@@ -8,13 +8,22 @@
 
 ## 팀원
 
+### [송희영](https://github.com/sheey37)
+
+### [이정수](https://github.com/dreamyvoice)
+
+### [신근수](https://github.com/messidor)
+
+### [한준성](https://github.com/JUNSUNGCODING)
 
 
 ## 프로젝트 소개
 
 
 
+
 ## 기술 스택
+
 
 
 
