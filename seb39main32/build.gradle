@@ -15,20 +15,20 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	//implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	//testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.springframework.security:spring-security-test'
 	//jwt
 	//implementation 'com.auth0:java-jwt:3.19.2' // 추가
 
 	/*SKS add dependencies*/
 	//mysql
-	//implementation 'mysql:mysql-connector-java'
-	//implementation 'org.springframework.boot:spring-boot-starter-jta-atomikos'
+	implementation 'mysql:mysql-connector-java'
+	implementation 'org.springframework.boot:spring-boot-starter-jta-atomikos'
 
 	//@mapper
 	implementation 'org.mapstruct:mapstruct:1.5.1.Final'
