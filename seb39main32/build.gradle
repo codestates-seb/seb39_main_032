@@ -9,6 +9,12 @@ group = 'com.mainProject'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
 repositories {
 	mavenCentral()
 }
@@ -23,7 +29,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	//jwt
-	//implementation 'com.auth0:java-jwt:3.19.2' // 추가
+	implementation 'com.auth0:java-jwt:3.19.2' // 추가
 
 	/*SKS add dependencies*/
 	//mysql
@@ -44,6 +50,15 @@ dependencies {
 
 
 	implementation 'com.google.code.gson:gson'
+
+	//mustache
+	//implementation 'org.springframework.boot:spring-boot-starter-mustache'
+
+
+	/**********************/
+
+	/*HJS add dependencies*/
+	/**********************/
 }
 
 tasks.named('test') {
