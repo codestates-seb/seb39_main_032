@@ -28,7 +28,7 @@
 
 
 ## 프로젝트 관련 문서
-
+https://www.notion.so/codestates/Team-032-953a49b5581645a98e8d1f8f8813bf29?p=7ef908607fe545789cbc8f2a412fa8d1&pm=s
 
 
 ## GIT Commit Message rule
