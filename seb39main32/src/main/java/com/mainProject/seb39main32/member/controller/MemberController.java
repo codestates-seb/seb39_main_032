@@ -82,10 +82,10 @@ public class MemberController {
 //     * @param userId
 //     * @return
 //     */
-//    @DeleteMapping("/login/basic/{user-id}")
+//    @DeleteMapping("/login/basic/{member-id}")
 //    public ResponseEntity deleteMember(
-//            @PathVariable("user-id") @Positive long userId) {
-//        usersService.deleteUser(userId);
+//            @PathVariable("member-id") @Positive long memberId) {
+//        memberService.deleteMember(memberId);
 //        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 //    }
 
