@@ -1,16 +1,18 @@
 package com.mainProject.seb39main32.wish.service;
 
-import com.mainProject.seb39main32.board.entity.Board;
-import com.mainProject.seb39main32.board.repository.BoardRepository;
 import com.mainProject.seb39main32.exception.BusinessLogicException;
 import com.mainProject.seb39main32.exception.ExceptionCode;
 import com.mainProject.seb39main32.member.service.MemberService;
 import com.mainProject.seb39main32.wish.entity.Wish;
 import com.mainProject.seb39main32.wish.repository.WishRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+@Transactional
+@Service
 public class WishService {
     private final WishRepository wishRepository;
     private final MemberService memberService;
