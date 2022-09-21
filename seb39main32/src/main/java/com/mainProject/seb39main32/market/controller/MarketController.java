@@ -52,10 +52,10 @@ public class MarketController {
     }
 
     //굳이 필요한지 모르겠음.
-    @DeleteMapping("/{marketId}")
-    public ResponseEntity deleteMarket(){
-
-        return null;
-    }
+//    @DeleteMapping("/{marketId}")
+//    public ResponseEntity deleteMarket(){
+//
+//        return null;
+//    }
 
 }

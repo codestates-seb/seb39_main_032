@@ -33,19 +33,28 @@ public class SecurityConfig {
         http.headers().frameOptions().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .formLogin().disable()
+            .formLogin().disable()
                 .httpBasic().disable()
                 .apply(new CustomDsl()) // 추가
                 .and()
-                .authorizeRequests()
+            .authorizeRequests()
                 .antMatchers("/api/user/**")
                 .access("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
-
                 .antMatchers("/apiManager/**")
                 .access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
                 .antMatchers("/apiAdmin/**")
                 .access("hasRole('ROLE_ADMIN')")
                 .anyRequest().permitAll();
+        http
+            .oauth2Login()
+                .authorizationEndpoint()
+                .baseUri("/login/oauth2")
+            .and()
+                .redirectionEndpoint()
+                .baseUri("/login/oauth2/google")
+                .and()
+                .userInfoEndpoint();
+
         return http.build();
 
 
