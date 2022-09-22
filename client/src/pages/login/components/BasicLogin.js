@@ -22,7 +22,7 @@ function BasicLogin() {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    // console.log(loginInfo);
+    console.log(loginInfo);
 
     axios.post("api/jwt", loginInfo).then((res) => {
       //   dispatch;
