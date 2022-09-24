@@ -1,6 +1,10 @@
 package com.mainProject.seb39main32.board.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.mainProject.seb39main32.market.entity.Market;
+import com.mainProject.seb39main32.member.entity.Member;
+import com.mainProject.seb39main32.wish.entity.Wish;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,11 +25,19 @@ public class Board {
 
 
     //----외래키----
-    @Column(name = "member_id")
-    private long memberId;
+    /*@Column(name = "member_id")
+    private long memberId;*/
 
-    @Column(name = "market_id")
-    private long marketId;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    /*@Column(name = "market_id")
+    private long marketId;*/
+
+    @ManyToOne
+    @JoinColumn(name = "market_id")
+    private Market market;
     //----------
 
     @Column(name = "item_name")
@@ -54,4 +66,12 @@ public class Board {
 
     @Column(name = "status")
     private String boardStatus;
+
+    //-----양방향
+    @OneToMany(mappedBy = "board")
+    @JsonManagedReference
+    private List<Wish> wishes = new ArrayList<>();
+
+    //-----양방향
+
 }
