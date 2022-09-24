@@ -50,7 +50,7 @@ public class ReviewController {
 
         requestBody.setMarketId(marketId);
         requestBody.setMemberId(memberId);
-        System.out.println("마켓: "+requestBody.getMarketId()+"멤버: "+requestBody.getMemberId());
+        //System.out.println("마켓: "+requestBody.getMarketId()+"멤버: "+requestBody.getMemberId());
         Review review = mapper.reviewPostToReview(requestBody);
         //System.out.println("1: "+ review.getMember().getMemberId());
         //System.out.println("2: "+ review.getMarket().getMarketId());
