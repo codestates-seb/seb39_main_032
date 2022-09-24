@@ -34,11 +34,11 @@ public class Review {
         this.member = member;
     }*/
 
-    /*@Column(name = "market_id")
-    private long marketId;*/
+    @Column(name = "market_id")
+    private long marketId;
 
     @ManyToOne
-    @JoinColumn(name = "market_id")
+    @JoinColumn(name = "market_id", insertable = false, updatable = false)
     private Market market;
 
     public void setMarket(Market market){
