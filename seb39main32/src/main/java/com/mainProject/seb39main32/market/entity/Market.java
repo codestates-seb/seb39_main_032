@@ -1,12 +1,10 @@
 package com.mainProject.seb39main32.market.entity;
 
+import com.mainProject.seb39main32.member.entity.Member;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @NoArgsConstructor
 @Data
@@ -18,8 +16,13 @@ public class Market {
     @Column(name = "market_id")
     private long marketId;
 
-    @Column(name = "member_id")
-    private long memberId;
+//    @Column(name = "member_id")
+//    private long memberId;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
 
     @Column(name = "market_name")
     private String marketName;
@@ -38,4 +41,8 @@ public class Market {
 
     @Column(name = "update_at")
     private String updateAt;
+
+    public void setMember(Member member){
+        this.member = member;
+    }
 }

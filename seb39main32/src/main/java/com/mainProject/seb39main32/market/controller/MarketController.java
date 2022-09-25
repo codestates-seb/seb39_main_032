@@ -43,9 +43,13 @@ public class MarketController {
         return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.CREATED);
     }
 
-    @PatchMapping("/patch")
-    public ResponseEntity updateMarket(@RequestBody MarketDto.Patch requestBody){
+    @PatchMapping("/patch/{market-id}")
+    public ResponseEntity updateMarket(@PathVariable("market-id") @Positive long marketId,
+                                       @Valid @RequestBody MarketDto.Patch requestBody){
+        requestBody.setMarketId(marketId);
+        System.out.println(requestBody.getMemberId());
         Market market = mapper.marketPatchDtoToMarket(requestBody);
+        System.out.println(market.getMember());
         Market updateMarket = marketService.updateMarket(market);
         MarketDto.Response response = mapper.MarketToMarketResponse(updateMarket);
         return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);

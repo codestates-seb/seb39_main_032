@@ -34,7 +34,7 @@ public class MarketService {
     }
 
     public Market updateMarket(Market market) {
-        Market findMarket = findVerifiedMarket(market.getMemberId());
+        Market findMarket = findVerifiedMarket(market.getMarketId());
         findMarket.setUpdateAt(String.valueOf(LocalDateTime.now()));
         Optional.ofNullable(market.getMarketName()).ifPresent(name -> findMarket.setMarketName(name));
         Optional.ofNullable(market.getCompanyNumber()).ifPresent(number -> findMarket.setCompanyNumber(number));
@@ -54,8 +54,8 @@ public class MarketService {
     }
      */
 
-    public Market findVerifiedMarket(long memberID){
-        Optional<Market> OptionalMarket = marketRepository.findByMemberId(memberID);
+    public Market findVerifiedMarket(long marketId){
+        Optional<Market> OptionalMarket = marketRepository.findByMarketId(marketId);
         Market findMarket = OptionalMarket.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MARKET_NOT_FOUND));
         return findMarket;
     }
