@@ -2,6 +2,7 @@ package com.mainProject.seb39main32.member.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mainProject.seb39main32.market.entity.Market;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -36,6 +37,14 @@ public class Member {
     @Column(name = "auth")
     private String auth;
 
+    //양방향 매핑을 위한 추가
+    @OneToMany(mappedBy = "member")
+    private List<Market> markets = new ArrayList<>();
+
+    public void add(Market market){
+        market.setMember(this);
+        getMarkets().add(market);
+    }
 
 
     public List<String> getAuthList() {

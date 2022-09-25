@@ -3,8 +3,10 @@ package com.mainProject.seb39main32.config;
 
 import com.mainProject.seb39main32.config.filter.JwtAuthenticationFilter;
 import com.mainProject.seb39main32.config.filter.JwtAuthorizationFilter;
+import com.mainProject.seb39main32.config.oauth.PrincipalOauth2UserService;
 import com.mainProject.seb39main32.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,6 +26,8 @@ public class SecurityConfig {
 
     private final CorsFilter corsFilter;
     private final MemberRepository memberRepository;
+    @Autowired
+    private PrincipalOauth2UserService principalOauth2UserService;
 
 
     @Bean
@@ -48,12 +52,13 @@ public class SecurityConfig {
         http
             .oauth2Login()
                 .authorizationEndpoint()
-                .baseUri("/login/oauth2")
+                .baseUri("/login/oauth2/code")
             .and()
                 .redirectionEndpoint()
-                .baseUri("/login/oauth2/google")
+                .baseUri("/login/oauth2/code/google")
                 .and()
-                .userInfoEndpoint();
+                .userInfoEndpoint()
+                .userService(principalOauth2UserService);
 
         return http.build();
 
