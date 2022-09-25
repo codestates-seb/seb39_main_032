@@ -1,13 +1,17 @@
 package com.mainProject.seb39main32.review.entity;
 
 
-import lombok.Data;
+import com.mainProject.seb39main32.market.entity.Market;
+import com.mainProject.seb39main32.member.entity.Member;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "REVIEW")
 public class Review {
@@ -17,11 +21,31 @@ public class Review {
     @Column(name = "review_id")
     private long reviewId;
 
+    //-----외래키
+
     @Column(name= "member_id")
     private long memberId;
 
+    @ManyToOne
+    @JoinColumn(name = "member_id", insertable = false, updatable = false)
+    private Member member;
+
+    /*public void setMember(Member member){
+        this.member = member;
+    }*/
+
     @Column(name = "market_id")
     private long marketId;
+
+    @ManyToOne
+    @JoinColumn(name = "market_id", insertable = false, updatable = false)
+    private Market market;
+
+    public void setMarket(Market market){
+        this.market = market;
+    }
+
+    //-----외래키
 
     @Column(name= "content")
     private String reviewContent;
@@ -31,5 +55,6 @@ public class Review {
 
     @Column(name= "update_at")
     private String reviewUpdateAt;
+
 
 }

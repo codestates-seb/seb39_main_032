@@ -1,6 +1,8 @@
 package com.mainProject.seb39main32.wish.entity;
 
 
+import com.mainProject.seb39main32.board.entity.Board;
+import com.mainProject.seb39main32.member.entity.Member;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,10 +21,18 @@ public class Wish {
     @Column(name = "wish_id")
     private long wishId;
     //----외래키----
-    @Column(name = "board_id")
-    private long boardId;
+    /*@Column(name = "board_id")
+    private long boardId;*/
 
-    @Column(name = "member_id")
-    private long memberId;
+    @ManyToOne
+    @JoinColumn(name = "board_id")
+    private Board board;
+
+    /*@Column(name = "member_id")
+    private long memberId;*/
+
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
     //--------------
 }

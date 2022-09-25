@@ -1,6 +1,7 @@
 package com.mainProject.seb39main32.review.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,9 +33,10 @@ public class ReviewDto {
         private String reviewUpdateAt;
 
     }
-
+    @Builder
     @AllArgsConstructor
     @Getter
+    @Setter
     public static class Response{
         private long reviewId;
         private long memberId;

@@ -19,13 +19,6 @@ public class FavoriteService {
         this.favoriteRepository = favoriteRepository;
     }
 
-    /*public Favorite getFavorite(long memberId) {
-        Favorite favorite = findFavorite(memberId);
-    }
-
-    private Favorite findFavorite(long memberId) {
-
-    }*/
 
     public Favorite createFavorite(Favorite favorite) {
         favoriteRepository.save(favorite);
@@ -34,17 +27,17 @@ public class FavoriteService {
     }
 
     public void deleteFavorite(long marketId, long memberId) {
-        Favorite favorite = findVerifiedFavorite(marketId,memberId);
+        //Favorite favorite = findVerifiedFavorite(marketId,memberId);
+        Favorite favorite = favoriteRepository.findByMarketIdAndMemberId(marketId, memberId);
         favoriteRepository.delete(favorite);
     }
 
-
-
-    public Favorite findVerifiedFavorite(long marketId, long memberId){
-        Optional<Favorite> favorite = favoriteRepository.findByMarketIdAndMemberId(marketId,memberId);
+    /*public Favorite findVerifiedFavorite(long marketId, long memberId){
+        //Optional<Favorite> favorite = favoriteRepository.findByMarketIdAndMemberId(marketId,memberId);
+        Optional<Favorite> favorite = favoriteRepository.findByMarket_MarketIdAndMember_MemberId(marketId,memberId);
         Favorite findFavorite = favorite.orElseThrow(() -> new BusinessLogicException(ExceptionCode.FAVORITE_NOT_FOUND));
         return findFavorite;
-    }
+    }*/
 
 
 

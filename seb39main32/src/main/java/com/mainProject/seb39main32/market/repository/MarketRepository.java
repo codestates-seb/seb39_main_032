@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface MarketRepository extends JpaRepository<Market, Long> {
-    Optional<Market> findByMarketId(long merketId);
+    Optional<Market> findByMemberId(long memberId);
 }

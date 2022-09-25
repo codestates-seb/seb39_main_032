@@ -43,23 +43,19 @@ public class MarketController {
         return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.CREATED);
     }
 
-    @PatchMapping("/patch/{market-id}")
-    public ResponseEntity updateMarket(@PathVariable("market-id") @Positive long marketId,
-                                       @Valid @RequestBody MarketDto.Patch requestBody){
-        requestBody.setMarketId(marketId);
-        System.out.println(requestBody.getMemberId());
+    @PatchMapping("/patch")
+    public ResponseEntity updateMarket(@RequestBody MarketDto.Patch requestBody){
         Market market = mapper.marketPatchDtoToMarket(requestBody);
-        System.out.println(market.getMember());
         Market updateMarket = marketService.updateMarket(market);
         MarketDto.Response response = mapper.MarketToMarketResponse(updateMarket);
         return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
     }
 
     //굳이 필요한지 모르겠음.
-//    @DeleteMapping("/{marketId}")
-//    public ResponseEntity deleteMarket(){
-//
-//        return null;
-//    }
+    @DeleteMapping("/{marketId}")
+    public ResponseEntity deleteMarket(){
+
+        return null;
+    }
 
 }
