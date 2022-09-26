@@ -12,10 +12,6 @@ const MainContainer = styled.div`
 
   main {
     height: 80vh;
-<<<<<<< HEAD
-    /* border: 1px solid; */
-=======
->>>>>>> main
   }
 
   #category {

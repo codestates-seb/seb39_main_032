@@ -5,12 +5,9 @@ import App from "./App";
 import { Provider } from "react-redux";
 import { legacy_createStore as createStore } from "redux";
 import rootReducer from "./reducers/index";
-<<<<<<< HEAD
-=======
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
->>>>>>> main
 
 const store = createStore(rootReducer);
 

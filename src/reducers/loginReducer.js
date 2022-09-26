@@ -1,15 +1,4 @@
 // action 타입 가져오기
-<<<<<<< HEAD
-import { USER_LOGIN } from "../actions/index";
-
-const initialState = {};
-
-const loginReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case USER_LOGIN:
-      return { ...state, loginSuccess: action.payload };
-      break;
-=======
 import {
   SET_ACCESS_TOKEN,
   DELETE_TOKEN,
@@ -39,7 +28,6 @@ const loginReducer = (state = initialState, action) => {
         accessToken: null,
         expireTime: null,
       };
->>>>>>> main
 
     default:
       return state;

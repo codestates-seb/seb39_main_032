@@ -1,15 +1,6 @@
 import { Icon } from "@iconify/react";
 import styled from "styled-components";
 import { useState } from "react";
-<<<<<<< HEAD
-import { useDispatch } from "react-redux";
-import { userLogin } from "../../../actions/index";
-import { useNavigate } from "react-router-dom";
-import SubmitBtn from "../../../components/SubmitBtn";
-import axios from "axios";
-
-function BasicLogin() {
-=======
 import { useDispatch, useSelector } from "react-redux";
 import { storeToken, setUserInfo } from "../../../actions/index";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -24,45 +15,18 @@ import {
 function BasicLogin() {
   const location = useLocation();
   const path = location.pathname;
->>>>>>> main
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loginInfo, setLoginInfo] = useState({
     email: "",
-<<<<<<< HEAD
-    userPw: "",
-  });
-
-=======
     memberPw: "",
   });
 
   //
->>>>>>> main
   const loginHandler = (key) => (e) => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
   };
 
-<<<<<<< HEAD
-  const submitHandler = (e) => {
-    e.preventDefault();
-
-    console.log(loginInfo);
-
-    axios.post("api/jwt", loginInfo).then((res) => {
-      //   dispatch;
-    });
-
-    dispatch(userLogin(loginInfo));
-
-    //  dispatch(userLogin(loginInfo)).then((res) => {
-    //   if (res.payload.loginSuccess) {
-    //     navigate("/");
-    //   } else {
-    //     alert("아이디 또는 비밀번호를 확인해주세요");
-    //   }
-    // });
-=======
   // const state = useSelector((state) => state.loginReducer);
   // const { accessToken } = state;
 
@@ -107,18 +71,13 @@ function BasicLogin() {
     //     navigate(`/main`);
     //   })
     //   .catch((err) => console.log("로그인 실패 " + err));
->>>>>>> main
   };
 
   return (
     <BasicLoginContainer>
       <h3>회원 로그인</h3>
       <form onSubmit={submitHandler}>
-<<<<<<< HEAD
-        <div className="login_info">
-=======
         <div className="user_info">
->>>>>>> main
           <Icon icon="ic:baseline-perm-identity" className="login_icon" />
           <input
             type="email"
@@ -126,27 +85,16 @@ function BasicLogin() {
             onChange={loginHandler("email")}
           ></input>
         </div>
-<<<<<<< HEAD
-        <div className="login_info">
-=======
         <div className="user_info">
->>>>>>> main
           <Icon icon="ri:lock-password-line" className="login_icon" />
           <input
             autoComplete="on"
             type="password"
             placeholder="비밀번호"
-<<<<<<< HEAD
-            onChange={loginHandler("userPw")}
-          ></input>
-        </div>
-        <SubmitBtn type="submit" title={"로 그 인"} />
-=======
             onChange={loginHandler("memberPw")}
           ></input>
         </div>
         <SubmitBtn type="submit" />
->>>>>>> main
       </form>
       <div id="sub_menu">
         {/* <span className="sub_menu">비밀번호 찾기</span>
@@ -160,19 +108,11 @@ function BasicLogin() {
 }
 export default BasicLogin;
 
-<<<<<<< HEAD
-const BasicLoginContainer = styled.section`
-  width: 80%;
-  padding: 20px 20px;
-
-  .login_info {
-=======
 export const BasicLoginContainer = styled.section`
   width: 80%;
   padding: 20px 20px;
 
   .user_info {
->>>>>>> main
     display: flex;
     align-items: center;
     height: 40px;
@@ -193,12 +133,9 @@ export const BasicLoginContainer = styled.section`
     :focus {
       outline: none;
     }
-<<<<<<< HEAD
-=======
     ::placeholder {
       font-size: smaller;
     }
->>>>>>> main
   }
 
   #sub_menu {
@@ -216,8 +153,6 @@ export const BasicLoginContainer = styled.section`
   a {
     text-decoration: none;
   }
-<<<<<<< HEAD
-=======
 
   p {
     font-size: smaller;
@@ -230,5 +165,4 @@ export const BasicLoginContainer = styled.section`
     margin-left: 30px;
     height: 15px;
   }
->>>>>>> main
 `;

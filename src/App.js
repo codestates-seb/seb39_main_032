@@ -1,15 +1,5 @@
 import "./GlobalStyle.css";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-<<<<<<< HEAD
-import Login from "./pages/Login/Login";
-import Main from "./pages/Main/Main";
-import Mypage from "./pages/Mypage/Mypage";
-import Newpost from "./pages/Newpost/Newpost";
-import Signup from "./pages/Signup/Signup";
-import Post from "./pages/Post/Post";
-
-function App() {
-=======
 import Login from "./pages/Login/login";
 import Main from "./pages/Main/main";
 import Mypage from "./pages/Mypage/mypage";
@@ -39,7 +29,6 @@ function App() {
     authHandler();
   }, []);
 
->>>>>>> main
   return (
     <BrowserRouter>
       <Routes>
