@@ -1,4 +1,5 @@
 import styled from "styled-components";
+<<<<<<< HEAD
 
 const SignupContainer = styled.div`
   display: flex;
@@ -67,6 +68,20 @@ function Signup() {
         </section>
       </main>
     </SignupContainer>
+=======
+import BasicSignup from "./components/BasicSignup";
+import { LoginContainer } from "../Login/login";
+import SnsSignup from "./components/SnsSignup";
+
+function Signup() {
+  return (
+    <LoginContainer>
+      <main>
+        <BasicSignup />
+        <SnsSignup />
+      </main>
+    </LoginContainer>
+>>>>>>> main
   );
 }
 

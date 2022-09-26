@@ -1,5 +1,6 @@
 import "./GlobalStyle.css";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+<<<<<<< HEAD
 import Login from "./pages/Login/Login";
 import Main from "./pages/Main/Main";
 import Mypage from "./pages/Mypage/Mypage";
@@ -8,6 +9,37 @@ import Signup from "./pages/Signup/Signup";
 import Post from "./pages/Post/Post";
 
 function App() {
+=======
+import Login from "./pages/Login/login";
+import Main from "./pages/Main/main";
+import Mypage from "./pages/Mypage/mypage";
+import Newpost from "./pages/Newpost/newpost";
+import Signup from "./pages/Signup/signup";
+import Post from "./pages/Post/Post";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserInfo, storeToken } from "./actions";
+import { getAccessToken } from "./storage/Cookie";
+import { useEffect } from "react";
+
+function App() {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.userInfoReducer);
+  const { email, memberPw, authenticated } = state;
+  const state2 = useSelector((state) => state.loginReducer);
+  const { accessToken } = state2;
+
+  const authHandler = () => {
+    // if (accessToken) {
+    //   dispatch(setUserInfo({ ...email, ...memberPw, authenticated: true }));
+    //   console.log(email, memberPw, authenticated);
+    // }
+  };
+
+  useEffect(() => {
+    authHandler();
+  }, []);
+
+>>>>>>> main
   return (
     <BrowserRouter>
       <Routes>

@@ -21,3 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+# 샘플 아이디 및 비번
+{
+    "email":"test2@test.com",
+    "memberPw":"test32"
+}
