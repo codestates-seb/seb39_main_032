@@ -1,45 +1,48 @@
 import styled from "styled-components";
 import ItemBox from "../../Newpost/components/ItemBox";
 import { Icon } from "@iconify/react";
+import { useState } from "react";
+import axios from "axios";
+import Wishlist from "./Wishlist";
 
 function Item() {
   return (
     <ItemContainer>
       <ImgContainer>
-        <img
-          className="added_item_img"
-          src="https://img-cf.kurly.com/cdn-cgi/image/width=676,format=auto/shop/data/goods/1594968820799l0.jpg"
-          alt="image"
-        />
+        <a href="/:id">
+          <img
+            className="added_item_img"
+            src="https://img-cf.kurly.com/cdn-cgi/image/width=676,format=auto/shop/data/goods/1594968820799l0.jpg"
+            alt="image"
+          />
+        </a>
       </ImgContainer>
       <div className="added_item_wrapper">
-        <div className="added_item_content">
-          <ul>
-            <li>
-              <div className="store_name">[달려라 떡볶이]</div>
-            </li>
-            <li>
-              <div className="item_title">로제 떡볶이</div>
-            </li>
-
-            <li>
-              <div>12,900원</div>
-            </li>
-            <li>
-              <div className="price">13,900원</div>
-            </li>
-            <li>
-              <div className="sale_time">할인시간 : 18:00 ~ 19:00</div>
-            </li>
-            <li>
-              <div>수량 : 5개</div>
-            </li>
-            <li className="wishlist">
-              <div>관심 4</div>
-              <Icon icon="clarity:heart-line" className="wishlist_icon" />
-            </li>
-          </ul>
-        </div>
+        <ContentContainer>
+          <a href="/:id">
+            <ul>
+              <li>
+                <div className="store_name">[달려라 떡볶이]</div>
+              </li>
+              <li>
+                <div className="item_title">로제 떡볶이</div>
+              </li>
+              <li>
+                <div>12,900원</div>
+              </li>
+              <li>
+                <div className="price">13,900원</div>
+              </li>
+              <li>
+                <div className="sale_time">할인시간 : 18:00 ~ 19:00</div>
+              </li>
+              <li>
+                <div>수량 : 5개</div>
+              </li>
+            </ul>
+          </a>
+        </ContentContainer>
+        <Wishlist />
       </div>
     </ItemContainer>
   );
@@ -70,6 +73,7 @@ const ItemContainer = styled.li`
   .store_name {
     font-size: larger;
     font-weight: 700;
+    cursor: pointer;
   }
 
   .price {
@@ -83,19 +87,13 @@ const ItemContainer = styled.li`
     color: red;
   }
 
-  .wishlist {
-    display: flex;
-    justify-content: space-between;
-    font-size: smaller;
-    margin-top: 20px;
-    margin-bottom: 8px;
-  }
-
-  .wishlist_icon {
-    height: 25px;
-    width: 25px;
-    padding-bottom: 5px;
-    cursor: pointer;
+  a {
+    text-decoration: none;
+    :focus {
+    }
+    :visited {
+      color: black;
+    }
   }
 `;
 
@@ -107,6 +105,7 @@ const ImgContainer = styled.div`
   height: 200px;
   /* border: 1px solid green; */
   margin: 5px;
+  cursor: pointer;
 
   & .added_item_img {
     background-color: #d9d9d9;
@@ -114,4 +113,8 @@ const ImgContainer = styled.div`
     height: 190px;
     border-radius: 0.5rem;
   }
+`;
+
+const ContentContainer = styled.div`
+  cursor: pointer;
 `;

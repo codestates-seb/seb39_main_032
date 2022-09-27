@@ -1,15 +1,34 @@
+import { useState } from "react";
 import styled from "styled-components";
 import List from "./List";
 
 function Lists() {
+  const [btnActive, setBtnActive] = useState(1);
+
+  const clickHandler = (e) => {
+    setBtnActive(e.target.id);
+  };
+
   return (
     <ListsContainer>
       <ListHeader>
         <h2>#분식</h2>
         <ListsNav>
-          <span id="ing">진행 중</span>
+          <span
+            id="1"
+            className={1 === Number(btnActive) ? "active" : ""}
+            onClick={clickHandler}
+          >
+            진행 중
+          </span>
           <span> | </span>
-          <span>전체 보기</span>
+          <span
+            id="2"
+            className={2 === Number(btnActive) ? "active" : ""}
+            onClick={clickHandler}
+          >
+            전체 보기
+          </span>
         </ListsNav>
       </ListHeader>
       <List />
@@ -37,8 +56,9 @@ const ListsNav = styled.div`
     padding: 0 7px;
   }
 
-  #ing {
+  .active {
     color: red;
+    font-weight: 700;
   }
 `;
 

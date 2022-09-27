@@ -3,6 +3,23 @@ import { TitleHeader } from "./Firstselling";
 import { Icon } from "@iconify/react";
 import ItemBox from "./ItemBox";
 
+function Item() {
+  return (
+    <ItemContainer>
+      <TitleHeader>
+        <h2>할인 판매 품목</h2>
+        <div>품목 추가하기</div>
+      </TitleHeader>
+      <form>
+        <ItemBox />
+        <div className="delete_btn">삭제하기</div>
+      </form>
+    </ItemContainer>
+  );
+}
+
+export default Item;
+
 const ItemContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -24,20 +41,3 @@ const ItemContainer = styled.div`
     cursor: pointer;
   }
 `;
-
-function Item() {
-  return (
-    <ItemContainer>
-      <TitleHeader>
-        <h2>할인 판매 품목</h2>
-        <div>품목 추가하기</div>
-      </TitleHeader>
-      <form>
-        <ItemBox />
-        <div className="delete_btn">삭제하기</div>
-      </form>
-    </ItemContainer>
-  );
-}
-
-export default Item;

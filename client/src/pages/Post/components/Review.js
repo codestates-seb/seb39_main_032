@@ -1,5 +1,39 @@
 import styled from "styled-components";
 
+function Review() {
+  return (
+    <ReviewContainer>
+      <div id="review_title">
+        <h2>후기</h2>
+      </div>
+      <div id="review_box">
+        <div id="review_list">
+          <div id="review">
+            <div className="user_id">ab**</div>
+            <span className="review_detail">
+              <div className="review_content">
+                마감 5분 남기고 가서 구매했어요 저렴한 가격에 잘 먹었습니다
+              </div>
+              <div className="review_date">9월 15일</div>
+              <div className="review_delete_btn">X</div>
+            </span>
+          </div>
+        </div>
+        <form>
+          <input
+            type="text"
+            id="review_write"
+            placeholder="여기에 후기를 작성해주세요"
+          ></input>
+          <button type="submit">등록</button>
+        </form>
+      </div>
+    </ReviewContainer>
+  );
+}
+
+export default Review;
+
 const ReviewContainer = styled.section`
   #review_title {
     border-top: 2px solid;
@@ -80,37 +114,3 @@ const ReviewContainer = styled.section`
     cursor: pointer;
   }
 `;
-
-function Review() {
-  return (
-    <ReviewContainer>
-      <div id="review_title">
-        <h2>REVIEW</h2>
-      </div>
-      <div id="review_box">
-        <div id="review_list">
-          <div id="review">
-            <div className="user_id">ab**</div>
-            <span className="review_detail">
-              <div className="review_content">
-                마감 5분 남기고 가서 구매했어요 저렴한 가격에 잘 먹었습니다
-              </div>
-              <div className="review_date">9월 15일</div>
-              <div className="review_delete_btn">X</div>
-            </span>
-          </div>
-        </div>
-        <form>
-          <input
-            type="text"
-            id="review_write"
-            placeholder="여기에 후기를 작성해주세요"
-          ></input>
-          <button type="submit">등록</button>
-        </form>
-      </div>
-    </ReviewContainer>
-  );
-}
-
-export default Review;

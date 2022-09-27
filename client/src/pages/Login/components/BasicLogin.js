@@ -36,7 +36,7 @@ function BasicLogin() {
     // console.log(loginInfo);
 
     axios
-      .post("/login", loginInfo)
+      .post("/login/jwt", loginInfo)
       .then((res) => {
         dispatch(storeToken(res.headers.authorization));
         dispatch(setUserInfo(loginInfo));

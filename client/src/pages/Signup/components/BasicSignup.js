@@ -31,7 +31,7 @@ function BasicSignup() {
     }
 
     axios
-      .post("/api/member/signup/basic", {
+      .post("/api/signup", {
         email: userLoginInfo.email,
         memberPw: userLoginInfo.pwd1,
       })

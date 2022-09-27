@@ -83,12 +83,15 @@ const MainContainer = styled.main`
     box-shadow: 3px 3px grey;
     /* font-family: "Noto Sans KR", sans-serif; */
     font-family: "Do Hyeon";
+    :hover {
+      background-color: grey;
+    }
   }
 
   #btn_newpost {
     display: flex;
     justify-content: flex-end;
-    margin-right: 15%;
+    margin-right: 18%;
 
     > button {
       margin-top: 70vh;

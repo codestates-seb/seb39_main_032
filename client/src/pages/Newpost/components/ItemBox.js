@@ -27,7 +27,11 @@ function ItemBox() {
           </ul>
         </div>
         <div className="added_item_img_wrapper">
-          <div className="added_item_img"></div>
+          <img
+            className="added_item_img"
+            src="https://img-cf.kurly.com/cdn-cgi/image/width=676,format=auto/shop/data/goods/1594968820799l0.jpg"
+            alt="image"
+          />
         </div>
       </div>
     </ItemBoxContainer>
@@ -108,7 +112,6 @@ export const ItemBoxContainer = styled.section`
     /* border: 1px solid green; */
 
     & .added_item_img {
-      background-color: #d9d9d9;
       width: 190px;
       height: 180px;
       border-radius: 0.5rem;

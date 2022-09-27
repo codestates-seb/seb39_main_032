@@ -1,12 +1,5 @@
 import styled from "styled-components";
 
-const FooterContainer = styled.footer`
-  margin-top: 40px;
-  text-align: center;
-  background-color: #f8f9f9;
-  height: 80px;
-`;
-
 function Footer() {
   return (
     <FooterContainer>
@@ -16,3 +9,10 @@ function Footer() {
 }
 
 export default Footer;
+
+const FooterContainer = styled.footer`
+  margin-top: 40px;
+  text-align: center;
+  background-color: #f8f9f9;
+  height: 65px;
+`;
