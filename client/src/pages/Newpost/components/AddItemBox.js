@@ -1,105 +1,6 @@
 import styled from "styled-components";
 import { Icon } from "@iconify/react";
 
-export const AddItemBoxContainer = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 30px;
-
-  form {
-    display: flex;
-    flex-direction: column;
-    /* border: 1px solid rgba(170, 170, 170, 1); */
-    border: 1px solid;
-    box-shadow: 5px 5px #f24e1e;
-    height: 250px;
-    border-radius: 1rem;
-
-    > button {
-      background-color: #f24e1e;
-      color: white;
-      font-weight: 700;
-      border-radius: 0.3rem;
-      border: none;
-      width: 60px;
-      height: 30px;
-      margin-left: 620px;
-      margin-bottom: 10px;
-      cursor: pointer;
-    }
-  }
-
-  .add_item_wrapper {
-    display: flex;
-    height: 230px;
-    align-items: center;
-    border-radius: 1rem;
-  }
-
-  .add_item_content {
-    display: flex;
-    align-items: center;
-    width: 500px;
-    height: 200px;
-    /* border: 1px solid; */
-  }
-
-  ul {
-    list-style: none;
-    padding-left: 0px;
-  }
-
-  li {
-    padding: 5px 0;
-    display: flex;
-    margin-left: 15px;
-
-    .start_time {
-      width: 200px;
-    }
-
-    .finish_time {
-      width: 200px;
-    }
-
-    > div {
-      width: 80px;
-    }
-  }
-
-  .add_item_img_wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 200px;
-    height: 200px;
-    /* border: 1px solid; */
-
-    label {
-      background-color: #d9d9d9;
-      border-radius: 0.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    & .add_item_img_input {
-      width: 150px;
-      height: 180px;
-      cursor: pointer;
-      opacity: 0;
-    }
-
-    & .camera_icon {
-      position: absolute;
-      width: 50px;
-      height: 50px;
-      cursor: pointer;
-    }
-  }
-`;
-
 function AddItemBox() {
   let hour = [
     "01",
@@ -275,3 +176,102 @@ function AddItemBox() {
 }
 
 export default AddItemBox;
+
+export const AddItemBoxContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid rgba(170, 170, 170, 1); */
+    border: 1px solid;
+    box-shadow: 5px 5px #f24e1e;
+    height: 250px;
+    border-radius: 1rem;
+
+    > button {
+      background-color: #f24e1e;
+      color: white;
+      font-weight: 700;
+      border-radius: 0.3rem;
+      border: none;
+      width: 60px;
+      height: 30px;
+      margin-left: 620px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+  }
+
+  .add_item_wrapper {
+    display: flex;
+    height: 230px;
+    align-items: center;
+    border-radius: 1rem;
+  }
+
+  .add_item_content {
+    display: flex;
+    align-items: center;
+    width: 500px;
+    height: 200px;
+    /* border: 1px solid; */
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0px;
+  }
+
+  li {
+    padding: 5px 0;
+    display: flex;
+    margin-left: 15px;
+
+    .start_time {
+      width: 200px;
+    }
+
+    .finish_time {
+      width: 200px;
+    }
+
+    > div {
+      width: 80px;
+    }
+  }
+
+  .add_item_img_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    /* border: 1px solid; */
+
+    label {
+      background-color: #d9d9d9;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    & .add_item_img_input {
+      width: 150px;
+      height: 180px;
+      cursor: pointer;
+      opacity: 0;
+    }
+
+    & .camera_icon {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+    }
+  }
+`;

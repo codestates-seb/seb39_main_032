@@ -3,26 +3,65 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import Lists from "./components/Lists";
 
-const MainContainer = styled.div`
+function Main() {
+  let caterogies = [
+    "분식",
+    "치킨",
+    "찌개",
+    "중식",
+    "일식",
+    "양식",
+    "아시안",
+    "족발/보쌈",
+    "반찬",
+    "샐러드",
+    "카페/디저트",
+  ];
+
+  return (
+    <>
+      <Header />
+      <MainContainer>
+        <a href="/newpost" id="btn_newpost">
+          <button>상품 등록하기</button>
+        </a>
+        <section id="category">
+          <article>
+            {caterogies.map((item, idx) => {
+              return (
+                <div value={idx} key={idx} className="food_category">
+                  {item}
+                </div>
+              );
+            })}
+          </article>
+        </section>
+        <Lists />
+      </MainContainer>
+      <Footer />
+    </>
+  );
+}
+
+export default Main;
+
+const MainContainer = styled.main`
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  border: 1px solid;
-
-  main {
-    height: 80vh;
-  }
+  height: 100%;
 
   #category {
-    margin-top: 20px;
-    height: 25%;
+    margin-top: 10px;
+    height: 150px;
     display: flex;
     justify-content: center;
     background-color: rgba(217, 217, 217, 0.58);
   }
 
   article {
+    margin: 10px 0;
     flex-wrap: wrap;
     width: 70%;
     display: flex;
@@ -46,12 +85,6 @@ const MainContainer = styled.div`
     font-family: "Do Hyeon";
   }
 
-  #list {
-    border: 5px solid green;
-    height: 70%;
-    margin: 0 15%;
-  }
-
   #btn_newpost {
     display: flex;
     justify-content: flex-end;
@@ -69,55 +102,3 @@ const MainContainer = styled.div`
     }
   }
 `;
-
-function Main() {
-  let caterogies = [
-    "분식",
-    "치킨",
-    "찌개",
-    "중식",
-    "일식",
-    "양식",
-    "아시안",
-    "족발/보쌈",
-    "반찬",
-    "샐러드",
-    "카페/디저트",
-  ];
-
-  return (
-    <MainContainer>
-      <Header />
-      <main>
-        <a href="/newpost" id="btn_newpost">
-          <button>상품 등록하기</button>
-        </a>
-        <section id="category">
-          <article>
-            {caterogies.map((item, idx) => {
-              return (
-                <div value={idx} key={idx} className="food_category">
-                  {item}
-                </div>
-              );
-            })}
-          </article>
-        </section>
-        <section id="list">
-          <div>
-            <span>진행 중</span>
-            <span> | </span>
-            <span>전체 보기</span>
-          </div>
-          <ul>
-            <li>리스트1</li>
-            <li>리스트2</li>
-          </ul>
-        </section>
-      </main>
-      <Footer />
-    </MainContainer>
-  );
-}
-
-export default Main;

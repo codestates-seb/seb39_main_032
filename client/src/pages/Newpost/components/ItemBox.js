@@ -2,6 +2,40 @@ import styled from "styled-components";
 import { TitleHeader } from "./Firstselling";
 import { Icon } from "@iconify/react";
 
+function ItemBox() {
+  return (
+    <ItemBoxContainer>
+      <div className="added_item_wrapper">
+        <div className="added_item_content">
+          <ul>
+            <li>
+              <div className="item_title">로제 떡볶이</div>
+              <span className="category_tag">분식</span>
+            </li>
+            <li>
+              <div>수량 : 5개</div>
+            </li>
+            <li>
+              <div>12,900원</div>
+            </li>
+            <li>
+              <div className="price">13,900원</div>
+            </li>
+            <li>
+              <div className="sale_time">할인시간 : 18:00 ~ 19:00</div>
+            </li>
+          </ul>
+        </div>
+        <div className="added_item_img_wrapper">
+          <div className="added_item_img"></div>
+        </div>
+      </div>
+    </ItemBoxContainer>
+  );
+}
+
+export default ItemBox;
+
 export const ItemBoxContainer = styled.section`
   display: flex;
   flex-direction: column;
@@ -13,6 +47,7 @@ export const ItemBoxContainer = styled.section`
     display: flex;
     height: 230px;
     align-items: center;
+    /* flex-direction: ${(props) => (props.path === "/" ? "column" : "row")}; */
   }
 
   .added_item_content {
@@ -80,37 +115,3 @@ export const ItemBoxContainer = styled.section`
     }
   }
 `;
-
-function ItemBox() {
-  return (
-    <ItemBoxContainer>
-      <div className="added_item_wrapper">
-        <div className="added_item_content">
-          <ul>
-            <li>
-              <div className="item_title">로제 떡볶이</div>
-              <span className="category_tag">분식</span>
-            </li>
-            <li>
-              <div>수량 : 5개</div>
-            </li>
-            <li>
-              <div>12,900원</div>
-            </li>
-            <li>
-              <div className="price">13,900원</div>
-            </li>
-            <li>
-              <div className="sale_time">할인시간 : 18:00 ~ 19:00</div>
-            </li>
-          </ul>
-        </div>
-        <div className="added_item_img_wrapper">
-          <div className="added_item_img"></div>
-        </div>
-      </div>
-    </ItemBoxContainer>
-  );
-}
-
-export default ItemBox;
