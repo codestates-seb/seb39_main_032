@@ -19,10 +19,10 @@ function Search() {
     function success(pos) {
       var crd = pos.coords;
 
-      console.log("Your current position is:");
-      console.log(`Latitude : ${crd.latitude}`);
-      console.log(`Longitude: ${crd.longitude}`);
-      console.log(`More or less ${crd.accuracy} meters.`);
+      // console.log("Your current position is:");
+      // console.log(`Latitude : ${crd.latitude}`);
+      // console.log(`Longitude: ${crd.longitude}`);
+      // console.log(`More or less ${crd.accuracy} meters.`);
 
       setCurLat(crd.latitude);
       setCurLon(crd.longitude);
@@ -58,11 +58,8 @@ function Search() {
           <input
             id="search"
             type="text"
-            placeholder={
-              curAdr
-                ? `${curAdr}`
-                : "건물명, 도로명, 지번으로 주소를 검색하세요"
-            }
+            defaultValue={curAdr}
+            placeholder="건물명, 도로명, 지번으로 주소를 검색하세요"
           ></input>
           <button id="search_btn">
             <Icon icon="ant-design:search-outlined" id="search_icon" />
