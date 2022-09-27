@@ -28,13 +28,23 @@ public class MarketController {
         this.mapper = mapper;
     }
 
-    @GetMapping("/{memberId}")
-    public ResponseEntity getMarkets(@PathVariable @Positive long memberId){
+    /**
+     * 마켓 정보 가져오기
+     * @param memberId
+     * @return
+     */
+    @GetMapping("/{member-id}")
+    public ResponseEntity getMarkets(@PathVariable("member-id") @Positive long memberId){
         Market market = marketService.getMarket(memberId);
         MarketDto.Response response = mapper.MarketToMarketResponse(market);
         return new ResponseEntity(new SingleResponseDto<>(response), HttpStatus.OK);
     }
 
+    /**
+     * 마켓 등록하기
+     * @param requestBody
+     * @return
+     */
     @PostMapping
     public ResponseEntity postMarket(@Valid @RequestBody MarketDto.Post requestBody){
         Market market = mapper.marketPostDtoToMarket(requestBody);
@@ -44,6 +54,12 @@ public class MarketController {
     }
 
 
+    /**
+     * 마켓 수정하기
+     * @param marketId
+     * @param requestBody
+     * @return
+     */
     @PatchMapping("/{market-id}")
      public ResponseEntity updateMarket(@PathVariable("market-id") @Positive long marketId,
                                         @Valid @RequestBody MarketDto.Patch requestBody){
@@ -56,11 +72,11 @@ public class MarketController {
      }
 
 
-    //굳이 필요한지 모르겠음.
-    @DeleteMapping("/{marketId}")
+    /*//굳이 필요한지 모르겠음.
+    @DeleteMapping("/{market-id}")
     public ResponseEntity deleteMarket(){
 
         return null;
-    }
+    }*/
 
 }

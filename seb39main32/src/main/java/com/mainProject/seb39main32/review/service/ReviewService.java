@@ -4,6 +4,8 @@ import com.mainProject.seb39main32.exception.BusinessLogicException;
 import com.mainProject.seb39main32.exception.ExceptionCode;
 import com.mainProject.seb39main32.review.entity.Review;
 import com.mainProject.seb39main32.review.repository.ReviewRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,6 +21,10 @@ public class ReviewService {
     }
 
 
+    public Page<Review> findReviews(long marketId, Pageable pageable) {
+        return reviewRepository.findByMarket_MarketId(marketId, pageable);
+    }
+
     public Review createReview(Review review) {
         review.setReviewCreateAt(String.valueOf(LocalDateTime.now()));
         review.setReviewUpdateAt(String.valueOf(LocalDateTime.now()));
@@ -26,16 +32,6 @@ public class ReviewService {
 
         return saveReview;
     }
-
-    /*
-    public Review updateReview(Review review) {
-        Review findReview = findverifiedReview(review.getReviewId());
-        Optional.ofNullable(review.getReviewContent()).ifPresent(content -> findReview.setReviewContent(content));
-        findReview.setReviewUpdateAt(String.valueOf(LocalDateTime.now()));
-        Review updateReview = reviewRepository.save(findReview);
-        return updateReview;
-    }
-    */
 
     public void deleteReview(long reviewId) {
         Review findReview = findverifiedReview(reviewId);
@@ -48,6 +44,17 @@ public class ReviewService {
 
         return findReview;
     }
+
+
+    /*
+    public Review updateReview(Review review) {
+        Review findReview = findverifiedReview(review.getReviewId());
+        Optional.ofNullable(review.getReviewContent()).ifPresent(content -> findReview.setReviewContent(content));
+        findReview.setReviewUpdateAt(String.valueOf(LocalDateTime.now()));
+        Review updateReview = reviewRepository.save(findReview);
+        return updateReview;
+    }
+    */
 
 
 }

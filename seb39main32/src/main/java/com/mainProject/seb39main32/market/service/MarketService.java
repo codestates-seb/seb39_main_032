@@ -23,8 +23,6 @@ public class MarketService {
         return findMarket;
     }
 
-
-
     public Market createMarket(Market market) {
         market.setCreateAt(String.valueOf(LocalDateTime.now()));
         market.setUpdateAt(String.valueOf(LocalDateTime.now()));
@@ -44,6 +42,11 @@ public class MarketService {
 
     }
 
+    public Market findVerifiedMarket(long marketID){
+        Optional<Market> OptionalMarket = marketRepository.findByMarketId(marketID);
+        Market findMarket = OptionalMarket.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MARKET_NOT_FOUND));
+        return findMarket;
+    }
 
     /*
     private Market findMarket(long memberId) {
@@ -52,12 +55,5 @@ public class MarketService {
         return findMarket;
     }
      */
-
-    public Market findVerifiedMarket(long marketID){
-        Optional<Market> OptionalMarket = marketRepository.findByMarketId(marketID);
-        Market findMarket = OptionalMarket.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MARKET_NOT_FOUND));
-        return findMarket;
-    }
-
 
 }

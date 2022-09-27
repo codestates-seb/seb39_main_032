@@ -1,6 +1,7 @@
 package com.mainProject.seb39main32.wish.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mainProject.seb39main32.board.entity.Board;
 import com.mainProject.seb39main32.member.entity.Member;
 import lombok.Data;
@@ -21,18 +22,19 @@ public class Wish {
     @Column(name = "wish_id")
     private long wishId;
     //----외래키----
-    /*@Column(name = "board_id")
-    private long boardId;*/
-
+    @Column(name = "board_id")
+    private long boardId;
     @ManyToOne
-    @JoinColumn(name = "board_id")
+    @JsonIgnore
+    @JoinColumn(name = "board_id",insertable = false, updatable = false)
     private Board board;
 
-    /*@Column(name = "member_id")
-    private long memberId;*/
 
+    @Column(name = "member_id")
+    private long memberId;
     @ManyToOne
-    @JoinColumn(name = "member_id")
+    @JsonIgnore
+    @JoinColumn(name = "member_id", insertable = false, updatable = false)
     private Member member;
-    //--------------
+    //----외래키----
 }

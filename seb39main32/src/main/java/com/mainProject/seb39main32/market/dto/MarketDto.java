@@ -8,25 +8,6 @@ import lombok.Setter;
 
 public class MarketDto {
 
-    /*@Getter
-    @Setter
-    @AllArgsConstructor
-    public static class Post{
-        private long marketId;
-        @Getter(AccessLevel.NONE)
-        private long memberId;
-        private String marketName;
-        private String companyNumber;
-        private String address;
-        private String phone;
-        private String createAt;
-        private String updateAt;
-        public void getMember(Member member){
-            this.memberId = member.getMemberId();
-        }
-
-    }*/
-
     @Getter
     @Setter
     @AllArgsConstructor

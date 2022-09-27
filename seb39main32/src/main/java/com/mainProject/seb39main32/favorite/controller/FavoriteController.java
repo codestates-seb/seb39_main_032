@@ -40,7 +40,7 @@ public class FavoriteController {
 
     @GetMapping("/{member-id}")
     public ResponseEntity getFavorites(@PathVariable("member-id") @Positive long memberId, Pageable pageable){
-        Page<Favorite> post = repository.findByMember_MemberId(memberId,pageable);
+        Page<Favorite> post = favoriteService.getFavorites(memberId,pageable);
         List<Favorite> posts = post.getContent();
         return new ResponseEntity<>(new MultiResponseDto<>(mapper.favoritesToFavoritesDto(posts), post), HttpStatus.OK);
     }
@@ -54,8 +54,8 @@ public class FavoriteController {
 
     }
 
-    @DeleteMapping("/{marketId}/{memberId}")
-    public ResponseEntity delFavorite(@PathVariable("marketId") @Positive long marketId, @PathVariable("memberId") @Positive long memberId){
+    @DeleteMapping("/{market-id}/{member-id}")
+    public ResponseEntity delFavorite(@PathVariable("market-id") @Positive long marketId, @PathVariable("member-id") @Positive long memberId){
         favoriteService.deleteFavorite(marketId,memberId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

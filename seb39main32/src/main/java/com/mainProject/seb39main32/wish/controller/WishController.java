@@ -3,12 +3,15 @@ package com.mainProject.seb39main32.wish.controller;
 
 
 
+import com.mainProject.seb39main32.dto.MultiResponseDto;
 import com.mainProject.seb39main32.dto.SingleResponseDto;
 import com.mainProject.seb39main32.wish.dto.WishDto;
 import com.mainProject.seb39main32.wish.entity.Wish;
 import com.mainProject.seb39main32.wish.mapper.WishMapper;
 import com.mainProject.seb39main32.wish.service.WishService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -18,7 +21,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
 @RestController
-@RequestMapping("/api/wish")
+@RequestMapping("/api/wishes")
 @Validated
 @Slf4j
 public class WishController {
@@ -40,7 +43,7 @@ public class WishController {
                 HttpStatus.CREATED);
     }
 
-    @GetMapping("{wish-id}")
+    @GetMapping("/{wish-id}")
     public ResponseEntity getWish(
             @PathVariable("wish-id") @Positive long wishId) {
         Wish wish = wishService.findWish(wishId);
@@ -49,8 +52,14 @@ public class WishController {
                 , HttpStatus.OK);
     }
 
+    @GetMapping("/my/{member-id}")
+    public ResponseEntity getWishes(@PathVariable("member-id") @Positive long memberId, Pageable pageable){
+        Page<Wish> wish = wishService.findWishes(memberId,pageable);
+        return new ResponseEntity<>(wish, HttpStatus.OK);
+    }
 
-    @PatchMapping("{wish-id}")
+
+    @PatchMapping("/{wish-id}")
     public ResponseEntity patchBoard(
             @PathVariable("wish-id") @Positive long wishId,
             @Valid @RequestBody WishDto.Patch requestBody) {

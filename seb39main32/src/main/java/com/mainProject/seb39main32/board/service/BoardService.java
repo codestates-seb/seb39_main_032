@@ -6,10 +6,13 @@ import com.mainProject.seb39main32.exception.BusinessLogicException;
 import com.mainProject.seb39main32.exception.ExceptionCode;
 import com.mainProject.seb39main32.member.entity.Member;
 import com.mainProject.seb39main32.member.service.MemberService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Transactional
@@ -25,6 +28,8 @@ public class BoardService {
 
 
     public Board createBoard(Board board) {
+        board.setBoardCreateAt(String.valueOf(LocalDateTime.now()));
+        board.setBoardUpdateAt(String.valueOf(LocalDateTime.now()));
         Board saveBoard = boardRepository.save(board);
         return saveBoard;
     }
@@ -68,5 +73,13 @@ public class BoardService {
                 optionalBoard.orElseThrow(()->
                         new BusinessLogicException(ExceptionCode.BOARD_NOT_FOUND));
         return findBoard;
+    }
+
+    public Page<Board> getPBoards(Pageable pageable) {
+        return boardRepository.findAll(pageable);
+    }
+
+    public List<Board> getBoards() {
+        return boardRepository.findAll();
     }
 }
