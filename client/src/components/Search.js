@@ -87,7 +87,7 @@ const SearchContainer = styled.div`
     align-items: center;
     height: 35px;
     width: 500px;
-    border-radius: 10rem;
+    border-radius: 0.1rem;
     border: 1px solid rgba(217, 217, 217, 1);
   }
 
@@ -117,7 +117,12 @@ const SearchContainer = styled.div`
     background: none;
     border: none;
     cursor: pointer;
-    margin-right: -4px;
+    margin-right: 1px;
+    border-radius: 0.1rem;
+    border: 1px solid rgba(217, 217, 217, 1);
+    :hover {
+      background-color: rgba(217, 217, 217, 1);
+    }
   }
 
   #location_icon {
