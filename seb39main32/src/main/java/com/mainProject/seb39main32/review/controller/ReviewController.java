@@ -36,28 +36,50 @@ public class ReviewController {
     }
 
 
+    /**
+     * 마켓에 따른 리뷰 페이징 처리 후 불러오기
+     * @param marketId
+     * @param pageable
+     * @return
+     */
     @GetMapping ("/{market-id}")
     public ResponseEntity getReviews(@PathVariable("market-id") @Positive long marketId, Pageable pageable){
-        Page<Review> review = reviewRepository.findByMarket_MarketId(marketId, pageable);
+        Page<Review> review = reviewService.findReviews(marketId,pageable);
+
         List<Review> reviews = review.getContent();
 
         return new ResponseEntity<>(new MultiResponseDto<>(mapper.reviewToReviewsResponse(reviews),review), HttpStatus.OK );
     }
 
 
+    /**
+     * 리뷰 등록하기
+     * @param requestBody
+     * @param marketId
+     * @param memberId
+     * @return
+     */
     @PostMapping ("/{market-Id}/{member-Id}")
     public ResponseEntity postReview(@RequestBody ReviewDto.Post requestBody, @PathVariable("market-Id") @Positive long marketId, @PathVariable("member-Id") @Positive long memberId){
 
         requestBody.setMarketId(marketId);
         requestBody.setMemberId(memberId);
-        //System.out.println("마켓: "+requestBody.getMarketId()+"멤버: "+requestBody.getMemberId());
         Review review = mapper.reviewPostToReview(requestBody);
-        //System.out.println("1: "+ review.getMember().getMemberId());
-        //System.out.println("2: "+ review.getMarket().getMarketId());
         Review createReview = reviewService.createReview(review);
         ReviewDto.Response response = mapper.reviewToReviewResponse(createReview);
 
         return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.CREATED);
+    }
+
+    /**
+     * 리뷰 삭제
+     * @param reviewId
+     * @return
+     */
+    @DeleteMapping("/delete/{review-id}")
+    public ResponseEntity deleteReview(@PathVariable("review-id") @Positive long reviewId){
+        reviewService.deleteReview(reviewId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     /*
@@ -71,14 +93,5 @@ public class ReviewController {
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.reviewToReviewResponse(updateReview)), HttpStatus.OK);
     }
     */
-
-
-
-    @DeleteMapping("/delete/{reviewId}")
-    public ResponseEntity deleteReview(@PathVariable("reviewId") @Positive long reviewId){
-        reviewService.deleteReview(reviewId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
 
 }

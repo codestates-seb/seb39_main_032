@@ -5,6 +5,8 @@ import com.mainProject.seb39main32.exception.ExceptionCode;
 import com.mainProject.seb39main32.member.service.MemberService;
 import com.mainProject.seb39main32.wish.entity.Wish;
 import com.mainProject.seb39main32.wish.repository.WishRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,8 +36,13 @@ public class WishService {
         return updateWish;
     }
 
+
     public Wish findWish(long wishId){
         return findVerifiedWish(wishId);
+    }
+    //페이징 처리하여 좋아요 누른 게시물 출력
+    public Page<Wish> findWishes(long memberId, Pageable pageable) {
+        return wishRepository.findByMember_MemberId(memberId,pageable);
     }
 
     public void deleteWish(long wishId){
@@ -50,4 +57,6 @@ public class WishService {
                         new BusinessLogicException(ExceptionCode.Wish_NOT_FOUND));
         return findWish;
     }
+
+
 }

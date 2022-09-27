@@ -6,6 +6,8 @@ import com.mainProject.seb39main32.board.mapper.BoardMapper;
 import com.mainProject.seb39main32.board.service.BoardService;
 import com.mainProject.seb39main32.dto.SingleResponseDto;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -13,9 +15,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/board")
+@RequestMapping("/api/boards")
 @Validated
 @Slf4j
 public class BoardController {
@@ -27,6 +30,30 @@ public class BoardController {
         this.mapper = mapper;
     }
 
+    @GetMapping("/{board-id}")
+    public ResponseEntity getBoard(
+            @PathVariable("board-id") @Positive long boardId) {
+        Board board = boardService.findBoard(boardId);
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.boardToBoardResponse(board))
+                , HttpStatus.OK);
+    }
+
+    //페이징처리
+    @GetMapping("/page")
+    public ResponseEntity getPBoards(Pageable pageable){
+        Page<Board> boards = boardService.getPBoards(pageable);
+        return new ResponseEntity<>(boards, HttpStatus.OK);
+    }
+
+    //페이징 없이 출력
+    @GetMapping
+    public ResponseEntity getBoards(){
+        List<Board> boards = boardService.getBoards();
+        return new ResponseEntity(boards,HttpStatus.OK);
+    }
+
+
     @PostMapping
     public ResponseEntity postBoard(@Valid @RequestBody BoardDto.Post requestBody){
         Board board = mapper.boardPostToBoard(requestBody);
@@ -35,15 +62,6 @@ public class BoardController {
         return new ResponseEntity<>(
                 new SingleResponseDto<>(response),
                 HttpStatus.CREATED);
-    }
-
-    @GetMapping("{board-id}")
-    public ResponseEntity getBoard(
-            @PathVariable("board-id") @Positive long boardId) {
-        Board board = boardService.findBoard(boardId);
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.boardToBoardResponse(board))
-                , HttpStatus.OK);
     }
 
 

@@ -5,6 +5,8 @@ import com.mainProject.seb39main32.exception.ExceptionCode;
 import com.mainProject.seb39main32.favorite.dto.FavoriteDto;
 import com.mainProject.seb39main32.favorite.entity.Favorite;
 import com.mainProject.seb39main32.favorite.repository.FavoriteRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.Positive;
@@ -26,11 +28,17 @@ public class FavoriteService {
 
     }
 
+    public Page<Favorite> getFavorites(long memberId, Pageable pageable) {
+        return favoriteRepository.findByMember_MemberId(memberId,pageable);
+    }
+
     public void deleteFavorite(long marketId, long memberId) {
         //Favorite favorite = findVerifiedFavorite(marketId,memberId);
         Favorite favorite = favoriteRepository.findByMarketIdAndMemberId(marketId, memberId);
         favoriteRepository.delete(favorite);
     }
+
+
 
     /*public Favorite findVerifiedFavorite(long marketId, long memberId){
         //Optional<Favorite> favorite = favoriteRepository.findByMarketIdAndMemberId(marketId,memberId);

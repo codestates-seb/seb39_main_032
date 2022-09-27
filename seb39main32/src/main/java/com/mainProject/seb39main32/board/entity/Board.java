@@ -1,6 +1,7 @@
 package com.mainProject.seb39main32.board.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mainProject.seb39main32.market.entity.Market;
 import com.mainProject.seb39main32.member.entity.Member;
@@ -25,18 +26,20 @@ public class Board {
 
 
     //----외래키----
-    /*@Column(name = "member_id")
-    private long memberId;*/
+    @Column(name = "member_id")
+    private long memberId;
 
     @ManyToOne
-    @JoinColumn(name = "member_id")
+    @JsonIgnore
+    @JoinColumn(name = "member_id", insertable = false, updatable = false)
     private Member member;
 
-    /*@Column(name = "market_id")
-    private long marketId;*/
+    @Column(name = "market_id")
+    private long marketId;
 
     @ManyToOne
-    @JoinColumn(name = "market_id")
+    @JsonIgnore
+    @JoinColumn(name = "market_id", insertable = false, updatable = false)
     private Market market;
     //----------
 
@@ -69,7 +72,7 @@ public class Board {
 
     //-----양방향
     @OneToMany(mappedBy = "board")
-    @JsonManagedReference
+    @JsonIgnore
     private List<Wish> wishes = new ArrayList<>();
 
     //-----양방향

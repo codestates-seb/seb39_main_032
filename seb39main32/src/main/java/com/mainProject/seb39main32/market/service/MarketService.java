@@ -5,7 +5,6 @@ import com.mainProject.seb39main32.exception.ExceptionCode;
 import com.mainProject.seb39main32.market.entity.Market;
 import com.mainProject.seb39main32.market.repository.MarketRepository;
 import org.springframework.stereotype.Service;
-import org.yaml.snakeyaml.error.Mark;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -34,7 +33,7 @@ public class MarketService {
     }
 
     public Market updateMarket(Market market) {
-        Market findMarket = findVerifiedMarket(market.getMemberId());
+        Market findMarket = findVerifiedMarket(market.getMarketId());
         findMarket.setUpdateAt(String.valueOf(LocalDateTime.now()));
         Optional.ofNullable(market.getMarketName()).ifPresent(name -> findMarket.setMarketName(name));
         Optional.ofNullable(market.getCompanyNumber()).ifPresent(number -> findMarket.setCompanyNumber(number));
@@ -54,8 +53,8 @@ public class MarketService {
     }
      */
 
-    public Market findVerifiedMarket(long memberID){
-        Optional<Market> OptionalMarket = marketRepository.findByMemberId(memberID);
+    public Market findVerifiedMarket(long marketID){
+        Optional<Market> OptionalMarket = marketRepository.findByMarketId(marketID);
         Market findMarket = OptionalMarket.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MARKET_NOT_FOUND));
         return findMarket;
     }
