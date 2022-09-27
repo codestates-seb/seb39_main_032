@@ -32,21 +32,14 @@ public class MemberController {
     }
 
 
-    /**
-     * POST - 회원가입
-     * @param requestBody
-     * @return
-     */
-    @PostMapping("/signup/basic")
-    public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody){
-        Member member = mapper.memberPostToMember(requestBody);
-        Member createdMember = memberService.createMember(member);
-        MemberDto.Response response = mapper.memberToMemberResponse(createdMember);
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(response),
-                HttpStatus.CREATED);
-    }
 
+
+    @GetMapping("/duplicate")
+    public ResponseEntity getExistEmail(@RequestParam("email") String email){
+        System.out.println(email);
+        Member member = memberService.findEmail(email);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
 
     /**

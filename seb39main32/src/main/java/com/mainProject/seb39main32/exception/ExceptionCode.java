@@ -3,8 +3,8 @@ package com.mainProject.seb39main32.exception;
 import lombok.Getter;
 
 public enum ExceptionCode {
-    USER_NOT_FOUND(404, "User not found"),
-    USER_EXISTS(409, "User exists"),
+    MEMBER_NOT_FOUND(404, "User not found"),
+    MEMBER_EXISTS(409, "User exists"),
 
     Wish_NOT_FOUND(404,"Wish not found"),
     BOARD_NOT_FOUND(404, "Board not found"),

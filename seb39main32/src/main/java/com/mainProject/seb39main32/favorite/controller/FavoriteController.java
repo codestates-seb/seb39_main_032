@@ -51,7 +51,6 @@ public class FavoriteController {
         Favorite createFavorite = favoriteService.createFavorite(favorite);
         FavoriteDto.Response response = mapper.favoriteToFavoriteResponse(createFavorite);
         return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.CREATED);
-
     }
 
     @DeleteMapping("/{marketId}/{memberId}")
