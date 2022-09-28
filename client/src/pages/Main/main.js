@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import Lists from "./components/Lists";
+import List from "./components/List";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setItemsList } from "../../actions";
@@ -31,9 +31,6 @@ function Main() {
       .get("/api/boards?page=1&size=10")
       .then((res) => {
         dispatch(setItemsList(res.data.data));
-        // console.log(state);
-      })
-      .then(() => {
         console.log(state);
       })
       .catch((err) => {
@@ -73,7 +70,7 @@ function Main() {
             })}
           </article>
         </section>
-        <Lists />
+        <List />
       </MainContainer>
       <Footer />
     </>

@@ -10,6 +10,9 @@ function Search() {
 
   const locationAPI = () => {
     // 좌표 찾기
+
+    console.log("1");
+
     var options = {
       enableHighAccuracy: true,
       timeout: 5000,
@@ -19,13 +22,15 @@ function Search() {
     function success(pos) {
       var crd = pos.coords;
 
-      // console.log("Your current position is:");
-      // console.log(`Latitude : ${crd.latitude}`);
-      // console.log(`Longitude: ${crd.longitude}`);
-      // console.log(`More or less ${crd.accuracy} meters.`);
+      console.log("Your current position is:");
+      console.log(`Latitude : ${crd.latitude}`);
+      console.log(`Longitude: ${crd.longitude}`);
+      console.log(`More or less ${crd.accuracy} meters.`);
 
       setCurLat(crd.latitude);
       setCurLon(crd.longitude);
+
+      console.log("2");
     }
 
     function error(err) {
@@ -39,9 +44,12 @@ function Search() {
 
     var coord = new kakao.maps.LatLng(curLat, curLon);
     var callback = function (result, status) {
+      console.log(result, status);
+
       if (status === kakao.maps.services.Status.OK) {
         console.log("도로명 주소 : " + result[0].address.address_name);
         setCurAdr(result[0].address.address_name);
+        console.log("3");
       }
     };
 

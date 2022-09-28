@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { storeToken, setUserInfo } from "../../../actions/index";
 import { useNavigate, useLocation } from "react-router-dom";
-import SubmitBtn from "../../../components/SubmitBtn";
+import SubmitBtn from "../../../widgets/SubmitBtn";
 import axios from "axios";
 import {
   getAccessToken,

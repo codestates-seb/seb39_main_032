@@ -18,50 +18,6 @@ function Header() {
     dispatch(deleteToken());
   };
 
-  const [curLat, setCurLat] = useState("");
-  const [curLon, setCurLon] = useState("");
-  const [curAdr, setCurAdr] = useState("");
-
-  const locationAPI = () => {
-    // 좌표 찾기
-    var options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0,
-    };
-
-    function success(pos) {
-      var crd = pos.coords;
-
-      console.log("Your current position is:");
-      console.log(`Latitude : ${crd.latitude}`);
-      console.log(`Longitude: ${crd.longitude}`);
-      console.log(`More or less ${crd.accuracy} meters.`);
-
-      setCurLat(crd.latitude);
-      setCurLon(crd.longitude);
-    }
-
-    function error(err) {
-      console.warn(`ERROR(${err.code}): ${err.message}`);
-    }
-
-    navigator.geolocation.getCurrentPosition(success, error, options);
-
-    // 주소 변환
-    var geocoder = new kakao.maps.services.Geocoder();
-
-    var coord = new kakao.maps.LatLng(curLat, curLon);
-    var callback = function (result, status) {
-      if (status === kakao.maps.services.Status.OK) {
-        console.log("도로명 주소 : " + result[0].address.address_name);
-        setCurAdr(result[0].address.address_name);
-      }
-    };
-
-    geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
-  };
-
   return (
     <HeaderContainer>
       <div id="title_nav">
