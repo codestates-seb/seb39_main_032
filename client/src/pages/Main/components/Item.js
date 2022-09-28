@@ -6,8 +6,20 @@ import axios from "axios";
 import Wishlist from "./Wishlist";
 import { useSelector } from "react-redux";
 
-function Item() {
+function Item({ id }) {
   const state = useSelector((state) => state.itemListReducer);
+
+  let startTime = String(state[id].saleStartTime);
+  let startHour = startTime.slice(11, 13);
+  let startMinute = startTime.slice(14, 16);
+
+  let endTime = String(state[id].saleEndTime);
+  let endHour = endTime.slice(11, 13);
+  let endMinute = endTime.slice(14, 16);
+
+  // let startMinute = state[id].saleStartTime.getMinutes();
+  // let endHour = state[id].saleEndTime.getHours();
+  // let endMinute = state[id].saleEndTime.getMinutes();
 
   return (
     <ItemContainer>
@@ -25,22 +37,24 @@ function Item() {
           <a href="/:id">
             <ul>
               <li>
-                <div className="store_name">[달려라 떡볶이]</div>
+                <div className="store_name">[{state[id].marketName}]</div>
               </li>
               <li>
-                <div className="item_title">로제 떡볶이</div>
+                <div className="item_title">{state[id].itemName}</div>
               </li>
               <li>
-                <div>12,900원</div>
+                <div>{state[id].itemSale}원</div>
               </li>
               <li>
-                <div className="price">13,900원</div>
+                <div className="price">{state[id].itemPrice}원</div>
               </li>
               <li>
-                <div className="sale_time">할인시간 : 18:00 ~ 19:00</div>
+                <div className="sale_time">
+                  할인시간 : {startHour}:{startMinute} ~ {endHour}:{endMinute}
+                </div>
               </li>
               <li>
-                <div>수량 : 5개</div>
+                <div>수량 : {state[id].itemAmount}개</div>
               </li>
             </ul>
           </a>

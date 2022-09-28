@@ -1,17 +1,16 @@
 import styled from "styled-components";
 import Item from "./Item";
+import { useSelector } from "react-redux";
 
 function List() {
+  const state = useSelector((state) => state.itemListReducer);
+
   return (
     <ListContainer>
       <Items>
-        <Item />
-        <Item />
-        <Item />
-        <Item />
-        <Item />
-        <Item />
-        <Item />
+        {state.map((item, idx) => {
+          return <Item key={idx} id={idx} />;
+        })}
       </Items>
     </ListContainer>
   );

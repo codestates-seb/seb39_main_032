@@ -31,6 +31,9 @@ function Main() {
       .get("/api/boards?page=1&size=10")
       .then((res) => {
         dispatch(setItemsList(res.data.data));
+        // console.log(state);
+      })
+      .then(() => {
         console.log(state);
       })
       .catch((err) => {
