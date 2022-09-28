@@ -2,11 +2,10 @@ import styled from "styled-components";
 import Search from "./Search";
 import { useNavigate } from "react-router-dom";
 // import mapApi from "./mapApi";
-/*global kakao*/
 
 function Header() {
   const navigate = useNavigate();
-  const authenticated = window.localStorage.getItem("accessToken");
+  const authenticated = localStorage.getItem("accessToken");
 
   const logoutHandler = () => {
     localStorage.removeItem("accessToken");

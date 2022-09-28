@@ -1,9 +1,9 @@
 import { Icon } from "@iconify/react";
 import styled from "styled-components";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { storeToken, setUserInfo } from "../../../actions/index";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SubmitBtn from "../../../widgets/SubmitBtn";
 import axios from "axios";
 import {
@@ -13,8 +13,6 @@ import {
 } from "../../../storage/Cookie";
 
 function BasicLogin() {
-  const location = useLocation();
-  const path = location.pathname;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loginInfo, setLoginInfo] = useState({
@@ -33,7 +31,7 @@ function BasicLogin() {
       .post("/login/jwt", loginInfo)
       .then((res) => {
         localStorage.setItem("accessToken", res.headers.authorization);
-        dispatch(storeToken(window.localStorage.getItem("accessToken")));
+        dispatch(storeToken(localStorage.getItem("accessToken")));
         dispatch(setUserInfo(loginInfo));
 
         // 리프레쉬 토큰 쿠키 저장.
