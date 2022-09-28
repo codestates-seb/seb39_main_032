@@ -8,37 +8,35 @@ function Search() {
   const [curLon, setCurLon] = useState("");
   const [curAdr, setCurAdr] = useState("");
 
-  const locationAPI = () => {
-    // 좌표 찾기
+  // 좌표 찾기
+  var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+  };
 
-    console.log("1");
+  function success(pos) {
+    var crd = pos.coords;
 
-    var options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0,
-    };
+    // console.log("Your current position is:");
+    // console.log(`Latitude : ${crd.latitude}`);
+    // console.log(`Longitude: ${crd.longitude}`);
+    // console.log(`More or less ${crd.accuracy} meters.`);
 
-    function success(pos) {
-      var crd = pos.coords;
+    setCurLat(crd.latitude);
+    setCurLon(crd.longitude);
+  }
 
-      console.log("Your current position is:");
-      console.log(`Latitude : ${crd.latitude}`);
-      console.log(`Longitude: ${crd.longitude}`);
-      console.log(`More or less ${crd.accuracy} meters.`);
+  function error(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
 
-      setCurLat(crd.latitude);
-      setCurLon(crd.longitude);
-
-      console.log("2");
-    }
-
-    function error(err) {
-      console.warn(`ERROR(${err.code}): ${err.message}`);
-    }
-
+  // 좌표 찾기
+  useEffect(() => {
     navigator.geolocation.getCurrentPosition(success, error, options);
+  }, []);
 
+  const locationAPI = () => {
     // 주소 변환
     var geocoder = new kakao.maps.services.Geocoder();
 
@@ -49,7 +47,6 @@ function Search() {
       if (status === kakao.maps.services.Status.OK) {
         console.log("도로명 주소 : " + result[0].address.address_name);
         setCurAdr(result[0].address.address_name);
-        console.log("3");
       }
     };
 
