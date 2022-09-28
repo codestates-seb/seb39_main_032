@@ -6,29 +6,8 @@ import Mypage from "./pages/Mypage/mypage";
 import Newpost from "./pages/Newpost/newpost";
 import Signup from "./pages/Signup/signup";
 import Post from "./pages/PostDetail/Post";
-import { useSelector, useDispatch } from "react-redux";
-import { setUserInfo, storeToken } from "./actions";
-import { getAccessToken } from "./storage/Cookie";
-import { useEffect } from "react";
 
 function App() {
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state.userInfoReducer);
-  const { email, memberPw, authenticated } = state;
-  const state2 = useSelector((state) => state.loginReducer);
-  const { accessToken } = state2;
-
-  const authHandler = () => {
-    // if (accessToken) {
-    //   dispatch(setUserInfo({ ...email, ...memberPw, authenticated: true }));
-    //   console.log(email, memberPw, authenticated);
-    // }
-  };
-
-  useEffect(() => {
-    authHandler();
-  }, []);
-
   return (
     <BrowserRouter>
       <Routes>

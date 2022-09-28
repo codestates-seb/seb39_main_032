@@ -1,21 +1,16 @@
 import styled from "styled-components";
-
-import { useSelector } from "react-redux";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { deleteToken, setUserInfo } from "../actions";
 import Search from "./Search";
+import { useNavigate } from "react-router-dom";
 // import mapApi from "./mapApi";
-import { useEffect, useState } from "react";
 /*global kakao*/
 
 function Header() {
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state.loginReducer);
-  const { authenticated } = state;
+  const navigate = useNavigate();
+  const authenticated = window.localStorage.getItem("accessToken");
 
   const logoutHandler = () => {
-    dispatch(deleteToken());
+    localStorage.removeItem("accessToken");
+    navigate("/");
   };
 
   return (

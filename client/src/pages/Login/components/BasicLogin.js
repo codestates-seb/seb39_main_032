@@ -22,27 +22,19 @@ function BasicLogin() {
     memberPw: "",
   });
 
-  //
   const loginHandler = (key) => (e) => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
   };
 
-  // const state = useSelector((state) => state.loginReducer);
-  // const { accessToken } = state;
-
   const submitHandler = (e) => {
     e.preventDefault();
-
-    // console.log(loginInfo);
 
     axios
       .post("/login/jwt", loginInfo)
       .then((res) => {
-        dispatch(storeToken(res.headers.authorization));
+        localStorage.setItem("accessToken", res.headers.authorization);
+        dispatch(storeToken(window.localStorage.getItem("accessToken")));
         dispatch(setUserInfo(loginInfo));
-
-        // 액세스 토큰 쿠키 저장 -> 저장되는지 테스트 필요.
-        // setAccessToken(res.headers.authorization);
 
         // 리프레쉬 토큰 쿠키 저장.
         // setRefreshToken(res.cookie);
