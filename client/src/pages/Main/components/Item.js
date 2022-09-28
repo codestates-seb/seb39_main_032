@@ -1,19 +1,14 @@
 import styled from "styled-components";
 import ItemBox from "../../Newpost/components/ItemBox";
 import { Icon } from "@iconify/react";
-import { useState } from "react";
-import axios from "axios";
 import Wishlist from "./Wishlist";
-import { useSelector } from "react-redux";
 
-function Item({ id }) {
-  const state = useSelector((state) => state.itemListReducer);
-
-  let startTime = String(state[id].saleStartTime);
+function Item({ id, items }) {
+  let startTime = String(items[id].saleStartTime);
   let startHour = startTime.slice(11, 13);
   let startMinute = startTime.slice(14, 16);
 
-  let endTime = String(state[id].saleEndTime);
+  let endTime = String(items[id].saleEndTime);
   let endHour = endTime.slice(11, 13);
   let endMinute = endTime.slice(14, 16);
 
@@ -37,16 +32,16 @@ function Item({ id }) {
           <a href="/:id">
             <ul>
               <li>
-                <div className="store_name">[{state[id].marketName}]</div>
+                <div className="store_name">[{items[id].marketName}]</div>
               </li>
               <li>
-                <div className="item_title">{state[id].itemName}</div>
+                <div className="item_title">{items[id].itemName}</div>
               </li>
               <li>
-                <div>{state[id].itemSale}원</div>
+                <div>{items[id].itemSale}원</div>
               </li>
               <li>
-                <div className="price">{state[id].itemPrice}원</div>
+                <div className="price">{items[id].itemPrice}원</div>
               </li>
               <li>
                 <div className="sale_time">
@@ -54,7 +49,7 @@ function Item({ id }) {
                 </div>
               </li>
               <li>
-                <div>수량 : {state[id].itemAmount}개</div>
+                <div>수량 : {items[id].itemAmount}개</div>
               </li>
             </ul>
           </a>

@@ -1,15 +1,59 @@
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import Item from "./Item";
-import { useSelector } from "react-redux";
 
+// 명칭 변경
 function List() {
+  const dispatch = useDispatch();
   const state = useSelector((state) => state.itemListReducer);
+  const [btnActive, setBtnActive] = useState("all");
+  const [items, setItems] = useState(state);
+
+  let filteredItems = state.filter((item) => item.boardStatus === "판매중");
+
+  const clickHandler = (e) => {
+    setBtnActive(e.target.id);
+
+    if (e.target.id === "all") {
+      return setItems(state);
+    } else {
+      return setItems(filteredItems);
+    }
+  };
+
+  //
+  useEffect(() => {
+    if (state) {
+      setItems(state);
+    }
+  }, [state]);
 
   return (
     <ListContainer>
+      <ListHeader>
+        <h2>#분식</h2>
+        <ListNav>
+          <span
+            id="ongoing"
+            className={"ongoing" === btnActive ? "active" : ""}
+            onClick={clickHandler}
+          >
+            진행 중
+          </span>
+          <span> | </span>
+          <span
+            id="all"
+            className={"all" === btnActive ? "active" : ""}
+            onClick={clickHandler}
+          >
+            전체 보기
+          </span>
+        </ListNav>
+      </ListHeader>
       <Items>
-        {state.map((item, idx) => {
-          return <Item key={idx} id={idx} />;
+        {items.map((item, idx) => {
+          return <Item key={idx} id={idx} items={items} />;
         })}
       </Items>
     </ListContainer>
@@ -18,19 +62,43 @@ function List() {
 
 export default List;
 
-const ListContainer = styled.div`
+const ListHeader = styled.section`
   display: flex;
-  border: 1.5px solid #aaaaaa;
-  border-radius: 0.5rem;
-  margin: 0 40px;
+  justify-content: space-between;
+  margin: 20px 35px 0 20px;
+
+  h2 {
+    margin-left: 20px;
+  }
+`;
+
+const ListNav = styled.div`
+  margin-top: 20px;
+
+  span {
+    cursor: pointer;
+    padding: 0 7px;
+  }
+
+  .active {
+    color: red;
+    font-weight: 700;
+  }
+`;
+
+const ListContainer = styled.section`
+  /* border: 3px solid green; */
+  margin: 0 22% 20px 22%;
 `;
 
 const Items = styled.ul`
   display: flex;
-  /* border: 1px solid; */
   flex-wrap: wrap;
   margin: 0 20px;
   justify-content: flex-start;
   list-style: none;
   padding: 0 1%;
+  border: 1.5px solid #aaaaaa;
+  border-radius: 0.5rem;
+  margin: 0 40px;
 `;
