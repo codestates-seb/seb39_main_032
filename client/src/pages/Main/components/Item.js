@@ -4,8 +4,11 @@ import { Icon } from "@iconify/react";
 import { useState } from "react";
 import axios from "axios";
 import Wishlist from "./Wishlist";
+import { useSelector } from "react-redux";
 
 function Item() {
+  const state = useSelector((state) => state.itemListReducer);
+
   return (
     <ItemContainer>
       <ImgContainer>

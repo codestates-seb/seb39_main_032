@@ -5,7 +5,7 @@ import Main from "./pages/Main/main";
 import Mypage from "./pages/Mypage/mypage";
 import Newpost from "./pages/Newpost/newpost";
 import Signup from "./pages/Signup/signup";
-import Post from "./pages/Post/Post";
+import Post from "./pages/PostDetail/Post";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo, storeToken } from "./actions";
 import { getAccessToken } from "./storage/Cookie";

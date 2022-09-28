@@ -1,22 +1,17 @@
 import styled from "styled-components";
-import { TitleHeader } from "./Firstselling";
+import TitleHeader from "./TitleHeader";
 import { Icon } from "@iconify/react";
 import AddItemBox from "./AddItemBox";
-
-const AdditemContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
 
 function Additem() {
   return (
     <>
       <AdditemContainer>
-        <TitleHeader>
-          <h2>할인 판매 품목</h2>
-          <div>품목 추가하기</div>
-        </TitleHeader>
+        <TitleHeader
+          title={"할인 판매 품목"}
+          subtitle={"품목 추가하기"}
+          cursor={"pointer"}
+        />
         <AddItemBox />
       </AdditemContainer>
     </>
@@ -24,3 +19,9 @@ function Additem() {
 }
 
 export default Additem;
+
+const AdditemContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import { TitleHeader } from "../Newpost/components/Firstselling";
+import TitleHeader from "../Newpost/components/TitleHeader";
 import { Icon } from "@iconify/react";
 import ItemBox from "../Newpost/components/ItemBox";
 import Review from "./components/Review";
@@ -12,13 +12,11 @@ function Post() {
     <>
       <Header />
       <PostContainer>
-        <TitleHeader>
-          <h2>달려라 떡볶이</h2>
-          <span className="bookmark">
-            <Icon icon="bi:bookmark-star" className="bookmark_icon" />
-          </span>
-          <div>서울시 용산구 회나무로 21 / 02 1234 5678</div>
-        </TitleHeader>
+        <TitleHeader
+          title={"달러라 떡볶이"}
+          subtitle={"서울시 용산구 회나무로 21 / 02 1234 5678"}
+          icon={<Icon icon="bi:bookmark-star" className="bookmark_icon" />}
+        />
         <main>
           <section>
             <StoreLocation />
@@ -41,19 +39,6 @@ const PostContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  .bookmark {
-    width: 30px;
-    height: 30px;
-    margin-top: 20px;
-    margin-left: -400px;
-
-    .bookmark_icon {
-      width: 30px;
-      height: 30px;
-      cursor: pointer;
-    }
-  }
 
   #map {
     background-color: grey;

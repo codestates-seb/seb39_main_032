@@ -1,10 +1,43 @@
 import styled from "styled-components";
 import Header from "../../components/Header";
-import { TitleHeader } from "../Newpost/components/Firstselling";
+import TitleHeader from "../Newpost/components/TitleHeader";
 import Footer from "../../components/Footer";
 import CurrentSaleItems from "./components/CurrentSaleItems";
 import MyFavoriteStores from "./components/MyFavoriteStores";
 import MyWishlist from "./components/MyWishlist";
+
+function Mypage() {
+  return (
+    <>
+      <Header />
+      <MypageContainer>
+        <TitleHeader title={"나의 정보"} />
+        <section id="pw_change_wrapper">
+          <h4>비밀번호 변경</h4>
+          <form>
+            <div id="pw_change_box">
+              <input id="new_pw" type="password" placeholder="새 비밀번호" />
+              <input
+                id="new_pw_confirm"
+                type="password"
+                placeholder="새 비밀번호 재확인"
+              />
+            </div>
+            <button id="pw_edit_btn" type="submit">
+              수정
+            </button>
+          </form>
+        </section>
+        <CurrentSaleItems />
+        <MyFavoriteStores />
+        <MyWishlist />
+      </MypageContainer>
+      <Footer />
+    </>
+  );
+}
+
+export default Mypage;
 
 const MypageContainer = styled.div`
   display: flex;
@@ -58,38 +91,3 @@ const MypageContainer = styled.div`
     border-radius: 0.2rem;
   }
 `;
-
-function Mypage() {
-  return (
-    <>
-      <Header />
-      <MypageContainer>
-        <TitleHeader>
-          <h2>나의 정보</h2>
-        </TitleHeader>
-        <section id="pw_change_wrapper">
-          <h4>비밀번호 변경</h4>
-          <form>
-            <div id="pw_change_box">
-              <input id="new_pw" type="password" placeholder="새 비밀번호" />
-              <input
-                id="new_pw_confirm"
-                type="password"
-                placeholder="새 비밀번호 재확인"
-              />
-            </div>
-            <button id="pw_edit_btn" type="submit">
-              수정
-            </button>
-          </form>
-        </section>
-        <CurrentSaleItems />
-        <MyFavoriteStores />
-        <MyWishlist />
-      </MypageContainer>
-      <Footer />
-    </>
-  );
-}
-
-export default Mypage;

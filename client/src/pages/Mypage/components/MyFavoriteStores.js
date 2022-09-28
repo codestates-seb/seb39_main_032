@@ -1,5 +1,25 @@
 import styled from "styled-components";
-import { TitleHeader } from "../../Newpost/components/Firstselling";
+import TitleHeader from "../../Newpost/components/TitleHeader";
+
+function MyFavoriteStores() {
+  return (
+    <MyFavoriteStoresContainer>
+      <TitleHeader title={"나의 관심 가게"} />
+      <section id="my_fav_store_wrapper">
+        <div className="my_fav_store">
+          <div className="my_fav_store_name">달려라 떡볶이</div>
+          <div className="my_fav_store_btn delte">삭제</div>
+        </div>
+        <div className="my_fav_store">
+          <div className="my_fav_store_name">샐러디</div>
+          <div className="my_fav_store_btn delte">삭제</div>
+        </div>
+      </section>
+    </MyFavoriteStoresContainer>
+  );
+}
+
+export default MyFavoriteStores;
 
 const MyFavoriteStoresContainer = styled.div`
   display: flex;
@@ -29,25 +49,3 @@ const MyFavoriteStoresContainer = styled.div`
     }
   }
 `;
-
-function MyFavoriteStores() {
-  return (
-    <MyFavoriteStoresContainer>
-      <TitleHeader>
-        <h2>나의 관심 가게</h2>
-      </TitleHeader>
-      <section id="my_fav_store_wrapper">
-        <div className="my_fav_store">
-          <div className="my_fav_store_name">달려라 떡볶이</div>
-          <div className="my_fav_store_btn delte">삭제</div>
-        </div>
-        <div className="my_fav_store">
-          <div className="my_fav_store_name">샐러디</div>
-          <div className="my_fav_store_btn delte">삭제</div>
-        </div>
-      </section>
-    </MyFavoriteStoresContainer>
-  );
-}
-
-export default MyFavoriteStores;

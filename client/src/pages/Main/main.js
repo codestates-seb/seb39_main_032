@@ -4,6 +4,9 @@ import axios from "axios";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Lists from "./components/Lists";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setItemsList } from "../../actions";
 
 function Main() {
   let caterogies = [
@@ -20,6 +23,30 @@ function Main() {
     "카페/디저트",
   ];
 
+  const state = useSelector((state) => state.itemListReducer);
+  const dispatch = useDispatch();
+
+  const getPosts = () => {
+    axios
+      .get("/api/boards?page=1&size=10")
+      .then((res) => {
+        dispatch(setItemsList(res.data.data));
+        console.log(state);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getPosts();
+  }, []);
+
+  const handleClickCategory = () => {
+    // axiox.get 해주기
+    return;
+  };
+
   return (
     <>
       <Header />
@@ -31,7 +58,12 @@ function Main() {
           <article>
             {caterogies.map((item, idx) => {
               return (
-                <div value={idx} key={idx} className="food_category">
+                <div
+                  value={idx}
+                  key={idx}
+                  className="food_category"
+                  onClick={handleClickCategory}
+                >
                   {item}
                 </div>
               );

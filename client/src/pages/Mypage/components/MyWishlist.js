@@ -1,5 +1,25 @@
 import styled from "styled-components";
-import { TitleHeader } from "../../Newpost/components/Firstselling";
+import TitleHeader from "../../Newpost/components/TitleHeader";
+
+function MyWishlist() {
+  return (
+    <MyWishlistContainer>
+      <TitleHeader title={"나의 관심 상품"} />
+      <section id="my_wishlist_wrapper">
+        <div className="my_wishlist">
+          <div className="my_wishlist_name">교촌 허니 콤보</div>
+          <div className="my_wishlist_btn delte">삭제</div>
+        </div>
+        <div className="my_wishlist">
+          <div className="my_wishlist_name">알리오 올리오 파스타</div>
+          <div className="my_wishlist_btn delte">삭제</div>
+        </div>
+      </section>
+    </MyWishlistContainer>
+  );
+}
+
+export default MyWishlist;
 
 const MyWishlistContainer = styled.div`
   display: flex;
@@ -29,25 +49,3 @@ const MyWishlistContainer = styled.div`
     }
   }
 `;
-
-function MyWishlist() {
-  return (
-    <MyWishlistContainer>
-      <TitleHeader>
-        <h2>나의 관심 상품</h2>
-      </TitleHeader>
-      <section id="my_wishlist_wrapper">
-        <div className="my_wishlist">
-          <div className="my_wishlist_name">교촌 허니 콤보</div>
-          <div className="my_wishlist_btn delte">삭제</div>
-        </div>
-        <div className="my_wishlist">
-          <div className="my_wishlist_name">알리오 올리오 파스타</div>
-          <div className="my_wishlist_btn delte">삭제</div>
-        </div>
-      </section>
-    </MyWishlistContainer>
-  );
-}
-
-export default MyWishlist;

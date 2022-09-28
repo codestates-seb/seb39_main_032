@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TitleHeader } from "../../Newpost/components/Firstselling";
+import TitleHeader from "../../Newpost/components/TitleHeader";
 
 const CurrentSaleItemsContainer = styled.div`
   display: flex;
@@ -43,9 +43,7 @@ const CurrentSaleItemsContainer = styled.div`
 function CurrentSaleItems() {
   return (
     <CurrentSaleItemsContainer>
-      <TitleHeader>
-        <h2>현재 판매 중인 상품</h2>
-      </TitleHeader>
+      <TitleHeader title={"현재 판매 중인 상품"} />
       <section id="currunt_selling_items_wrapper">
         <div className="cur_selling_item">
           <div className="cur_selling_item_name">까르보나라 떡볶이</div>
