@@ -1,9 +1,14 @@
 package com.mainProject.seb39main32.market.service;
 
+import com.mainProject.seb39main32.board.entity.Board;
 import com.mainProject.seb39main32.exception.BusinessLogicException;
 import com.mainProject.seb39main32.exception.ExceptionCode;
 import com.mainProject.seb39main32.market.entity.Market;
 import com.mainProject.seb39main32.market.repository.MarketRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -18,12 +23,16 @@ public class MarketService {
         this.marketRepository = marketRepository;
     }
 
-    public Market getMarket(long memberId) {
-        Market findMarket = findVerifiedMarket(memberId);
-        return findMarket;
+    public Page<Market> getMarketMemberID( Pageable pageable, long memberId) {
+        //Market findMarket = findVerifiedMarketMemberID(memberId);
+        Page<Market> pageResult = marketRepository.findByMember_MemberId(pageable,memberId);
+        return pageResult;
     }
 
-
+    public Market getMarketMarkgetID(long markgetId) {
+        Market findMarket = findVerifiedMarketMarkgetID(markgetId);
+        return findMarket;
+    }
 
     public Market createMarket(Market market) {
         market.setCreateAt(String.valueOf(LocalDateTime.now()));
@@ -33,7 +42,7 @@ public class MarketService {
     }
 
     public Market updateMarket(Market market) {
-        Market findMarket = findVerifiedMarket(market.getMarketId());
+        Market findMarket = findVerifiedMarketMarkgetID(market.getMarketId());
         findMarket.setUpdateAt(String.valueOf(LocalDateTime.now()));
         Optional.ofNullable(market.getMarketName()).ifPresent(name -> findMarket.setMarketName(name));
         Optional.ofNullable(market.getCompanyNumber()).ifPresent(number -> findMarket.setCompanyNumber(number));
@@ -44,6 +53,17 @@ public class MarketService {
 
     }
 
+//    public Market findVerifiedMarketMemberID(long memberID){
+//        Optional<Market> OptionalMarket = marketRepository.findByMember_MemberId(memberID);
+//        Market findMarket = OptionalMarket.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MARKET_NOT_FOUND));
+//        return findMarket;
+//    }
+
+    public Market findVerifiedMarketMarkgetID(long marketID){
+        Optional<Market> OptionalMarket = marketRepository.findByMarketId(marketID);
+        Market findMarket = OptionalMarket.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MARKET_NOT_FOUND));
+        return findMarket;
+    }
 
     /*
     private Market findMarket(long memberId) {
@@ -52,12 +72,5 @@ public class MarketService {
         return findMarket;
     }
      */
-
-    public Market findVerifiedMarket(long marketID){
-        Optional<Market> OptionalMarket = marketRepository.findByMarketId(marketID);
-        Market findMarket = OptionalMarket.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MARKET_NOT_FOUND));
-        return findMarket;
-    }
-
 
 }
