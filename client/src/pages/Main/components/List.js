@@ -8,26 +8,19 @@ function List() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.itemListReducer);
   const [btnActive, setBtnActive] = useState("all");
-  const [items, setItems] = useState(state);
+  const [isFiltered, setIsFiltered] = useState(false);
 
   let filteredItems = state.filter((item) => item.boardStatus === "판매중");
 
   const clickHandler = (e) => {
     setBtnActive(e.target.id);
 
-    if (e.target.id === "all") {
-      return setItems(state);
+    if (e.target.id === "ongoing") {
+      return setIsFiltered(true);
     } else {
-      return setItems(filteredItems);
+      return setIsFiltered(false);
     }
   };
-
-  //
-  useEffect(() => {
-    if (state) {
-      setItems(state);
-    }
-  }, [state]);
 
   return (
     <ListContainer>
@@ -51,10 +44,15 @@ function List() {
           </span>
         </ListNav>
       </ListHeader>
+
       <Items>
-        {items.map((item, idx) => {
-          return <Item key={idx} id={idx} items={items} />;
-        })}
+        {isFiltered
+          ? filteredItems.map((item, idx) => {
+              return <Item key={idx} id={idx} state={filteredItems} />;
+            })
+          : state.map((item, idx) => {
+              return <Item key={idx} id={idx} state={state} />;
+            })}
       </Items>
     </ListContainer>
   );
