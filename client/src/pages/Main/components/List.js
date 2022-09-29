@@ -7,8 +7,8 @@ import Item from "./Item";
 function List() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.itemListReducer);
-  const [btnActive, setBtnActive] = useState("all");
-  const [isFiltered, setIsFiltered] = useState(false);
+  const [btnActive, setBtnActive] = useState("ongoing");
+  const [isFiltered, setIsFiltered] = useState(true);
 
   let filteredItems = state.filter((item) => item.boardStatus === "판매중");
 

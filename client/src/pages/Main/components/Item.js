@@ -38,7 +38,7 @@ function Item({ id, state }) {
                 <div className="item_title">{state[id].itemName}</div>
               </li>
               <li>
-                <div>{state[id].stateale}원</div>
+                <div>{state[id].itemSale}원</div>
               </li>
               <li>
                 <div className="price">{state[id].itemPrice}원</div>
