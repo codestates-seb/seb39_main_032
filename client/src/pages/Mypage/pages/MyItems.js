@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
-import StoreInfo from "./StoreInfo";
-import Firstselling from "./Firstselling";
+import TitleHeader from "../../../components/TitleHeader";
+import Item from "../components/newpost/Item";
 
-function MyStore() {
+function MyItems() {
   const [hasStoreInfo, setHasStoreInfo] = useState(true);
   const [hasItems, setHasItems] = useState(false);
 
@@ -25,17 +25,17 @@ function MyStore() {
   return (
     <>
       <Header />
-      <MyStoreContainer>
-        {hasStoreInfo ? <StoreInfo /> : <Firstselling />}
-      </MyStoreContainer>
+      <MyItemsContainer>
+        <Item />
+      </MyItemsContainer>
       <Footer />
     </>
   );
 }
 
-export default MyStore;
+export default MyItems;
 
-const MyStoreContainer = styled.div`
+const MyItemsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

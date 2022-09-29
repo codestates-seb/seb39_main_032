@@ -2,11 +2,23 @@ import styled from "styled-components";
 import TitleHeader from "../../../components/TitleHeader";
 import StoreLocation from "../../PostDetail/components/Map";
 import SubmitBtn from "../../../widgets/SubmitBtn";
+import { useNavigate } from "react-router-dom";
 
 function StoreInfo() {
+  const navigate = useNavigate();
+
+  const editBtnHandler = () => {
+    navigate("/mystore/edit");
+  };
+
   return (
     <>
-      <TitleHeader title={"나의 가게 정보"} cursor={"pointer"} />
+      <TitleHeader
+        title={"나의 가게 정보"}
+        cursor={"pointer"}
+        func={editBtnHandler}
+        subtitle={"수정하기"}
+      />
       <StoreInfoContainer>
         <StoreLocation />
         <div className="first_selling_wrapper">
@@ -28,9 +40,6 @@ function StoreInfo() {
           </div>
         </div>
       </StoreInfoContainer>
-      <a href="/mystore/edit">
-        <SubmitBtn width={"200px"} />
-      </a>
     </>
   );
 }

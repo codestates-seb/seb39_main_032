@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import TitleHeader from "../../../../../components/TitleHeader";
+import TitleHeader from "../../../../components/TitleHeader";
 import { Icon } from "@iconify/react";
 
 function ItemBox() {

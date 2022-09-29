@@ -3,7 +3,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import TitleHeader from "../../components/TitleHeader";
 import { Icon } from "@iconify/react";
-import ItemBox from "../Mypage/pages/Newpost/components/ItemBox";
+import ItemBox from "../Mypage/components/newpost/ItemBox";
 import Review from "./components/Review";
 import StoreLocation from "./components/Map";
 

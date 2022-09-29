@@ -19,7 +19,10 @@ function Mypage() {
           <div>가게 등록 및 관리</div>
         </a>
         <a href="/newpost">
-          <div>할인 상품 등록 및 관리</div>
+          <div>할인 상품 등록</div>
+        </a>
+        <a href="/myitems">
+          <div>할인 상품 관리</div>
         </a>
         <CurrentSaleItems />
         <MyFavoriteStores />

@@ -1,17 +1,12 @@
 import styled from "styled-components";
-import TitleHeader from "../../../../../components/TitleHeader";
+import TitleHeader from "../../../../components/TitleHeader";
 import { Icon } from "@iconify/react";
 import ItemBox from "./ItemBox";
 
 function Item() {
   return (
     <ItemContainer>
-      <TitleHeader
-        title={"할인 판매 품목"}
-        subtitle={"품목 추가하기"}
-        cursor={"pointer"}
-        func
-      />
+      <TitleHeader title={"할인 상품 관리"} />
       <form>
         <ItemBox />
         <div className="delete_btn">삭제하기</div>

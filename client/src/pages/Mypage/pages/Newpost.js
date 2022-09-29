@@ -1,15 +1,11 @@
 import styled from "styled-components";
-import Header from "../../../../components/Header";
+import Header from "../../../components/Header";
 // import Firstselling from "./components/Firstselling";
-// import StoreInfo from "../Mypage/components/StoreInfo";
-import AddItem from "./components/AddItem";
-import Footer from "../../../../components/Footer";
-import Item from "./components/Item";
-import AddItemBox from "./components/AddItemBox";
+import Footer from "../../../components/Footer";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import ItemBox from "./components/ItemBox";
+import AddItemBox from "../components/newpost/AddItemBox";
 
 function Newpost() {
   const state = useSelector((state) => state.userInfoReducer);
@@ -33,12 +29,12 @@ function Newpost() {
     <>
       <Header />
       <main>
-        {/* 가게 정보가, 있을 때 : 없을때
-        {hasStoreInfo ? <StoreInfo /> : <Firstselling />} */}
-        {/* 가게 정보가 있고 && 아이템도 있을 때 : 가게 정보가 없고, 아이템도 없을 때*/}
-        {hasStoreInfo && hasItems ? <Item /> : null}
+        <AddItemBox />
+        <button>등록</button>
+        {/* 가게 정보가 있고 && 아이템도 있을 때 : 가게 정보가 없고, 아이템도 없을 때 */}
+        {/* {hasStoreInfo && hasItems ? <Item /> : null} */}
         {/* 가게 정보가 있고, 아이템은 없을 때 : 가게 정보가 없고, 아이템은 있을 때 */}
-        {hasStoreInfo && hasItems === false ? <AddItem /> : null}
+        {/* {hasStoreInfo && hasItems === false ? <AddItemBox /> : null} */}
       </main>
       <Footer />
     </>
