@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 
-function SubmitBtn() {
+function SubmitBtn(props) {
   const location = useLocation();
   const path = location.pathname;
 
   return (
-    <SubmitBtnContainer>
-      {path === "/signup" ? "가입하기" : "로 그 인"}
+    <SubmitBtnContainer width={props.width}>
+      {path === "/signup" ? ("/login" ? "가입하기" : "로 그 인") : "수정하기"}
     </SubmitBtnContainer>
   );
 }
@@ -24,4 +24,5 @@ const SubmitBtnContainer = styled.button`
   color: white;
   font-weight: 700;
   cursor: pointer;
+  width: ${(props) => props.width};
 `;

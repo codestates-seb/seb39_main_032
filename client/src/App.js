@@ -2,10 +2,13 @@ import "./GlobalStyle.css";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Login from "./pages/Login/login";
 import Main from "./pages/Main/main";
-import Mypage from "./pages/Mypage/mypage";
-import Newpost from "./pages/Newpost/newpost";
+import Newpost from "./pages/Mypage/pages/Newpost/newpost";
 import Signup from "./pages/Signup/signup";
 import Post from "./pages/PostDetail/Post";
+import EditPwd from "./pages/Mypage/pages/EditPwd";
+import MyStore from "./pages/Mypage/pages/MyStore";
+import Firstselling from "./pages/Mypage/pages/Firstselling";
+import Mypage from "./pages/Mypage/Mypage";
 
 function App() {
   return (
@@ -17,6 +20,9 @@ function App() {
         <Route path="/newpost" element={<Newpost />} />
         <Route path="/:id" element={<Post />} />
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/myinfo" element={<EditPwd />} />
+        <Route path="/mystore" element={<MyStore />} />
+        <Route path="/mystore/edit" element={<Firstselling />} />
       </Routes>
     </BrowserRouter>
   );

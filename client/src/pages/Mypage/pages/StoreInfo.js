@@ -1,15 +1,14 @@
 import styled from "styled-components";
-import TitleHeader from "./TitleHeader";
+import TitleHeader from "../../../components/TitleHeader";
+import StoreLocation from "../../PostDetail/components/Map";
+import SubmitBtn from "../../../widgets/SubmitBtn";
 
 function StoreInfo() {
   return (
-    <StoreInfoContainer>
-      <TitleHeader
-        title={"가게 정보"}
-        subtitle={"정보 수정하기"}
-        cursor={"pointer"}
-      />
-      <section>
+    <>
+      <TitleHeader title={"나의 가게 정보"} cursor={"pointer"} />
+      <StoreInfoContainer>
+        <StoreLocation />
         <div className="first_selling_wrapper">
           <div className="first_selling_category">
             <div>상호</div>
@@ -28,8 +27,11 @@ function StoreInfo() {
             <span>02-1234-5678</span>
           </div>
         </div>
-      </section>
-    </StoreInfoContainer>
+      </StoreInfoContainer>
+      <a href="/mystore/edit">
+        <SubmitBtn width={"200px"} />
+      </a>
+    </>
   );
 }
 
@@ -45,6 +47,7 @@ const StoreInfoContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 20px;
   }
 
   .first_selling_category {

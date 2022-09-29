@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import TitleHeader from "./TitleHeader";
+import TitleHeader from "../../../../../components/TitleHeader";
 import { Icon } from "@iconify/react";
 import AddItemBox from "./AddItemBox";
 
-function Additem() {
+function AddItem() {
   return (
     <>
       <AdditemContainer>
@@ -18,7 +18,7 @@ function Additem() {
   );
 }
 
-export default Additem;
+export default AddItem;
 
 const AdditemContainer = styled.div`
   display: flex;

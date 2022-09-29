@@ -30,9 +30,9 @@ function BasicLogin() {
     axios
       .post("/login/jwt", loginInfo)
       .then((res) => {
+        dispatch(setUserInfo(loginInfo));
         localStorage.setItem("accessToken", res.headers.authorization);
         dispatch(storeToken(localStorage.getItem("accessToken")));
-        dispatch(setUserInfo(loginInfo));
 
         // 리프레쉬 토큰 쿠키 저장.
         // setRefreshToken(res.cookie);

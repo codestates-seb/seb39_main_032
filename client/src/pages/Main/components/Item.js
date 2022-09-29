@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import ItemBox from "../../Newpost/components/ItemBox";
+import ItemBox from "../../Mypage/pages/Newpost/components/ItemBox";
 import { Icon } from "@iconify/react";
 import Wishlist from "./Wishlist";
 

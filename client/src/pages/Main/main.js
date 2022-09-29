@@ -31,7 +31,7 @@ function Main() {
       .get("/api/boards?page=1&size=10")
       .then((res) => {
         dispatch(setItemsList(res.data.data));
-        console.log(state);
+        // console.log(state);
       })
       .catch((err) => {
         console.log(err);
@@ -51,9 +51,6 @@ function Main() {
     <>
       <Header />
       <MainContainer>
-        <a href="/newpost" id="btn_newpost">
-          <button>상품 등록하기</button>
-        </a>
         <section id="category">
           <article>
             {caterogies.map((item, idx) => {
@@ -117,23 +114,6 @@ const MainContainer = styled.main`
     font-family: "Do Hyeon";
     :hover {
       background-color: grey;
-    }
-  }
-
-  #btn_newpost {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 18%;
-
-    > button {
-      margin-top: 70vh;
-      position: fixed;
-      background-color: rgba(255, 74, 85, 1);
-      color: white;
-      font-weight: 700;
-      height: 35px;
-      padding: 8px;
-      border-radius: 0.3rem;
     }
   }
 `;

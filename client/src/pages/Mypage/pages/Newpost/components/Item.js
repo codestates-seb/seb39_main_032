@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import TitleHeader from "./TitleHeader";
+import TitleHeader from "../../../../../components/TitleHeader";
 import { Icon } from "@iconify/react";
 import ItemBox from "./ItemBox";
 
@@ -10,6 +10,7 @@ function Item() {
         title={"할인 판매 품목"}
         subtitle={"품목 추가하기"}
         cursor={"pointer"}
+        func
       />
       <form>
         <ItemBox />

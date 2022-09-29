@@ -21,6 +21,7 @@ const loginReducer = (state = initialState, action) => {
         refreshToken: action.payload,
         expireTime: new Date().getTime() + TOKEN_TIME_OUT,
       };
+      break;
 
     case DELETE_TOKEN:
       return {
@@ -28,6 +29,7 @@ const loginReducer = (state = initialState, action) => {
         refreshToken: null,
         expireTime: null,
       };
+      break;
 
     default:
       return state;

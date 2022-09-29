@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import TitleHeader from "../../Newpost/components/TitleHeader";
+import TitleHeader from "../../../components/TitleHeader";
 
 const CurrentSaleItemsContainer = styled.div`
   display: flex;

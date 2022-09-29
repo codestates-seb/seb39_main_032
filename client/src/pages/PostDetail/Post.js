@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import TitleHeader from "../Newpost/components/TitleHeader";
+import TitleHeader from "../../components/TitleHeader";
 import { Icon } from "@iconify/react";
-import ItemBox from "../Newpost/components/ItemBox";
+import ItemBox from "../Mypage/pages/Newpost/components/ItemBox";
 import Review from "./components/Review";
 import StoreLocation from "./components/Map";
 

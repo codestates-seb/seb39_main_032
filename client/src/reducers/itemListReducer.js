@@ -9,6 +9,7 @@ const itemListReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_ITEMS_LIST:
       return action.payload;
+      break;
 
     default:
       return state;

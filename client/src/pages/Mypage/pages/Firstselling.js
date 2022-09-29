@@ -1,13 +1,18 @@
 import styled from "styled-components";
-import TitleHeader from "./TitleHeader";
+import TitleHeader from "../../../components/TitleHeader";
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setHasStoreInfo, setHasItems } from "../../../actions";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Firstselling() {
-  // const func = () => {
-  //   console.log("test");
-  // };
+  const navigate = useNavigate();
+  const location = useLocation();
+  const path = location.pathname;
+  const dispatch = useDispatch();
+  const accessToken = localStorage.getItem("accessToken");
 
   const [storeInfo, setStoreInfo] = useState({
     storeName: "",
@@ -34,7 +39,7 @@ function Firstselling() {
     }
 
     let body = {
-      memberId: "1", // 테스트용 넘버. 회원가입 시 부여되는 개인 아이디넘버가 들어가야함.
+      // memberId: "1", // 테스트용 넘버. 회원가입 시 부여되는 개인 아이디넘버가 들어가야함. 단, 헤더에 액세스 토큰 넣으면 불필요.
       marketName: storeInfo.storeName,
       companyNumber: storeInfo.storeNum,
       address: storeInfo.storeAdr,
@@ -42,8 +47,12 @@ function Firstselling() {
     };
 
     axios
-      .post("/api/markets", body)
-      .then((res) => console.log(res))
+      .post("/api/markets", body, { headers: { Authorization: accessToken } })
+      .then(
+        (res) => console.log(res),
+        dispatch(setHasStoreInfo(true)),
+        navigate("/mystore")
+      )
       .catch(
         (err) => console.log(err),
         alert("가게 등록에 실패했습니다. 잠시 후 다시 등록해주시기 바랍니다")
@@ -53,7 +62,11 @@ function Firstselling() {
   return (
     <Container>
       <TitleHeader
-        title="판매가 처음이세요? 처음이시면 가게 정보를 등록해주세요"
+        title={
+          path === "/mystore/edit"
+            ? "가게 정보 수정하기"
+            : "판매가 처음이세요? 처음이시면 가게 정보를 등록해주세요"
+        }
         // func={func}
         color={"red"}
         subtitle={"*필수입력사항"}
@@ -100,6 +113,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 70vh; // 조절 필요
 
   form {
     display: flex;
