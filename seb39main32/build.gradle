@@ -56,6 +56,9 @@ dependencies {
 	//mustache
 	//implementation 'org.springframework.boot:spring-boot-starter-mustache'
 
+	//swager
+	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 
 	/**********************/
 
