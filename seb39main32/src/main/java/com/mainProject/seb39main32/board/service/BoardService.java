@@ -4,10 +4,11 @@ import com.mainProject.seb39main32.board.entity.Board;
 import com.mainProject.seb39main32.board.repository.BoardRepository;
 import com.mainProject.seb39main32.exception.BusinessLogicException;
 import com.mainProject.seb39main32.exception.ExceptionCode;
-import com.mainProject.seb39main32.member.entity.Member;
 import com.mainProject.seb39main32.member.service.MemberService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,6 +58,9 @@ public class BoardService {
 
     public Board findBoard(long boardId){
         return findVerifiedBoard(boardId);
+    }
+    public Page<Board> findBoards(int page, int size){
+        return boardRepository.findAll(PageRequest.of(page-1,size, Sort.by("boardUpdateAt").descending()));
     }
 
     public void deleteBoard(long boardId){

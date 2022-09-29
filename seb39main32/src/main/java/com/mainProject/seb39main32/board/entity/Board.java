@@ -26,20 +26,27 @@ public class Board {
 
 
     //----외래키----
-    @Column(name = "member_id")
-    private long memberId;
-
+//    @Column(name = "member_id")
+//    private long memberId;
+//
+//    @ManyToOne
+//    @JsonIgnore
+//    @JoinColumn(name = "member_id", insertable = false, updatable = false)
+//    private Member member;
+//
+//    @Column(name = "market_id")
+//    private long marketId;
+//
+//    @ManyToOne
+//    @JsonIgnore
+//    @JoinColumn(name = "market_id", insertable = false, updatable = false)
+//    private Market market;
     @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "member_id", insertable = false, updatable = false)
+    @JoinColumn(name = "member_id")
     private Member member;
 
-    @Column(name = "market_id")
-    private long marketId;
-
     @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "market_id", insertable = false, updatable = false)
+    @JoinColumn(name = "market_id")
     private Market market;
     //----------
 
@@ -58,8 +65,11 @@ public class Board {
     @Column(name = "item_sale")
     private long itemSale;
 
-    @Column(name = "item_time")
-    private String itemTime;
+    @Column(name = "sale_starttime")
+    private String saleStartTime;
+
+    @Column(name = "sale_endtime")
+    private String saleEndTime;
 
     @Column(name = "create_at")
     private String boardCreateAt;
@@ -75,6 +85,14 @@ public class Board {
     @JsonIgnore
     private List<Wish> wishes = new ArrayList<>();
 
+
+    public void setMember(Member member){
+        this.member = member;
+    }
+
+    public void setMarket(Market market){
+        this.market = market;
+    }
     //-----양방향
 
 }
