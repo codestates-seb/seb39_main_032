@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react";
 import ItemBox from "./ItemBox";
 
 function Item() {
+  // ItemList로 수정하기
   return (
     <ItemContainer>
       <TitleHeader title={"할인 상품 관리"} />

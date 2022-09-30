@@ -100,7 +100,9 @@ function Firstselling() {
               <input onChange={handleInputStoreInfo("storeTel")} />
             </div>
           </div>
-          <button type="submit">등록하기</button>
+          <button type="submit">
+            {path === "/mystore/edit" ? "수정하기" : "등록하기"}
+          </button>
         </form>
       </section>
     </Container>

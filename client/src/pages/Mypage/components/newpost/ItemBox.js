@@ -3,6 +3,7 @@ import TitleHeader from "../../../../components/TitleHeader";
 import { Icon } from "@iconify/react";
 
 function ItemBox() {
+  //Item으로 수정하기
   return (
     <ItemBoxContainer>
       <div className="added_item_wrapper">
