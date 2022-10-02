@@ -2,6 +2,7 @@ import styled from "styled-components";
 import ItemBox from "../../Mypage/components/newpost/ItemBox";
 import { Icon } from "@iconify/react";
 import Wishlist from "./Wishlist";
+import { useState } from "react";
 
 function Item({ id, state }) {
   let startTime = String(state[id].saleStartTime);
@@ -12,9 +13,15 @@ function Item({ id, state }) {
   let endHour = endTime.slice(11, 13);
   let endMinute = endTime.slice(14, 16);
 
-  // let startMinute = state[id].saleStartTime.getMinutes();
-  // let endHour = state[id].saleEndTime.getHours();
-  // let endMinute = state[id].saleEndTime.getMinutes();
+  let salePrice = String(state[id].itemSale);
+  let SPhead = salePrice.slice(0, -3);
+  let SPqueue = salePrice.slice(-3);
+  let setSalePrice = SPhead.concat(",", SPqueue);
+
+  let price = String(state[id].itemPrice);
+  let head = price.slice(0, -3);
+  let queue = price.slice(-3);
+  let setPrice = head.concat(",", queue);
 
   return (
     <ItemContainer>
@@ -38,10 +45,10 @@ function Item({ id, state }) {
                 <div className="item_title">{state[id].itemName}</div>
               </li>
               <li>
-                <div>{state[id].itemSale}원</div>
+                <div>{setSalePrice}원</div>
               </li>
               <li>
-                <div className="price">{state[id].itemPrice}원</div>
+                <div className="price">{setPrice}원</div>
               </li>
               <li>
                 <div className="sale_time">
