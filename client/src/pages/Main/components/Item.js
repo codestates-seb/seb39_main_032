@@ -44,11 +44,17 @@ function Item({ id, state }) {
               <li>
                 <div className="item_title">{state[id].itemName}</div>
               </li>
-              <li>
-                <div>{setSalePrice}원</div>
+              <li id="comparison">
+                <span id="percent">
+                  {Math.round(
+                    100 - (state[id].itemSale / state[id].itemPrice) * 100
+                  )}
+                  %
+                </span>
+                <div>{setSalePrice} 원</div>
               </li>
               <li>
-                <div className="price">{setPrice}원</div>
+                <div className="price">{setPrice} 원</div>
               </li>
               <li>
                 <div className="sale_time">
@@ -89,6 +95,19 @@ const ItemContainer = styled.li`
     /* font-family: "Noto Sans KR"; */
   }
 
+  #comparison {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  #percent {
+    margin-right: 5px;
+    font-size: smaller;
+    color: #fa622f;
+    font-weight: 700;
+  }
+
   .store_name {
     font-size: larger;
     font-weight: 700;
@@ -104,6 +123,8 @@ const ItemContainer = styled.li`
 
   .sale_time {
     color: red;
+    margin-top: 10px;
+    font-weight: 700;
   }
 
   a {
