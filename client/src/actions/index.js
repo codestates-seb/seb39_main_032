@@ -7,6 +7,9 @@ export const SET_ITEMS_LIST = "SET_ITEMS_LIST";
 export const SET_STORE_INFO = "SET_STORE_INFO";
 export const SET_HAS_STORE_INFO = "SET_HAS_STORE_INFO";
 export const SET_HAS_ITEMS = "SET_HAS_ITEMS";
+export const SET_ADD_ITEM = "SET_ADD_ITEM";
+export const SET_DELETE_ITEM = "SET_DELETE_ITEM";
+export const SET_SUBMIT_ITEMS = "SET_SUBMIT_ITEMS";
 
 // actions 생성 함수
 export const storeToken = (refreshtoken) => {
@@ -55,5 +58,26 @@ export const setHasItems = (hasStoreInfo) => {
   return {
     type: SET_HAS_ITEMS,
     payload: hasStoreInfo, //true or false
+  };
+};
+
+export const setAddItem = (itemInfo) => {
+  return {
+    type: SET_ADD_ITEM,
+    payload: itemInfo, // {itmeName: "name", price: "3000" ...}
+  };
+};
+
+export const setDeleteItem = (deleteId) => {
+  return {
+    type: SET_DELETE_ITEM,
+    payload: deleteId,
+  };
+};
+
+export const setSubmitItems = (items) => {
+  return {
+    type: SET_SUBMIT_ITEMS,
+    payload: items, // {item1}
   };
 };

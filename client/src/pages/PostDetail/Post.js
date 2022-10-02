@@ -6,8 +6,17 @@ import { Icon } from "@iconify/react";
 import ItemBox from "../Mypage/components/newpost/ItemBox";
 import Review from "./components/Review";
 import StoreLocation from "./components/Map";
+import { useState } from "react";
+import axios from "axios";
 
 function Post() {
+  const [isBookMark, setIsBookMark] = useState(false);
+
+  const BookMarkHandler = () => {
+    setIsBookMark(!isBookMark);
+    // axios.post(); // 넣어주기
+  };
+
   return (
     <>
       <Header />
@@ -15,7 +24,17 @@ function Post() {
         <TitleHeader
           title={"달러라 떡볶이"}
           subtitle={"서울시 용산구 회나무로 21 / 02 1234 5678"}
-          icon={<Icon icon="bi:bookmark-star" className="bookmark_icon" />}
+          icon={
+            isBookMark ? (
+              <Icon
+                icon="bi:bookmark-star-fill"
+                className="bookmark_icon active"
+              />
+            ) : (
+              <Icon icon="bi:bookmark-star" className="bookmark_icon" />
+            )
+          }
+          func={BookMarkHandler}
         />
         <main>
           <section>
@@ -48,5 +67,9 @@ const PostContainer = styled.div`
 
   .item_info {
     margin-top: 50px;
+  }
+
+  .active {
+    color: #ff4a55;
   }
 `;

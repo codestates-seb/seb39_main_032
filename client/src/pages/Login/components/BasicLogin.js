@@ -1,8 +1,6 @@
 import { Icon } from "@iconify/react";
 import styled from "styled-components";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { storeToken, setUserInfo } from "../../../actions/index";
 import { useNavigate } from "react-router-dom";
 import SubmitBtn from "../../../widgets/SubmitBtn";
 import axios from "axios";
@@ -14,7 +12,7 @@ import {
 
 function BasicLogin() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     memberPw: "",
@@ -30,9 +28,10 @@ function BasicLogin() {
     axios
       .post("/login/jwt", loginInfo)
       .then((res) => {
-        dispatch(setUserInfo(loginInfo));
         localStorage.setItem("accessToken", res.headers.authorization);
-        dispatch(storeToken(localStorage.getItem("accessToken")));
+        // token이 필요한 API 요청 시 header Authorization에 token 담아서 보내기
+        axios.defaults.headers.common["Authorization"] =
+          res.headers.authorization;
 
         // 리프레쉬 토큰 쿠키 저장.
         // setRefreshToken(res.cookie);
@@ -87,8 +86,8 @@ function BasicLogin() {
         <SubmitBtn type="submit" />
       </form>
       <div id="sub_menu">
-        {/* <span className="sub_menu">비밀번호 찾기</span>
-        <span className="sub_menu">계정 찾기</span> */}
+        <span className="sub_menu">비밀번호 찾기</span>
+        <span className="sub_menu">계정 찾기</span>
         <a href="/signup">
           <span className="signup_menu">회원가입</span>
         </a>

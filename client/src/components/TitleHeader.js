@@ -5,7 +5,9 @@ function TitleHeader(props) {
   return (
     <TitleHeaderContainer>
       <h2>{props.title}</h2>
-      <span className="bookmark">{props.icon}</span>
+      <span className="bookmark" onClick={props.func}>
+        {props.icon}
+      </span>
       <Subtext onClick={props.func} color={props.color} cursor={props.cursor}>
         {props.subtitle}
       </Subtext>

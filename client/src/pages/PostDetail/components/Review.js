@@ -1,6 +1,19 @@
+import axios from "axios";
+import { useState } from "react";
 import styled from "styled-components";
 
 function Review() {
+  const [review, setReview] = useState("");
+
+  const inputHandler = (e) => {
+    setReview(e.target.value);
+    console.log(review);
+  };
+
+  const rvSubmitHandler = () => {
+    // axios.post()
+  };
+
   return (
     <ReviewContainer>
       <div id="review_title">
@@ -19,11 +32,12 @@ function Review() {
             </span>
           </div>
         </div>
-        <form>
+        <form onSubmit={rvSubmitHandler}>
           <input
             type="text"
             id="review_write"
             placeholder="여기에 후기를 작성해주세요"
+            onChange={inputHandler}
           ></input>
           <button type="submit">등록</button>
         </form>
@@ -57,7 +71,7 @@ const ReviewContainer = styled.section`
   #review {
     display: flex;
     flex-direction: column;
-    height: 60px;
+    height: 55px;
     margin: 10px;
 
     .user_id {
