@@ -6,37 +6,31 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import AddItemBox from "../components/newpost/AddItemBox";
 import TitleHeader from "../../../components/TitleHeader";
-import { setAddItem, setDeleteItem } from "../../../actions";
 
 function Newpost() {
   const deleteRef = useRef();
-  const dispatch = useDispatch();
   const state = useSelector((state) => state.itemReducer);
+  // const items = useSelector((state) => state.itemsReducer);
 
-  const [countList, setCountList] = useState([1, 2, 3, 4, 5]);
+  const [countList, setCountList] = useState([0]);
+
   const addItemBoxHandler = () => {
-    let countArr = [...countList];
-    let counter = countArr.slice(-1)[0]; //배열의 마지막 요소의 값 추출
-    counter += 1;
-    countArr.push(counter);
-    setCountList(countArr);
+    let counter = countList.length; // length는 기본적으로 1부터 시작 // 2
+    setCountList([...countList, counter]); // [0,1,2]
     console.log(countList);
   };
 
   //[0,2]
 
-  const deleteItemBoxHandler = (deleteId) => {
-    console.log(deleteId); // 1
+  const deleteItemBoxHandler = (deleteidx) => {
+    console.log(deleteidx); // 1
     // console.log(countList); // [0,1,2]
-    let countArr = [...countList];
-    const restList = countArr.filter((ele, idx) => {
-      return ele !== deleteId; // [0,2]
+    const restList = countList.filter((ele, idx) => {
+      return idx !== deleteidx; // [0,2]
     });
     console.log(restList); //[0,2]
     setCountList(restList);
-    dispatch(setDeleteItem(deleteId));
-    console.log(state);
-    // console.log(items);
+    console.log(countList);
   };
 
   return (
@@ -49,12 +43,11 @@ function Newpost() {
           cursor={"pointer"}
           func={addItemBoxHandler}
         />
-
-        {countList.map((ele, idx) => {
+        {countList.map((item, idx) => {
           return (
             <AddItemBox
               key={idx}
-              ele={ele}
+              idx={idx}
               id={idx + 1}
               deleteItemBoxHandler={deleteItemBoxHandler}
             />

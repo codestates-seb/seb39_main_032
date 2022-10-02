@@ -6,6 +6,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setHasStoreInfo, setHasItems } from "../../../actions";
 import { useNavigate, useLocation } from "react-router-dom";
+import StoreLocationMap from "../components/StoreLocationMap";
 
 function Firstselling() {
   const navigate = useNavigate();
@@ -92,6 +93,7 @@ function Firstselling() {
                 주소<span>*</span>
               </div>
               <input onChange={handleInputStoreInfo("storeAdr")} />
+              {/* <StoreLocationMap /> */}
             </div>
             <div className="first_selling_category">
               <div>
