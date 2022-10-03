@@ -39,14 +39,14 @@ public class FavoriteController {
     }
 
     @GetMapping("/{member-id}")
-    public ResponseEntity getFavorites(@PathVariable("member-id") @Positive long memberId, Pageable pageable){
+    public ResponseEntity<MultiResponseDto> getFavorites(@PathVariable("member-id") @Positive long memberId, Pageable pageable){
         Page<Favorite> post = favoriteService.getFavorites(memberId,pageable);
         List<Favorite> posts = post.getContent();
         return new ResponseEntity<>(new MultiResponseDto<>(mapper.favoritesToFavoritesDto(posts), post), HttpStatus.OK);
     }
 
     @PostMapping()
-    public ResponseEntity addFavorite(@RequestBody FavoriteDto.Post requestBody){
+    public ResponseEntity<SingleResponseDto> addFavorite(@RequestBody FavoriteDto.Post requestBody){
         Favorite favorite = mapper.favoritePostToFavorite(requestBody);
         Favorite createFavorite = favoriteService.createFavorite(favorite);
         FavoriteDto.Response response = mapper.favoriteToFavoriteResponse(createFavorite);

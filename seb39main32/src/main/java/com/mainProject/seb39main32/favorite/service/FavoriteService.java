@@ -8,10 +8,12 @@ import com.mainProject.seb39main32.favorite.repository.FavoriteRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.Positive;
 import java.util.Optional;
 
+@Transactional
 @Service
 public class FavoriteService {
 
@@ -34,7 +36,7 @@ public class FavoriteService {
 
     public void deleteFavorite(long marketId, long memberId) {
         //Favorite favorite = findVerifiedFavorite(marketId,memberId);
-        Favorite favorite = favoriteRepository.findByMarketIdAndMemberId(marketId, memberId);
+        Favorite favorite = favoriteRepository.findByMarket_MarketIdAndMember_MemberId(marketId, memberId);
         favoriteRepository.delete(favorite);
     }
 

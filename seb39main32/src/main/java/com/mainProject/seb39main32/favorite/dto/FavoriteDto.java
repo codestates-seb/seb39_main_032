@@ -12,7 +12,6 @@ public class FavoriteDto {
     @Getter
     @Setter
     public static class Post{
-        private long favoriteId;
         @Setter(AccessLevel.NONE)
         private long memberId;
         @Setter(AccessLevel.NONE)
@@ -36,8 +35,12 @@ public class FavoriteDto {
     @Setter
     public static class Patch{
         private long favoriteId;
+        @Setter(AccessLevel.NONE)
         private long memberId;
+        @Setter(AccessLevel.NONE)
         private long marketId;
+        public void setMember(Member member) {this.memberId = member.getMemberId();}
+        public void setMarket(Market market) {this.marketId = market.getMarketId();}
 
     }
     @Builder
@@ -51,13 +54,8 @@ public class FavoriteDto {
         @Setter(AccessLevel.NONE)
         private long marketId;
 
-        public void setMember(Member member){
-            this.memberId = member.getMemberId();
-        }
-
-        public void setMarket(Market market){
-            this.marketId = market.getMarketId();
-        }
+        public void setMember(Member member) {this.memberId = member.getMemberId();}
+        public void setMarket(Market market) {this.marketId = market.getMarketId();}
         /*private List<FavoriteDto.Response> favoriteList;
 
         public Member getMember() {
