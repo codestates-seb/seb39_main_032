@@ -38,5 +38,7 @@ public class MemberDto {
         private String memberCreateAt;
         private String memberUpdateAt;
         private String auth;
+
+
     }
 }
