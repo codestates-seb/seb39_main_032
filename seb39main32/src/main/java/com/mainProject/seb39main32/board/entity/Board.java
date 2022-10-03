@@ -95,4 +95,5 @@ public class Board {
     }
     //-----양방향
 
+
 }

@@ -6,6 +6,7 @@ import com.mainProject.seb39main32.board.mapper.BoardMapper;
 import com.mainProject.seb39main32.board.service.BoardService;
 import com.mainProject.seb39main32.dto.MultiResponseDto;
 import com.mainProject.seb39main32.dto.SingleResponseDto;
+import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,7 +36,7 @@ public class BoardController {
     }
 
     @GetMapping("/{board-id}")
-    public ResponseEntity getBoard(
+    public ResponseEntity<SingleResponseDto> getBoard(
             @PathVariable("board-id") @Positive long boardId) {
         Board board = boardService.findBoard(boardId);
         return new ResponseEntity<>(
@@ -52,7 +53,7 @@ public class BoardController {
 
 
     @GetMapping
-    public ResponseEntity getBoards(@Positive @RequestParam int page,
+    public ResponseEntity<MultiResponseDto> getBoards(@Positive @RequestParam int page,
                                     @Positive @RequestParam int size){
         Page<Board> pageBoard = boardService.findBoards(page,size);
         List<Board> boards = pageBoard.getContent();
@@ -63,8 +64,23 @@ public class BoardController {
     }
 
 
+
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "memberId",value = "멤버아이디",required = true),
+//            @ApiImplicitParam(name = "marketId",value = "가게이이디",required = true),
+//            @ApiImplicitParam(name = "itemName",value = "상품명",required = true,dataType = "string"),
+//            @ApiImplicitParam(name = "itemPrice",value = "상품가격",required = true),
+//            @ApiImplicitParam(name = "foodCategory",value = "상품카테고리",required = true,dataType = "string"),
+//            @ApiImplicitParam(name = "itemAmount",value = "상품갯수",required = true),
+//            @ApiImplicitParam(name = "itemSale",value = "상품세일가격",required = true),
+//            @ApiImplicitParam(name = "saleStartTime",value = "세일시작시간",required = true,dataType = "string"),
+//            @ApiImplicitParam(name = "saleEndTime",value = "세일만료시간",required = true,dataType = "string"),
+//            @ApiImplicitParam(name = "boardCreateAt",value = "상품등록 게시시간",required = true,dataType = "string"),
+//            @ApiImplicitParam(name = "boardUpdateAt",value = "상품등록 수정시간",required = true,dataType = "string"),
+//            @ApiImplicitParam(name = "boardStatus",value = "판매중,품절",required = true,dataType = "string")
+//    })
     @PostMapping
-    public ResponseEntity postBoard(@Valid @RequestBody BoardDto.Post requestBody){
+    public ResponseEntity<SingleResponseDto> postBoard(@Valid @RequestBody  BoardDto.Post requestBody){
         System.out.println(LocalDateTime.now());
         Board board = mapper.boardPostToBoard(requestBody);
         Board createdBoard = boardService.createBoard(board);
@@ -76,7 +92,7 @@ public class BoardController {
 
 
     @PatchMapping("{board-id}")
-    public ResponseEntity patchBoard(
+    public ResponseEntity<SingleResponseDto> patchBoard(
             @PathVariable("board-id") @Positive long boardId,
             @Valid @RequestBody BoardDto.Patch requestBody) {
         requestBody.setBoardId(boardId);

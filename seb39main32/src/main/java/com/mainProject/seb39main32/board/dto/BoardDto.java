@@ -3,27 +3,44 @@ package com.mainProject.seb39main32.board.dto;
 
 import com.mainProject.seb39main32.market.entity.Market;
 import com.mainProject.seb39main32.member.entity.Member;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import com.mainProject.seb39main32.wish.dto.WishDto;
+import com.mainProject.seb39main32.wish.entity.Wish;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.*;
 
+import java.util.List;
 
+@Data
 public class BoardDto {
     @Getter
     @AllArgsConstructor
+
     public static class Post{
+        @ApiModelProperty(example = "1")
         private long memberId;
+        @ApiModelProperty(example = "9")
         private long marketId;
+        @ApiModelProperty(example = "떡볶이")
         private String itemName;
+        @ApiModelProperty(example = "4000")
         private long itemPrice;
+        @ApiModelProperty(example = "분식")
         private String foodCategory;
+        @ApiModelProperty(example = "5")
         private long itemAmount;
+        @ApiModelProperty(example = "3000")
         private long itemSale;
+        @ApiModelProperty(example = "2022-09-29 20:00:00")
         private String saleStartTime;
+        @ApiModelProperty(example = "2022-09-29 22:00:00")
         private String saleEndTime;
+        @ApiModelProperty(example = "2022-09-29 20:00:00")
         private String boardCreateAt;
+        @ApiModelProperty(example = "2022-09-29 20:00:00")
         private String boardUpdateAt;
+        @ApiModelProperty(example = "판매중")
         private String boardStatus;
 
         public Member getMember(){
@@ -90,6 +107,7 @@ public class BoardDto {
 
     @Getter
     @AllArgsConstructor
+    @Builder
     public static class ResponseMarketName{
         private long boardId;
         @Setter(AccessLevel.NONE)
@@ -109,12 +127,15 @@ public class BoardDto {
         private String boardCreateAt;
         private String boardUpdateAt;
         private String boardStatus;
+        private long wishListCount;
 
         public void setMember(Member member) {this.memberId = member.getMemberId();}
         public void setMarket(Market market) {
             this.marketId = market.getMarketId();
             this.marketName = market.getMarketName();
         }
+
+        public void setWishListCount(List<WishDto.Response> wishList){this.wishListCount = wishList.size();}
 
     }
 
