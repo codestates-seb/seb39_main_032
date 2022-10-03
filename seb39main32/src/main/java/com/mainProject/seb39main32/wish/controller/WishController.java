@@ -34,7 +34,7 @@ public class WishController {
     }
 
     @PostMapping
-    public ResponseEntity postWish(@Valid @RequestBody WishDto.Post requestBody){
+    public ResponseEntity<SingleResponseDto> postWish(@Valid @RequestBody WishDto.Post requestBody){
         Wish wish = mapper.wishPostToWish(requestBody);
         Wish createdWish = wishService.createWish(wish);
         WishDto.Response response = mapper.wishToWishResponse(createdWish);
@@ -44,7 +44,7 @@ public class WishController {
     }
 
     @GetMapping("/{wish-id}")
-    public ResponseEntity getWish(
+    public ResponseEntity<SingleResponseDto> getWish(
             @PathVariable("wish-id") @Positive long wishId) {
         Wish wish = wishService.findWish(wishId);
         return new ResponseEntity<>(
@@ -60,7 +60,7 @@ public class WishController {
 
 
     @PatchMapping("/{wish-id}")
-    public ResponseEntity patchBoard(
+    public ResponseEntity<SingleResponseDto> patchBoard(
             @PathVariable("wish-id") @Positive long wishId,
             @Valid @RequestBody WishDto.Patch requestBody) {
         requestBody.setWishId(wishId);

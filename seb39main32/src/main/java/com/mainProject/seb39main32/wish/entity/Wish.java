@@ -21,20 +21,32 @@ public class Wish {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "wish_id")
     private long wishId;
+//    //----외래키----
+//    @Column(name = "board_id")
+//    private long boardId;
+//    @ManyToOne
+//    @JsonIgnore
+//    @JoinColumn(name = "board_id",insertable = false, updatable = false)
+//    private Board board;
+//
+//
+//    @Column(name = "member_id")
+//    private long memberId;
+//    @ManyToOne
+//    @JsonIgnore
+//    @JoinColumn(name = "member_id", insertable = false, updatable = false)
+//    private Member member;
+//    //----외래키----
+
     //----외래키----
-    @Column(name = "board_id")
-    private long boardId;
-    @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "board_id",insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "board_id")
     private Board board;
 
-
-    @Column(name = "member_id")
-    private long memberId;
-    @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "member_id", insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "member_id")
     private Member member;
     //----외래키----
 }
