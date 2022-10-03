@@ -1,19 +1,27 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { Icon } from "@iconify/react";
+import axios from "axios";
 
-function Wishlist() {
+function Wishlist({ likeScore, setLikeScore, boardId }) {
   const [isLike, setIsLike] = useState(false);
-  const [likeScore, setLikeScore] = useState(2);
 
   const handleLikeClick = () => {
     setIsLike(!isLike);
     if (isLike === true) {
       if (likeScore > 0) {
         setLikeScore(likeScore - 1);
+        // todo : axios.delete
       }
     } else {
       setLikeScore(likeScore + 1);
+      return axios
+        .post("/api/wishes", {
+          boardId: boardId,
+          memberId: 2, // 나중에 삭제해주기
+        })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
     }
   };
 

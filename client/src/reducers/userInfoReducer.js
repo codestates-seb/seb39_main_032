@@ -24,7 +24,6 @@ const initialState = {
 //reducer(상태 관리) 함수
 const userInfoReducer = (state = initialState, action) => {
   switch (action.type) {
-    //어차피 새로고침하면 지워져서 필요한가 의문이 듬.
     case SET_USER_INFO:
       let userInfo = {
         email: action.payload.email,

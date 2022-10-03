@@ -4,21 +4,24 @@ import { Icon } from "@iconify/react";
 import Wishlist from "./Wishlist";
 import { useState } from "react";
 
-function Item({ id, state }) {
-  let startTime = String(state[id].saleStartTime);
+function Item({ state }) {
+  const [likeScore, setLikeScore] = useState(state.wishListCount);
+  const boardId = state.boardId;
+
+  let startTime = String(state.saleStartTime);
   let startHour = startTime.slice(11, 13);
   let startMinute = startTime.slice(14, 16);
 
-  let endTime = String(state[id].saleEndTime);
+  let endTime = String(state.saleEndTime);
   let endHour = endTime.slice(11, 13);
   let endMinute = endTime.slice(14, 16);
 
-  let salePrice = String(state[id].itemSale);
+  let salePrice = String(state.itemSale);
   let SPhead = salePrice.slice(0, -3);
   let SPqueue = salePrice.slice(-3);
   let setSalePrice = SPhead.concat(",", SPqueue);
 
-  let price = String(state[id].itemPrice);
+  let price = String(state.itemPrice);
   let head = price.slice(0, -3);
   let queue = price.slice(-3);
   let setPrice = head.concat(",", queue);
@@ -26,7 +29,7 @@ function Item({ id, state }) {
   return (
     <ItemContainer>
       <ImgContainer>
-        <a href="/:id">
+        <a href={`/${state.marketId}`}>
           <img
             className="added_item_img"
             src="https://img-cf.kurly.com/cdn-cgi/image/width=676,format=auto/shop/data/goods/1594968820799l0.jpg"
@@ -36,20 +39,17 @@ function Item({ id, state }) {
       </ImgContainer>
       <div className="added_item_wrapper">
         <ContentContainer>
-          <a href="/:id">
+          <a href={`/${state.marketId}`}>
             <ul>
               <li>
-                <div className="store_name">[{state[id].marketName}]</div>
+                <div className="store_name">[{state.marketName}]</div>
               </li>
               <li>
-                <div className="item_title">{state[id].itemName}</div>
+                <div className="item_title">{state.itemName}</div>
               </li>
               <li id="comparison">
                 <span id="percent">
-                  {Math.round(
-                    100 - (state[id].itemSale / state[id].itemPrice) * 100
-                  )}
-                  %
+                  {Math.round(100 - (state.itemSale / state.itemPrice) * 100)}%
                 </span>
                 <div>{setSalePrice} 원</div>
               </li>
@@ -62,12 +62,16 @@ function Item({ id, state }) {
                 </div>
               </li>
               <li>
-                <div>수량 : {state[id].itemAmount}개</div>
+                <div>수량 : {state.itemAmount}개</div>
               </li>
             </ul>
           </a>
         </ContentContainer>
-        <Wishlist />
+        <Wishlist
+          likeScore={likeScore}
+          setLikeScore={setLikeScore}
+          boardId={boardId}
+        />
       </div>
     </ItemContainer>
   );

@@ -48,10 +48,10 @@ function List() {
       <Items>
         {isFiltered
           ? filteredItems.map((item, idx) => {
-              return <Item key={idx} id={idx} state={filteredItems} />;
+              return <Item key={idx} id={idx} state={item} />;
             })
           : state.map((item, idx) => {
-              return <Item key={idx} id={idx} state={state} />;
+              return <Item key={idx} id={idx} state={item} />;
             })}
       </Items>
     </ListContainer>
@@ -85,8 +85,8 @@ const ListNav = styled.div`
 `;
 
 const ListContainer = styled.section`
-  /* border: 3px solid green; */
-  margin: 0 22% 20px 22%;
+  width: 50%;
+  /* border: 1px solid; */
 `;
 
 const Items = styled.ul`

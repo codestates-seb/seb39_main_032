@@ -4,10 +4,13 @@ import React from "react";
 function TitleHeader(props) {
   return (
     <TitleHeaderContainer>
-      <h2>{props.title}</h2>
-      <span className="bookmark" onClick={props.func}>
-        {props.icon}
-      </span>
+      <h2>
+        {props.title}{" "}
+        <span className="bookmark" onClick={props.func}>
+          {props.icon}
+        </span>
+      </h2>
+
       <Subtext onClick={props.func} color={props.color} cursor={props.cursor}>
         {props.subtitle}
       </Subtext>
@@ -27,13 +30,12 @@ const TitleHeaderContainer = styled.div`
 
   & h2 {
     margin-bottom: 8px;
+    display: flex;
   }
 
   .bookmark {
     width: 30px;
     height: 30px;
-    margin-top: 20px;
-    margin-left: -380px;
 
     .bookmark_icon {
       width: 30px;

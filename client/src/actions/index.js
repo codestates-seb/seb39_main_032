@@ -32,11 +32,10 @@ export const setItemsList = (itemlist) => {
   };
 };
 
-export const setUserInfo = (loginInfo) => {
-  // loginInfo = {email: , memberPw: }
+export const setUserInfo = (userinfo) => {
   return {
     type: SET_USER_INFO,
-    payload: loginInfo,
+    payload: userinfo,
   };
 };
 

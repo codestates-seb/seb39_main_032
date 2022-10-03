@@ -18,8 +18,8 @@ function Main() {
     "양식",
     "아시안",
     "족발/보쌈",
-    "반찬",
     "샐러드",
+    "반찬",
     "카페/디저트",
   ];
 
@@ -79,10 +79,12 @@ export default Main;
 const MainContainer = styled.main`
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: 100%;
 
   #category {
     margin-top: 10px;
+    width: 100%;
     height: 150px;
     display: flex;
     justify-content: center;
@@ -92,9 +94,8 @@ const MainContainer = styled.main`
   article {
     margin: 10px 0;
     flex-wrap: wrap;
-    width: 70%;
+    width: 60%;
     display: flex;
-    justify-content: flex-start;
     align-items: center;
   }
 

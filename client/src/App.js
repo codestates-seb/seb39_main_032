@@ -10,8 +10,25 @@ import MyStore from "./pages/Mypage/pages/MyStore";
 import Firstselling from "./pages/Mypage/pages/Firstselling";
 import Mypage from "./pages/Mypage/Mypage";
 import MyItems from "./pages/Mypage/pages/MyItems";
+import axios from "axios";
+import { useEffect } from "react";
+import { setUserInfo } from "./actions";
+import { useDispatch } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+
+  const userInfoHandler = () => {
+    // axios
+    //   .get("api/member")
+    //   .then(() => dispatch(setUserInfo(res.data.data)))
+    //   .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    userInfoHandler();
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
