@@ -28,13 +28,13 @@ public class CategoryController {
     }
 
 
-    @GetMapping
-    public ResponseEntity getCategories(){
-
-        List<Category> categories = categoryRepository.findAll();
-
-        return new ResponseEntity(categories, HttpStatus.OK);
-    }
+//    @GetMapping
+//    public ResponseEntity getCategories(){
+//
+//        List<Category> categories = categoryRepository.findAll();
+//
+//        return new ResponseEntity(categories, HttpStatus.OK);
+//    }
 
 
 }
