@@ -64,7 +64,7 @@ function Post() {
         />
         <main>
           <section>
-            <StoreLocation />
+            <StoreLocation address={storeInfo.address} />
           </section>
           <section className="item_info">
             <h2>할인 품목</h2>

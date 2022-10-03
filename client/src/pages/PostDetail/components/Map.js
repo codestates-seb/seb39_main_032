@@ -1,8 +1,8 @@
 /*global kakao*/
 import React, { useEffect } from "react";
 
-const StoreLocation = () => {
-  let address = "서울특별시 용산구 회나무로 21";
+const StoreLocation = ({ address }) => {
+  // let address = "서울특별시 용산구 회나무로 21";
 
   useEffect(() => {
     const container = document.getElementById("map"); // 지도를 표시할 div
