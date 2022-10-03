@@ -69,15 +69,16 @@ function AddItemBox({ ele, id, deleteItemBoxHandler }) {
   const onChangeImg = () => {
     const reader = new FileReader();
     const file = imgRef.current.files[0];
-    // console.log(file);
+    console.log(file);
 
+    //업로드한 이미지를 화면에 표시
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setImageUrl(reader.result);
+      console.log("이미지주소", reader.result);
     };
-    // console.log(imageUrl);
 
-    setItemInfo({ ...itemInfo, itemId: ele, img: imageUrl });
+    setItemInfo({ ...itemInfo, itemId: ele, img: file });
   };
   //
 
@@ -107,7 +108,7 @@ function AddItemBox({ ele, id, deleteItemBoxHandler }) {
         <span
           id={ele}
           className="delete_box"
-          onClick={() => deleteItemBoxHandler(ele)}
+          onClick={() => deleteItemBoxHandler(ele, id)}
         >
           삭제
         </span>
@@ -176,7 +177,6 @@ function AddItemBox({ ele, id, deleteItemBoxHandler }) {
               <li>
                 <div className="ctgTitle">할인가</div>
                 <input onChange={inputHandler("salePrice")}></input>원
-                {/* <span>{100 - (state.salePrice / state.price) * 100}% 할인</span> */}
               </li>
               <li>
                 <div className="ctgTitle">할인시간</div>

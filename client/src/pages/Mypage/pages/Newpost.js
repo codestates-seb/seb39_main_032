@@ -25,7 +25,7 @@ function Newpost() {
 
   //[0,2]
 
-  const deleteItemBoxHandler = (deleteId) => {
+  const deleteItemBoxHandler = (deleteId, id) => {
     console.log(deleteId); // 1
     // console.log(countList); // [0,1,2]
     let countArr = [...countList];
@@ -37,6 +37,9 @@ function Newpost() {
     dispatch(setDeleteItem(deleteId));
     console.log(state);
     // console.log(items);
+
+    // $('#divReloadLayer').load(location.href+' #divReloadLayer');
+    // $(`#${id}`).load(window.location + ` #${id}`);
   };
 
   return (

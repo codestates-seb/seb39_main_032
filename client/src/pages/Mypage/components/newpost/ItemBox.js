@@ -2,28 +2,48 @@ import styled from "styled-components";
 import TitleHeader from "../../../../components/TitleHeader";
 import { Icon } from "@iconify/react";
 
-function ItemBox() {
+function ItemBox({ state }) {
   //Item으로 수정하기
+
+  let startTime = String(state.saleStartTime);
+  let startHour = startTime.slice(11, 13);
+  let startMinute = startTime.slice(14, 16);
+
+  let endTime = String(state.saleEndTime);
+  let endHour = endTime.slice(11, 13);
+  let endMinute = endTime.slice(14, 16);
+
+  let salePrice = String(state.itemSale);
+  let SPhead = salePrice.slice(0, -3);
+  let SPqueue = salePrice.slice(-3);
+  let setSalePrice = SPhead.concat(",", SPqueue);
+
+  let price = String(state.itemPrice);
+  let head = price.slice(0, -3);
+  let queue = price.slice(-3);
+  let setPrice = head.concat(",", queue);
   return (
     <ItemBoxContainer>
       <div className="added_item_wrapper">
         <div className="added_item_content">
           <ul>
             <li>
-              <div className="item_title">로제 떡볶이</div>
-              <span className="category_tag">분식</span>
+              <div className="item_title">{state.itemName}</div>
+              <span className="category_tag">{state.foodCategory}</span>
             </li>
             <li>
-              <div>수량 : 5개</div>
+              <div>수량 : {state.itemAmount}개</div>
             </li>
             <li>
-              <div>12,900원</div>
+              <div>{setSalePrice} 원</div>
             </li>
             <li>
-              <div className="price">13,900원</div>
+              <div className="price">{setPrice}원</div>
             </li>
             <li>
-              <div className="sale_time">할인시간 : 18:00 ~ 19:00</div>
+              <div className="sale_time">
+                할인시간 : {startHour}:{startMinute} ~ {endHour}:{endMinute}
+              </div>
             </li>
           </ul>
         </div>
@@ -47,6 +67,7 @@ export const ItemBoxContainer = styled.section`
   align-items: center;
   border-radius: 0.5rem;
   border: 1px solid rgba(170, 170, 170, 1);
+  margin-bottom: 5px;
 
   .added_item_wrapper {
     display: flex;
@@ -86,7 +107,7 @@ export const ItemBoxContainer = styled.section`
       font-weight: 700;
       padding: 4px 8px;
       color: white;
-      background-color: #d9d9d9;
+      background-color: rgba(255, 74, 85, 1);
       border-radius: 1rem;
     }
 
@@ -100,6 +121,7 @@ export const ItemBoxContainer = styled.section`
     .sale_time {
       color: red;
       font-weight: 700;
+      font-size: larger;
     }
   }
 
