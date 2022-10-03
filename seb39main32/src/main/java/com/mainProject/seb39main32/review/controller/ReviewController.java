@@ -43,7 +43,7 @@ public class ReviewController {
      * @return
      */
     @GetMapping ("/{market-id}")
-    public ResponseEntity getReviews(@PathVariable("market-id") @Positive long marketId, Pageable pageable){
+    public ResponseEntity<MultiResponseDto> getReviews(@PathVariable("market-id") @Positive long marketId, Pageable pageable){
         Page<Review> review = reviewService.findReviews(marketId,pageable);
 
         List<Review> reviews = review.getContent();
@@ -60,7 +60,7 @@ public class ReviewController {
      * @return
      */
     @PostMapping ("/{market-Id}/{member-Id}")
-    public ResponseEntity postReview(@RequestBody ReviewDto.Post requestBody, @PathVariable("market-Id") @Positive long marketId, @PathVariable("member-Id") @Positive long memberId){
+    public ResponseEntity<SingleResponseDto> postReview(@RequestBody ReviewDto.Post requestBody, @PathVariable("market-Id") @Positive long marketId, @PathVariable("member-Id") @Positive long memberId){
 
         requestBody.setMarketId(marketId);
         requestBody.setMemberId(memberId);
