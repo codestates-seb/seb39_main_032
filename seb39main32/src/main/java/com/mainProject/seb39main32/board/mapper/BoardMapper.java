@@ -21,6 +21,7 @@ public interface BoardMapper {
                 .boardId(brd.getBoardId())
                 .memberId(brd.getMember().getMemberId())
                 .marketId(brd.getMarket().getMarketId())
+                .marketName(brd.getMarket().getMarketName())
                 .itemName(brd.getItemName())
                 .itemPrice(brd.getItemPrice())
                 .foodCategory(brd.getFoodCategory())

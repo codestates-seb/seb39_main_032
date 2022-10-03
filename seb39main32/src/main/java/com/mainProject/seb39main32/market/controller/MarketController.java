@@ -77,7 +77,7 @@ public class MarketController {
     public ResponseEntity getMarket(@PathVariable("market-id") @Positive long marketId) {
         Market market = marketService.findVerifiedMarketMarkgetID(marketId);
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.marketToMarketResponseList(market))
+                new SingleResponseDto<>(mapper.marketToMarketResponse(market))
                 , HttpStatus.OK);
     }
     /**
