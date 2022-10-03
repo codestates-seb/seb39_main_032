@@ -29,9 +29,9 @@ public class MarketService {
         return pageResult;
     }
 
-    public Market getMarketMarkgetID(long markgetId) {
-        Market findMarket = findVerifiedMarketMarkgetID(markgetId);
-        return findMarket;
+    public Page<Market> getMarketMarkgetID( Pageable pageable,long markgetId) {
+        Page<Market> pageResult = marketRepository.findByMarketId(pageable,markgetId);
+        return pageResult;
     }
 
     public Market createMarket(Market market) {

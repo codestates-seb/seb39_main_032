@@ -47,26 +47,46 @@ public class MarketController {
 //        return new ResponseEntity(new SingleResponseDto<>(response), HttpStatus.OK);
 //    }
 
-    @GetMapping("/{member-id}")
-    public ResponseEntity getMarkets(@PathVariable("member-id") @Positive long memberId,
+    @GetMapping("/getMember/{member-id}")
+    public ResponseEntity<MultiResponseDto> getMemberMarkets(@PathVariable("member-id") @Positive long memberId,
                                      @Positive @RequestParam int page,
                                      @Positive @RequestParam int size){
         Pageable paging = PageRequest.of(page-1, size, Sort.by("updateAt").descending());
         Page<Market> pageMarket = marketService.getMarketMemberID(paging,memberId);
         List<Market> market = pageMarket.getContent();
         return new ResponseEntity<>(
-                new MultiResponseDto<>(mapper.marketsToMarketResponseDtos(market),
+                new MultiResponseDto<>(mapper.marketsToMarketsResponseDtos(market),
                         pageMarket),
                 HttpStatus.OK);
     }
 
+    @GetMapping("/getMarket/{market-id}")
+    public ResponseEntity<MultiResponseDto> getMarkets(@PathVariable("market-id") @Positive long marketId,
+                                                       @Positive @RequestParam int page,
+                                                       @Positive @RequestParam int size){
+        Pageable paging = PageRequest.of(page-1, size, Sort.by("updateAt").descending());
+        Page<Market> pageMarket = marketService.getMarketMarkgetID(paging,marketId);
+        List<Market> market = pageMarket.getContent();
+        return new ResponseEntity<>(
+                new MultiResponseDto<>(mapper.marketsToMarketsResponseDtos(market),
+                        pageMarket),
+                HttpStatus.OK);
+    }
+
+    @GetMapping("/{market-id}")
+    public ResponseEntity getMarket(@PathVariable("market-id") @Positive long marketId) {
+        Market market = marketService.findVerifiedMarketMarkgetID(marketId);
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.marketToMarketResponseList(market))
+                , HttpStatus.OK);
+    }
     /**
      * 마켓 등록하기
      * @param requestBody
      * @return
      */
     @PostMapping
-    public ResponseEntity postMarket(@Valid @RequestBody MarketDto.Post requestBody){
+    public ResponseEntity<SingleResponseDto> postMarket(@Valid @RequestBody MarketDto.Post requestBody){
         Market market = mapper.marketPostDtoToMarket(requestBody);
         Market createMarket = marketService.createMarket(market);
         MarketDto.Response response = mapper.marketToMarketResponse(createMarket);
@@ -81,7 +101,7 @@ public class MarketController {
      * @return
      */
     @PatchMapping("/{market-id}")
-    public ResponseEntity updateMarket(@PathVariable("market-id") @Positive long marketId,
+    public ResponseEntity<SingleResponseDto> updateMarket(@PathVariable("market-id") @Positive long marketId,
                                        @Valid @RequestBody MarketDto.Patch requestBody){
         requestBody.setMarketId(marketId);
 

@@ -1,6 +1,7 @@
 package com.mainProject.seb39main32.market.entity;
 
 import com.mainProject.seb39main32.board.entity.Board;
+import com.mainProject.seb39main32.favorite.entity.Favorite;
 import com.mainProject.seb39main32.member.entity.Member;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,9 +50,9 @@ public class Market {
     }
 
 
-    /*@OneToMany(mappedBy = "market")
+    @OneToMany(mappedBy = "market")
     private List<Favorite> favorites = new ArrayList<>();
-*/
+
     @OneToMany(mappedBy = "market")
     private List<Board> boards = new ArrayList<>();
 
@@ -59,6 +60,12 @@ public class Market {
         favorite.setMarket(this);
         getFavorites().add(favorite);
     }*/
+    public void setBoards(Board board){
+        boards.add(board);
+        if(board.getMarket() != this){
+            board.setMarket(this);
+        }
+    }
 
 
 }

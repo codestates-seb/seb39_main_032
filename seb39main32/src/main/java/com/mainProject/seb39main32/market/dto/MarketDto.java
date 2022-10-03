@@ -1,10 +1,10 @@
 package com.mainProject.seb39main32.market.dto;
 
+import com.mainProject.seb39main32.board.dto.BoardDto;
 import com.mainProject.seb39main32.member.entity.Member;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.List;
 
 public class MarketDto {
 
@@ -56,6 +56,26 @@ public class MarketDto {
         private String phone;
         private String createAt;
         private String updateAt;
+
+        public void setMember(Member member){
+            this.memberId = member.getMemberId();
+        }
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class ResponseListDto{
+        private long marketId;
+        @Setter(AccessLevel.NONE)
+        private long memberId;
+        private String marketName;
+        private String companyNumber;
+        private String address;
+        private String phone;
+        private String createAt;
+        private String updateAt;
+        private List<BoardDto.Response> boardList;
 
         public void setMember(Member member){
             this.memberId = member.getMemberId();

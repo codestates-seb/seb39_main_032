@@ -12,4 +12,5 @@ import java.util.Optional;
 public interface MarketRepository extends JpaRepository<Market, Long> {
     Optional<Market> findByMarketId(long marketId);
     Page<Market> findByMember_MemberId( Pageable pageable,long memberId);
+    Page<Market> findByMarketId( Pageable pageable,long memberId);
 }
