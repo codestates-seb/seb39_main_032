@@ -74,6 +74,7 @@ public class WishController {
     @DeleteMapping("{wish-id}")
     public ResponseEntity deleteWish(
             @PathVariable("wish-id") @Positive long wishId) {
+        
         wishService.deleteWish(wishId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

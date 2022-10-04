@@ -3,6 +3,7 @@ package com.mainProject.seb39main32.wish.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mainProject.seb39main32.board.entity.Board;
+import com.mainProject.seb39main32.market.entity.Market;
 import com.mainProject.seb39main32.member.entity.Member;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,4 +50,11 @@ public class Wish {
     @JoinColumn(name = "member_id")
     private Member member;
     //----외래키----
+
+    public void setMember(Member member){
+        this.member = member;
+    }
+    public void setBoard(Board board){
+        this.board = board;
+    }
 }
