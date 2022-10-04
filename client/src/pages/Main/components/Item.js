@@ -1,10 +1,18 @@
 import styled from "styled-components";
-
 import { Icon } from "@iconify/react";
 import Wishlist from "./Wishlist";
 import { useState } from "react";
+import { useEffect } from "react";
 
 function Item({ state }) {
+  const [soldOut, setSoldOut] = useState("판매중");
+
+  useEffect(() => {
+    if (state.boardStatus === "품절" || state.boardStatus === "delete") {
+      return setSoldOut("품절");
+    }
+  }, [soldOut]);
+
   const [likeScore, setLikeScore] = useState(state.wishListCount);
   const boardId = state.boardId;
 
@@ -28,6 +36,12 @@ function Item({ state }) {
 
   return (
     <ItemContainer>
+      {soldOut === "품절" ? (
+        <div id="done">
+          <span>판매 완료</span>
+        </div>
+      ) : null}
+
       <ImgContainer>
         <a href={`/${state.marketId}`}>
           <img
@@ -83,10 +97,25 @@ const ItemContainer = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   /* width: 230px; */
-  /* border: 1px dotted; */
   margin: 20px 10px;
+
+  #done {
+    /* text-align: center; */
+    font-size: 40px;
+    font-weight: 700;
+    width: 100%;
+    height: 450px;
+    /* border: 1px solid; */
+    margin-bottom: -450px;
+    background-color: rgba(170, 170, 170, 1);
+    z-index: 1;
+    opacity: 0.87;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5rem;
+  }
 
   ul {
     list-style: none;
