@@ -3,7 +3,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import TitleHeader from "../../components/TitleHeader";
 import { Icon } from "@iconify/react";
-import ItemBox from "../Mypage/components/newpost/ItemBox";
+import ItemBox from "./components/ItemBox";
 import Review from "./components/Review";
 import StoreLocation from "./components/Map";
 import { useState, useEffect } from "react";
@@ -19,12 +19,14 @@ function Post() {
   const [itemList, setItemList] = useState([]);
   const path = useLocation().pathname;
   const [isBookMark, setIsBookMark] = useState(false);
+  const [reviewList, setReviewList] = useState([]);
 
   const BookMarkHandler = () => {
     setIsBookMark(!isBookMark);
     // axios.post(); // 넣어주기
     console.log(storeInfo);
     console.log(state);
+    console.log(reviewList);
   };
 
   const renderHandler = () => {
@@ -33,6 +35,7 @@ function Post() {
       .then((res) => {
         setStoreInfo(res.data.data);
         dispatch(setItemsList(res.data.data.boardList)); // main 페이지에서 사용하는 아이템 리스트 리듀서 재활용.
+        setReviewList(res.data.data.reviewList);
       })
       .catch((err) => {
         console.log(err);
@@ -49,7 +52,8 @@ function Post() {
       <PostContainer>
         <TitleHeader
           title={storeInfo.marketName}
-          subtitle={`${storeInfo.address} / ${storeInfo.phone}`}
+          bookmarkCount={storeInfo.favoriteCount}
+          subtitle={`${storeInfo.address} / ${storeInfo.phone} / `}
           icon={
             isBookMark ? (
               <Icon
@@ -59,6 +63,9 @@ function Post() {
             ) : (
               <Icon icon="bi:bookmark-star" className="bookmark_icon" />
             )
+          }
+          icon2={
+            <Icon icon="material-symbols:thumb-up-outline" id="thumb_up" />
           }
           func={BookMarkHandler}
         />
@@ -73,7 +80,7 @@ function Post() {
             })}
           </section>
         </main>
-        <Review />
+        <Review reviewList={reviewList} marketId={storeInfo.marketId} />
       </PostContainer>
       <Footer />
     </>
@@ -98,7 +105,6 @@ const PostContainer = styled.div`
   }
 
   .active {
-    /* color: #ff4a55; */
     color: rgb(253, 220, 63);
   }
 `;

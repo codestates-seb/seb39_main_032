@@ -1,17 +1,39 @@
 import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
+import moment from "moment";
 
-function Review() {
+function Review({ reviewList, marketId }) {
   const [review, setReview] = useState("");
 
   const inputHandler = (e) => {
     setReview(e.target.value);
     console.log(review);
+    console.log(marketId);
   };
 
-  const rvSubmitHandler = () => {
-    // axios.post()
+  const rvSubmitHandler = (e) => {
+    if (review.length < 5) {
+      alert("5자 이상 작성해야 합니다");
+      return e.preventDefault();
+    }
+
+    axios
+      .post(`/api/reviews/${marketId}`, {
+        memberId: "2", // todo : 삭제하기
+        reviewContent: review,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  const rvDeleteHandler = (e) => {
+    axios
+      .delete(`/api/reviews/${e.target.id}`)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+
+    window.location.reload();
   };
 
   return (
@@ -22,14 +44,31 @@ function Review() {
       <div id="review_box">
         <div id="review_list">
           <div id="review">
-            <div className="user_id">ab**</div>
-            <span className="review_detail">
-              <div className="review_content">
-                마감 5분 남기고 가서 구매했어요 저렴한 가격에 잘 먹었습니다
-              </div>
-              <div className="review_date">9월 15일</div>
-              <div className="review_delete_btn">X</div>
-            </span>
+            {reviewList.map((review, idx) => {
+              return (
+                <>
+                  <div className="user_id" key={idx}>
+                    {review.memberEmail.slice(0, 2)}**
+                  </div>
+                  <span className="review_detail">
+                    <div className="review_content">{review.reviewContent}</div>
+                    <div className="review_date">
+                      {moment(
+                        `${review.reviewCreateAt}`,
+                        "YYYY-MM-DD HH:mm:ss"
+                      ).format("MM월 DD일")}
+                    </div>
+                    <div
+                      className="review_delete_btn"
+                      id={review.reviewId}
+                      onClick={rvDeleteHandler}
+                    >
+                      X
+                    </div>
+                  </span>
+                </>
+              );
+            })}
           </div>
         </div>
         <form onSubmit={rvSubmitHandler}>
@@ -66,6 +105,7 @@ const ReviewContainer = styled.section`
 
   #review_list {
     height: 90%;
+    overflow: auto;
   }
 
   #review {
@@ -77,7 +117,8 @@ const ReviewContainer = styled.section`
     .user_id {
       height: 30%;
       padding-left: 15px;
-      font-size: 15px;
+      font-size: 13px;
+      margin-top: 9px;
     }
 
     .review_detail {
@@ -109,7 +150,7 @@ const ReviewContainer = styled.section`
   #review_write {
     border: 1px solid #528cfc;
     border-radius: 0.3rem;
-    margin: 0 4px 0 10px;
+    margin: 5px 4px 0 10px;
     width: 90%;
     height: 35px;
     :focus {
@@ -126,5 +167,8 @@ const ReviewContainer = styled.section`
     color: white;
     font-weight: 700;
     cursor: pointer;
+    :hover {
+      background-color: #4070ff;
+    }
   }
 `;
