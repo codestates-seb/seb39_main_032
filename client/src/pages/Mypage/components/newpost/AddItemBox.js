@@ -7,12 +7,14 @@ import { setAddItem, setSubmitItems } from "../../../../actions";
 import { applyMiddleware } from "redux";
 import axios from "axios";
 import moment from "moment";
+import DeleteBtn from "../../../../widgets/DeleteBtn";
 
 function AddItemBox({ ele, id, deleteItemBoxHandler }) {
   const state = useSelector((state) => state.itemReducer);
-
   const dispatch = useDispatch();
   const done = useRef(); // 등록 완료 시 회색 화면 처리용
+  const url = "http://messidor.iptime.org:8080";
+
   const [itemInfo, setItemInfo] = useState({});
 
   // 내용 입력 시,
@@ -53,11 +55,28 @@ function AddItemBox({ ele, id, deleteItemBoxHandler }) {
       saleStartTime: setStTime,
       saleEndTime: setFiTime,
       boardStatus: "판매중",
-      // 이미지 파일 추가 필요
     };
+    //기존
+    // axios
+    //   .post("/api/boards", body)
+    //   .then(() => (done.current.id = "done"))
+    //   .catch((err) => console.log(err));
 
-    axios
-      .post("/api/boards", body)
+    // console.log(file);
+    const formData = new FormData(); // formData는 콘솔로 확인 불가.
+
+    formData.enctype = "multipart/form-data";
+    formData.append("file", file); // 이미지 파일 넣기
+
+    const blob = new Blob([JSON.stringify(body)], { type: "application/json" });
+    formData.append("requestBody", blob); // 일반 데이터 넣기
+
+    fetch(`${url}/api/boards`, {
+      method: "POST",
+      headers: {},
+      body: formData,
+    })
+      .then((res) => console.log(res))
       .then(() => (done.current.id = "done"))
       .catch((err) => console.log(err));
   };
@@ -65,17 +84,18 @@ function AddItemBox({ ele, id, deleteItemBoxHandler }) {
   //img 미리보기 관리
   const [imageUrl, setImageUrl] = useState(null);
   const imgRef = useRef();
+  const [file, setFile] = useState({});
 
   const onChangeImg = () => {
     const reader = new FileReader();
     const file = imgRef.current.files[0];
-    console.log(file);
+    setFile(file); // 전송용
 
-    //업로드한 이미지를 화면에 표시
+    // 업로드한 이미지를 화면에 표시
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setImageUrl(reader.result);
-      console.log("이미지주소", reader.result);
+      // console.log("이미지주소", reader.result);
     };
 
     setItemInfo({ ...itemInfo, itemId: ele, img: file });
@@ -264,7 +284,11 @@ function AddItemBox({ ele, id, deleteItemBoxHandler }) {
             />
           </AddImgContainer>
         </div>
-        <button onClick={submitItemHandler}>등록</button>
+        <DeleteBtn
+          func={submitItemHandler}
+          marginLeft={"92%"}
+          marginBottom={"20px"}
+        />
       </AddItemBoxContainer>
     </>
   );
@@ -286,19 +310,6 @@ export const AddItemBoxContainer = styled.section`
     background-color: rgba(170, 170, 170, 1);
     z-index: 1;
     opacity: 0.6;
-  }
-
-  button {
-    background-color: #f24e1e;
-    color: white;
-    font-weight: 700;
-    border-radius: 0.3rem;
-    border: none;
-    width: 60px;
-    height: 30px;
-    margin-left: 92%;
-    margin-bottom: 20px;
-    cursor: pointer;
   }
 
   .delete_box {

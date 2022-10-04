@@ -4,29 +4,39 @@ import axios from "axios";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import TitleHeader from "../../../components/TitleHeader";
-import Item from "../components/newpost/Item";
+import ItemBox from "../../PostDetail/components/ItemBox";
+import { useSelector, useDispatch } from "react-redux";
+import { setItemsList } from "../../../actions";
 
 function MyItems() {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.itemListReducer);
   const [hasStoreInfo, setHasStoreInfo] = useState(true);
   const [hasItems, setHasItems] = useState(false);
 
-  const getStoreInfo = () => {
-    // axios.get()
+  const getItemList = () => {
+    axios
+      .get("/api/markets/9")
+      .then((res) => dispatch(setItemsList(res.data.data.boardList)))
+      .catch((err) => console.log(err));
   };
 
   // 테스트용
 
-  //   useEffect(() => {
-  //     // console.log(state);
-  //     // state에 저장해서 가져오면 어차피 초기화되니, 서버에서 가져오는게 나음.
-  //     // setHasStoreInfo(state.hasStoreInfo);
-  //   }, []);
+  useEffect(() => {
+    getItemList();
+  }, []);
 
   return (
     <>
       <Header />
       <MyItemsContainer>
-        <Item />
+        <TitleHeader title={"할인 상품 관리"} />
+        <form>
+          {state.map((item, idx) => {
+            return <ItemBox key={idx} id={idx} state={item} />;
+          })}
+        </form>
       </MyItemsContainer>
       <Footer />
     </>
@@ -39,4 +49,11 @@ const MyItemsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid rgba(170, 170, 170, 1); */
+    border-radius: 0.5rem;
+  }
 `;
