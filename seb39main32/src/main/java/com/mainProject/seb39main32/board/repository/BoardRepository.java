@@ -8,4 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BoardRepository extends JpaRepository<Board, Long> {
     Page<Board> findAll(Pageable pageable);
+    Page<Board> findByBoardStatus(Pageable pageable,String status);
+    Page<Board> findByMember_MemberIdAndBoardStatusNot(Pageable pageable,long memberId,String status);
+    Page<Board> findByMarket_AddressContainingAndBoardStatus(Pageable pageable,String adrress,String status);
+    Page<Board> findByMarket_AddressContainingAndFoodCategoryAndBoardStatus(Pageable pageable,String adrress,String category,String status);
 }

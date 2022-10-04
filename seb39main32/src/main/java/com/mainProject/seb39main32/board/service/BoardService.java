@@ -59,8 +59,27 @@ public class BoardService {
     public Board findBoard(long boardId){
         return findVerifiedBoard(boardId);
     }
-    public Page<Board> findBoards(int page, int size){
-        return boardRepository.findAll(PageRequest.of(page-1,size, Sort.by("boardUpdateAt").descending()));
+    public Page<Board> findBoards(int page, int size,String address,String category){
+        Page<Board> pageResult = null;
+        Pageable paging = PageRequest.of(page-1,size, Sort.by("boardUpdateAt").descending());
+
+        if((address != null && !address.isEmpty()) && ( category != null && !category.isEmpty())){
+            pageResult = boardRepository.findByMarket_AddressContainingAndFoodCategoryAndBoardStatus(paging,address,category,"판매중");
+        }
+        else if(address != null && !address.isEmpty()){
+            pageResult =boardRepository.findByMarket_AddressContainingAndBoardStatus(paging,address,"판매중");
+        }
+        else {
+            pageResult= boardRepository.findByBoardStatus(paging,"판매중");
+        }
+        return pageResult;
+        //return boardRepository.findByMarket_AddressContaining(paging,address);
+    }
+
+    public Page<Board> findMemberBoards(int page, int size,long memberId){
+        Page<Board> pageResult = null;
+        Pageable paging = PageRequest.of(page-1,size, Sort.by("boardUpdateAt").descending());
+        return boardRepository.findByMember_MemberIdAndBoardStatusNot(paging,memberId,"delete");
     }
 
     public void deleteBoard(long boardId){

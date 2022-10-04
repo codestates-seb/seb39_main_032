@@ -82,6 +82,7 @@ public class BoardDto {
     }
 
     @Getter
+    @Builder
     @AllArgsConstructor
     public static class Response{
         private long boardId;
@@ -136,6 +137,26 @@ public class BoardDto {
         }
 
         public void setWishListCount(List<WishDto.Response> wishList){this.wishListCount = wishList.size();}
+
+    }
+
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class ResponseOnlyBoard{
+        private long boardId;
+        private long marketId;
+        private String itemName;
+        private long itemPrice;
+        private String foodCategory;
+        private long itemAmount;
+        private long itemSale;
+        private String saleStartTime;
+        private String saleEndTime;
+        private String boardCreateAt;
+        private String boardUpdateAt;
+        private String boardStatus;
 
     }
 

@@ -52,10 +52,23 @@ public class BoardController {
 //    }
 
 
+//    @GetMapping
+//    public ResponseEntity<MultiResponseDto> getBoards(@Positive @RequestParam int page,
+//                                    @Positive @RequestParam int size){
+//        Page<Board> pageBoard = boardService.findBoards(page,size);
+//        List<Board> boards = pageBoard.getContent();
+//        return new ResponseEntity<>(
+//                new MultiResponseDto<>(mapper.boardsToBoardResponseDtos(boards),
+//                        pageBoard),
+//                HttpStatus.OK);
+//    }
+
     @GetMapping
     public ResponseEntity<MultiResponseDto> getBoards(@Positive @RequestParam int page,
-                                    @Positive @RequestParam int size){
-        Page<Board> pageBoard = boardService.findBoards(page,size);
+                                                      @Positive @RequestParam int size,
+                                                      @RequestParam(required = false) String address,
+                                                      @RequestParam(required = false) String category){
+        Page<Board> pageBoard = boardService.findBoards(page,size,address,category);
         List<Board> boards = pageBoard.getContent();
         return new ResponseEntity<>(
                 new MultiResponseDto<>(mapper.boardsToBoardResponseDtos(boards),
@@ -63,6 +76,17 @@ public class BoardController {
                 HttpStatus.OK);
     }
 
+    @GetMapping("/myBoards/{member-Id}")
+    public ResponseEntity<MultiResponseDto> getMemberBoards(@Positive @RequestParam int page,
+                                                            @Positive @RequestParam int size,
+                                                            @PathVariable("member-Id") @Positive long memberId){
+        Page<Board> pageBoard = boardService.findMemberBoards(page,size,memberId);
+        List<Board> boards = pageBoard.getContent();
+        return new ResponseEntity<>(
+                new MultiResponseDto<>(mapper.boardsToBoardResponseDtos(boards),
+                        pageBoard),
+                HttpStatus.OK);
+    }
 
 
 //    @ApiImplicitParams({
