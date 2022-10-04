@@ -3,8 +3,10 @@ package com.mainProject.seb39main32.market.entity;
 import com.mainProject.seb39main32.board.entity.Board;
 import com.mainProject.seb39main32.favorite.entity.Favorite;
 import com.mainProject.seb39main32.member.entity.Member;
+import com.mainProject.seb39main32.review.entity.Review;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -49,21 +51,33 @@ public class Market {
         this.member = member;
     }
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "market")
     private List<Favorite> favorites = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "market")
     private List<Board> boards = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "market")
+    private List<Review> reviews = new ArrayList<>();
 
     /*public void add(Favorite favorite){
         favorite.setMarket(this);
         getFavorites().add(favorite);
     }*/
     public void setBoards(Board board){
-        boards.add(board);
+        this.boards.add(board);
         if(board.getMarket() != this){
             board.setMarket(this);
+        }
+    }
+
+    public void setReviews(Review review){
+        this.reviews.add(review);
+        if(review.getMarket() != this){
+            review.setMarket(this);
         }
     }
 
