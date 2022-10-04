@@ -13,6 +13,9 @@ function TitleHeader(props) {
 
       <Subtext onClick={props.func} color={props.color} cursor={props.cursor}>
         {props.subtitle}
+        <span id="count">
+          {props.icon2} {props.bookmarkCount}
+        </span>
       </Subtext>
     </TitleHeaderContainer>
   );
@@ -31,19 +34,26 @@ const TitleHeaderContainer = styled.div`
   & h2 {
     margin-bottom: 8px;
     display: flex;
+    align-items: center;
   }
 
   .bookmark {
-    margin-top: 2px;
     margin-left: 2px;
     width: 26px;
     height: 26px;
+    margin-right: 13px;
 
     .bookmark_icon {
       width: 26px;
       height: 26px;
       cursor: pointer;
     }
+  }
+
+  #count {
+    font-size: 14px;
+    font-weight: 400;
+    margin-left: 3px;
   }
 `;
 
