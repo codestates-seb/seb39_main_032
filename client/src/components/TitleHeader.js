@@ -34,12 +34,14 @@ const TitleHeaderContainer = styled.div`
   }
 
   .bookmark {
-    width: 30px;
-    height: 30px;
+    margin-top: 2px;
+    margin-left: 2px;
+    width: 26px;
+    height: 26px;
 
     .bookmark_icon {
-      width: 30px;
-      height: 30px;
+      width: 26px;
+      height: 26px;
       cursor: pointer;
     }
   }

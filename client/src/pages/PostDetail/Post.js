@@ -98,6 +98,7 @@ const PostContainer = styled.div`
   }
 
   .active {
-    color: #ff4a55;
+    /* color: #ff4a55; */
+    color: rgb(253, 220, 63);
   }
 `;
