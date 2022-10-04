@@ -23,27 +23,17 @@ public class Review {
 
     //-----외래키
 
-    @Column(name= "member_id")
-    private long memberId;
-
     @ManyToOne
-    @JoinColumn(name = "member_id", insertable = false, updatable = false)
+    @JoinColumn(name= "member_id")
     private Member member;
 
     /*public void setMember(Member member){
         this.member = member;
     }*/
 
-    @Column(name = "market_id")
-    private long marketId;
-
     @ManyToOne
-    @JoinColumn(name = "market_id", insertable = false, updatable = false)
+    @JoinColumn(name = "market_id")
     private Market market;
-
-    public void setMarket(Market market){
-        this.market = market;
-    }
 
     //-----외래키
 
@@ -55,6 +45,14 @@ public class Review {
 
     @Column(name= "update_at")
     private String reviewUpdateAt;
+
+    public void setMember(Member member){
+        this.member = member;
+    }
+
+    public void setMarket(Market market){
+        this.market = market;
+    }
 
 
 }

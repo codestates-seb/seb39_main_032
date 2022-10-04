@@ -56,14 +56,11 @@ public class ReviewController {
      * 리뷰 등록하기
      * @param requestBody
      * @param marketId
-     * @param memberId
      * @return
      */
-    @PostMapping ("/{market-Id}/{member-Id}")
-    public ResponseEntity<SingleResponseDto> postReview(@RequestBody ReviewDto.Post requestBody, @PathVariable("market-Id") @Positive long marketId, @PathVariable("member-Id") @Positive long memberId){
-
+    @PostMapping ("/{market-Id}")
+    public ResponseEntity<SingleResponseDto> postReview(@RequestBody ReviewDto.Post requestBody, @PathVariable("market-Id") @Positive long marketId){
         requestBody.setMarketId(marketId);
-        requestBody.setMemberId(memberId);
         Review review = mapper.reviewPostToReview(requestBody);
         Review createReview = reviewService.createReview(review);
         ReviewDto.Response response = mapper.reviewToReviewResponse(createReview);
@@ -76,7 +73,7 @@ public class ReviewController {
      * @param reviewId
      * @return
      */
-    @DeleteMapping("/delete/{review-id}")
+    @DeleteMapping("/{review-id}")
     public ResponseEntity deleteReview(@PathVariable("review-id") @Positive long reviewId){
         reviewService.deleteReview(reviewId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
