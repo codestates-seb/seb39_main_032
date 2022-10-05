@@ -1,14 +1,19 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
+import axios from "axios";
+import { setItemsList, setSearch } from "../actions";
+import { useDispatch } from "react-redux";
+
 /*global kakao*/
 
 function Search() {
+  const dispatch = useDispatch();
   const [curLat, setCurLat] = useState("");
   const [curLon, setCurLon] = useState("");
   const [curAdr, setCurAdr] = useState("");
 
-  // 좌표 찾기
+  // 좌표 찾기 함수
   var options = {
     enableHighAccuracy: true,
     timeout: 5000,
@@ -45,7 +50,7 @@ function Search() {
       console.log(result, status);
 
       if (status === kakao.maps.services.Status.OK) {
-        console.log("도로명 주소 : " + result[0].address.address_name);
+        // console.log("도로명 주소 : " + result[0].address.address_name);
         setCurAdr(result[0].address.address_name);
       }
     };
@@ -53,12 +58,29 @@ function Search() {
     geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
   };
 
+  //
+  //검색 기능
+
+  const searchHandler = (e) => {
+    e.preventDefault();
+
+    let search = curAdr.split(" ", 3); // '구'까지 잘라주기.
+    search = `${search[0]} ${search[1]} ${search[2]}`;
+
+    dispatch(setSearch(search));
+
+    axios
+      .get(`/api/boards?page=1&size=10&address=${search}`)
+      .then((res) => dispatch(setItemsList(res.data.data)))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <SearchContainer>
       <button id="location_btn" onClick={locationAPI}>
         <Icon icon="ic:outline-my-location" id="location_icon" />
       </button>
-      <form id="search_container">
+      <form id="search_container" onSubmit={searchHandler}>
         <div id="search_box">
           <input
             id="search"
