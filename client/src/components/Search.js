@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import axios from "axios";
 import { setClickedCategory, setItemsList, setSearch } from "../actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
 
 /*global kakao*/
 
@@ -61,7 +62,21 @@ function Search() {
   //
   //검색 기능
 
+  const navigate = useNavigate();
+  const path = useLocation().pathname;
+
   const searchHandler = (e) => {
+    if (!curAdr.length) {
+      alert("주소를 입력해주세요");
+      if (path === "/") {
+        return window.location.reload();
+      } else return e.preventDefault();
+    }
+
+    if (path !== "/") {
+      navigate("/");
+    }
+
     e.preventDefault();
 
     let search = curAdr.split(" ", 3); // '구'까지 잘라주기.

@@ -14,6 +14,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { setUserInfo } from "./actions";
 import { useDispatch } from "react-redux";
+import { setItemsList } from "./actions";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,8 +26,20 @@ function App() {
     //   .catch((err) => console.log(err));
   };
 
+  const getPosts = () => {
+    axios
+      .get("/api/boards?page=1&size=10")
+      .then((res) => {
+        dispatch(setItemsList(res.data.data));
+        // console.log(state);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
-    userInfoHandler();
+    getPosts();
   }, []);
 
   return (

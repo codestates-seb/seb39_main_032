@@ -28,22 +28,6 @@ function Main() {
   const state = useSelector((state) => state.itemListReducer);
   const dispatch = useDispatch();
 
-  const getPosts = () => {
-    axios
-      .get("/api/boards?page=1&size=10")
-      .then((res) => {
-        dispatch(setItemsList(res.data.data));
-        // console.log(state);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  useEffect(() => {
-    getPosts();
-  }, []);
-
   const handleClickCategory = (e) => {
     dispatch(setClickedCategory(e.target.id));
 
@@ -53,7 +37,6 @@ function Main() {
       )
       .then((res) => dispatch(setItemsList(res.data.data)))
       .catch((err) => console.log(err));
-    return;
   };
 
   return (
