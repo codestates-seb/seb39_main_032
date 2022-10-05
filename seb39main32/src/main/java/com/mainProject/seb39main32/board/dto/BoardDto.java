@@ -15,6 +15,7 @@ import java.util.List;
 @Data
 public class BoardDto {
     @Getter
+    @Setter
     @AllArgsConstructor
 
     public static class Post{

@@ -31,6 +31,7 @@ public class BoardService {
     public Board createBoard(Board board) {
         board.setBoardCreateAt(String.valueOf(LocalDateTime.now()));
         board.setBoardUpdateAt(String.valueOf(LocalDateTime.now()));
+        board.setBoardStatus("판매중");
         Board saveBoard = boardRepository.save(board);
         return saveBoard;
     }

@@ -4,6 +4,7 @@ import com.mainProject.seb39main32.board.dto.BoardDto;
 import com.mainProject.seb39main32.board.entity.Board;
 import com.mainProject.seb39main32.board.mapper.BoardMapper;
 import com.mainProject.seb39main32.board.service.BoardService;
+import com.mainProject.seb39main32.config.oauth.PrincipalDetails;
 import com.mainProject.seb39main32.dto.MultiResponseDto;
 import com.mainProject.seb39main32.dto.SingleResponseDto;
 import io.swagger.annotations.*;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -76,11 +78,12 @@ public class BoardController {
                 HttpStatus.OK);
     }
 
-    @GetMapping("/myBoards/{member-Id}")
+    @GetMapping("/myBoards")
     public ResponseEntity<MultiResponseDto> getMemberBoards(@Positive @RequestParam int page,
                                                             @Positive @RequestParam int size,
-                                                            @PathVariable("member-Id") @Positive long memberId){
-        Page<Board> pageBoard = boardService.findMemberBoards(page,size,memberId);
+                                                            @AuthenticationPrincipal PrincipalDetails principalDetails){
+
+        Page<Board> pageBoard = boardService.findMemberBoards(page, size, principalDetails.getMember().getMemberId());
         List<Board> boards = pageBoard.getContent();
         return new ResponseEntity<>(
                 new MultiResponseDto<>(mapper.boardsToBoardResponseDtos(boards),
@@ -104,8 +107,12 @@ public class BoardController {
 //            @ApiImplicitParam(name = "boardStatus",value = "판매중,품절",required = true,dataType = "string")
 //    })
     @PostMapping
-    public ResponseEntity<SingleResponseDto> postBoard(@Valid @RequestBody  BoardDto.Post requestBody){
+    public ResponseEntity<SingleResponseDto> postBoard(@Valid @RequestBody  BoardDto.Post requestBody,
+                                                       @AuthenticationPrincipal PrincipalDetails principalDetails){
         System.out.println(LocalDateTime.now());
+        if(principalDetails!=null) {
+            requestBody.setMemberId(principalDetails.getMember().getMemberId());
+        }
         Board board = mapper.boardPostToBoard(requestBody);
         Board createdBoard = boardService.createBoard(board);
         BoardDto.Response response = mapper.boardToBoardResponse(createdBoard);
