@@ -4,6 +4,7 @@ import userInfoReducer from "./userInfoReducer";
 import itemListReducer from "./itemListReducer";
 import itemReducer from "./itemReducer";
 import searchReducer from "./searchReducer";
+import categoryReducer from "./categoryReducer";
 
 const rootReducer = combineReducers({
   loginReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   itemListReducer,
   itemReducer,
   searchReducer,
+  categoryReducer,
 });
 
 export default rootReducer;

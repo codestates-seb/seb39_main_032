@@ -6,7 +6,7 @@ import Footer from "../../components/Footer";
 import List from "./components/List";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setItemsList } from "../../actions";
+import { setItemsList, setClickedCategory } from "../../actions";
 
 function Main() {
   const search = useSelector((state) => state.searchReducer);
@@ -44,10 +44,8 @@ function Main() {
     getPosts();
   }, []);
 
-  const [clickedCategory, setClickedCategory] = useState("");
-
   const handleClickCategory = (e) => {
-    setClickedCategory(e.target.id);
+    dispatch(setClickedCategory(e.target.id));
 
     axios
       .get(
@@ -79,7 +77,7 @@ function Main() {
             })}
           </article>
         </section>
-        <List clickedCategory={clickedCategory} />
+        <List />
       </MainContainer>
       <Footer />
     </>

@@ -3,7 +3,9 @@ import styled from "styled-components";
 function Footer() {
   return (
     <FooterContainer>
-      Copyright © 2022 seb39_team_032. All Rights Reserved.
+      Copyright © 2022 seb39_team_032.
+      <br />
+      All Rights Reserved.
     </FooterContainer>
   );
 }

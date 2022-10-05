@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import axios from "axios";
-import { setItemsList, setSearch } from "../actions";
+import { setClickedCategory, setItemsList, setSearch } from "../actions";
 import { useDispatch } from "react-redux";
 
 /*global kakao*/
@@ -68,6 +68,7 @@ function Search() {
     search = `${search[0]} ${search[1]} ${search[2]}`;
 
     dispatch(setSearch(search));
+    dispatch(setClickedCategory(""));
 
     axios
       .get(`/api/boards?page=1&size=10&address=${search}`)

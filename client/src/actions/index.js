@@ -11,6 +11,7 @@ export const SET_ADD_ITEM = "SET_ADD_ITEM";
 export const SET_DELETE_ITEM = "SET_DELETE_ITEM";
 export const SET_SUBMIT_ITEMS = "SET_SUBMIT_ITEMS";
 export const SET_SEARCH = "SET_SEARCH";
+export const SET_CLICKED_CATEGORY = "SET_CLICKED_CATEGORY";
 
 // actions 생성 함수
 export const storeToken = (refreshtoken) => {
@@ -86,5 +87,12 @@ export const setSearch = (keyword) => {
   return {
     type: SET_SEARCH,
     payload: keyword,
+  };
+};
+
+export const setClickedCategory = (category) => {
+  return {
+    type: SET_CLICKED_CATEGORY,
+    payload: category,
   };
 };

@@ -4,8 +4,9 @@ import styled from "styled-components";
 import Item from "./Item";
 
 // 명칭 변경
-function List({ clickedCategory }) {
+function List() {
   const search = useSelector((state) => state.searchReducer);
+  const clickedCategory = useSelector((state) => state.categoryReducer);
   const dispatch = useDispatch();
   const state = useSelector((state) => state.itemListReducer);
   const [btnActive, setBtnActive] = useState("ongoing");

@@ -7,7 +7,7 @@ import StoreInfo from "./StoreInfo";
 import Firstselling from "./Firstselling";
 
 function MyStore() {
-  const [hasStoreInfo, setHasStoreInfo] = useState(true);
+  const [hasStoreInfo, setHasStoreInfo] = useState(false);
   const [hasItems, setHasItems] = useState(false);
 
   const getStoreInfo = () => {

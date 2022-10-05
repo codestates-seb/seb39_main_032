@@ -19,8 +19,8 @@ function SnsLogin() {
       </div>
       <div className="sns_login_btn" id="naver">
         <img
-          src="https://w.namu.la/s/cfcd8d54c4668ce62a73401ad97535020da5fa40d9b3ac668f465994f449dcf42e9796fba45e11f033d072c61ec317263b60b9d25ceb29e4f2e570bd8ce06db21a66a0aacb02cb7b8af797f29a4dc583407bd1388d06a1623aed578c9341a09e"
-          alt="google logo"
+          src="https://w.namu.la/s/cfcd8d54c4668ce62a73401ad97535020da5fa40d9b3ac668f465994f449dcf42e9796fba45e11f033d072c61ec317263b60b9d25ceb29e4f2e570bd8ce06db21a66a0aacb02cb7b8af797f29a4dc583f6a65155fc2b4b14f9e0beac0dbcd721"
+          alt="naver logo"
         ></img>
         <div> Naver 계정으로 {path === "/login" ? "로그인" : "계속하기"}</div>
       </div>

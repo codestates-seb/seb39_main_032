@@ -40,7 +40,7 @@ function Firstselling() {
     }
 
     let body = {
-      // memberId: "1", // 테스트용 넘버. 회원가입 시 부여되는 개인 아이디넘버가 들어가야함. 단, 헤더에 액세스 토큰 넣으면 불필요.
+      memberId: "3", // 테스트용 넘버. 회원가입 시 부여되는 개인 아이디넘버가 들어가야함. 단, 헤더에 액세스 토큰 넣으면 불필요. todo : 삭제
       marketName: storeInfo.storeName,
       companyNumber: storeInfo.storeNum,
       address: storeInfo.storeAdr,
@@ -48,7 +48,8 @@ function Firstselling() {
     };
 
     axios
-      .post("/api/markets", body, { headers: { Authorization: accessToken } })
+      // .post("/api/markets", body, { headers: { Authorization: accessToken } }) // todo : 추가
+      .post("/api/markets", body)
       .then(
         (res) => console.log(res),
         dispatch(setHasStoreInfo(true)),

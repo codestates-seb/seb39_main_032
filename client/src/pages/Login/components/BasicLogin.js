@@ -89,7 +89,7 @@ function BasicLogin() {
         <span className="sub_menu">비밀번호 찾기</span>
         <span className="sub_menu">계정 찾기</span>
         <a href="/signup">
-          <span className="signup_menu">회원가입</span>
+          <span className="sub_menu">회원가입</span>
         </a>
       </div>
     </BasicLoginContainer>
@@ -130,17 +130,24 @@ export const BasicLoginContainer = styled.section`
   #sub_menu {
     display: flex;
     justify-content: center;
-    margin-top: 3px;
+    font-size: 7px;
+    padding: 3px 5px 0 5px;
+    cursor: pointer;
   }
 
-  .signup_menu {
+  .sub_menu {
+    display: flex;
+    justify-content: center;
     font-size: 7px;
+    margin: 3px 7px 0 7px;
     cursor: pointer;
-    /* padding: 0 10px; */
   }
 
   a {
     text-decoration: none;
+    :visited {
+      color: black;
+    }
   }
 
   p {
