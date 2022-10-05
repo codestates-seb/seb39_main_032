@@ -10,6 +10,7 @@ export const SET_HAS_ITEMS = "SET_HAS_ITEMS";
 export const SET_ADD_ITEM = "SET_ADD_ITEM";
 export const SET_DELETE_ITEM = "SET_DELETE_ITEM";
 export const SET_SUBMIT_ITEMS = "SET_SUBMIT_ITEMS";
+export const SET_SEARCH = "SET_SEARCH";
 
 // actions 생성 함수
 export const storeToken = (refreshtoken) => {
@@ -78,5 +79,12 @@ export const setSubmitItems = (items) => {
   return {
     type: SET_SUBMIT_ITEMS,
     payload: items, // {item1}
+  };
+};
+
+export const setSearch = (keyword) => {
+  return {
+    type: SET_SEARCH,
+    payload: keyword,
   };
 };
