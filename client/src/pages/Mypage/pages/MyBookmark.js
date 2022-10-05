@@ -3,11 +3,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
-import StoreInfo from "./StoreInfo";
-import Firstselling from "./Firstselling";
+import MyFavoriteStores from "../components/MyFavoriteStores";
 
-function MyStore() {
-  const [hasStoreInfo, setHasStoreInfo] = useState(true);
+function MyBookmark() {
+  const [hasStoreInfo, setHasStoreInfo] = useState(false);
   const [hasItems, setHasItems] = useState(false);
 
   const getStoreInfo = () => {
@@ -25,19 +24,19 @@ function MyStore() {
   return (
     <>
       <Header />
-      <MyStoreContainer>
-        {hasStoreInfo ? <StoreInfo /> : <Firstselling />}
-      </MyStoreContainer>
+      <MyBookmarkContainer>
+        <MyFavoriteStores />
+      </MyBookmarkContainer>
       <Footer />
     </>
   );
 }
 
-export default MyStore;
+export default MyBookmark;
 
-const MyStoreContainer = styled.div`
+const MyBookmarkContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%; // 조절 필요
+  height: 72vh;
 `;

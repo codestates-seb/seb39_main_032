@@ -8,20 +8,22 @@ function EditPwd() {
       <Header />
       <Container>
         <TitleHeader title={"개인정보 변경"} />
-        <h4>비밀번호 변경</h4>
-        <form>
-          <div id="pw_change_box">
-            <input id="new_pw" type="password" placeholder="새 비밀번호" />
-            <input
-              id="new_pw_confirm"
-              type="password"
-              placeholder="새 비밀번호 재확인"
-            />
-          </div>
-          <button id="pw_edit_btn" type="submit">
-            수정
-          </button>
-        </form>
+        <div id="box">
+          <h4>비밀번호 변경</h4>
+          <form>
+            <div id="pw_change_box">
+              <input id="new_pw" type="password" placeholder="새 비밀번호" />
+              <input
+                id="new_pw_confirm"
+                type="password"
+                placeholder="새 비밀번호 재확인"
+              />
+            </div>
+            <button id="pw_edit_btn" type="submit">
+              수정
+            </button>
+          </form>
+        </div>
       </Container>
     </>
   );
@@ -33,6 +35,11 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  #box {
+    border: 1px solid;
+    padding: 22px;
+  }
 
   #pw_change_wrapper {
     border: 1px solid rgba(170, 170, 170, 1);
@@ -50,7 +57,7 @@ const Container = styled.section`
   }
 
   h4 {
-    margin: 20px;
+    margin-left: 10px;
   }
 
   #pw_change_box {

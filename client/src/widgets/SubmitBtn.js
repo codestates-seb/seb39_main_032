@@ -7,7 +7,7 @@ function SubmitBtn(props) {
 
   return (
     <SubmitBtnContainer width={props.width}>
-      {path === "/signup" ? ("/login" ? "가입하기" : "로 그 인") : "수정하기"}
+      {path === "/signup" ? ("/login" ? "가입하기" : "수정하기") : "로 그 인"}
     </SubmitBtnContainer>
   );
 }

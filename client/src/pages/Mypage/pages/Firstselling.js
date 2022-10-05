@@ -118,7 +118,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 70vh; // 조절 필요
+  height: 72vh; // 조절 필요
 
   form {
     display: flex;

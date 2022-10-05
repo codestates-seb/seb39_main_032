@@ -15,6 +15,9 @@ import { useEffect } from "react";
 import { setUserInfo } from "./actions";
 import { useDispatch } from "react-redux";
 import { setItemsList } from "./actions";
+import MyBookmark from "./pages/Mypage/pages/MyBookmark";
+import MyLike from "./pages/Mypage/pages/MyLIke";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -55,6 +58,8 @@ function App() {
         <Route path="/mystore" element={<MyStore />} />
         <Route path="/mystore/edit" element={<Firstselling />} />
         <Route path="/myitems" element={<MyItems />} />
+        <Route path="/mylike" element={<MyLike />} />
+        <Route path="/mybookmark" element={<MyBookmark />} />
       </Routes>
     </BrowserRouter>
   );
