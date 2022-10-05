@@ -9,6 +9,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { setItemsList } from "../../actions";
 
 function Main() {
+  const search = useSelector((state) => state.searchReducer);
+
   let caterogies = [
     "분식",
     "치킨",
@@ -42,8 +44,17 @@ function Main() {
     getPosts();
   }, []);
 
-  const handleClickCategory = () => {
-    // axiox.get 해주기
+  const [clickedCategory, setClickedCategory] = useState("");
+
+  const handleClickCategory = (e) => {
+    setClickedCategory(e.target.id);
+
+    axios
+      .get(
+        `/api/boards?page=1&size=10&address=${search}&category=${e.target.id}`
+      )
+      .then((res) => dispatch(setItemsList(res.data.data)))
+      .catch((err) => console.log(err));
     return;
   };
 
@@ -56,6 +67,7 @@ function Main() {
             {caterogies.map((item, idx) => {
               return (
                 <div
+                  id={item}
                   value={idx}
                   key={idx}
                   className="food_category"
@@ -67,7 +79,7 @@ function Main() {
             })}
           </article>
         </section>
-        <List />
+        <List clickedCategory={clickedCategory} />
       </MainContainer>
       <Footer />
     </>

@@ -161,6 +161,7 @@ const ItemContainer = styled.li`
   }
 
   a {
+    color: black;
     text-decoration: none;
     :focus {
     }

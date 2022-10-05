@@ -4,7 +4,8 @@ import styled from "styled-components";
 import Item from "./Item";
 
 // 명칭 변경
-function List() {
+function List({ clickedCategory }) {
+  const search = useSelector((state) => state.searchReducer);
   const dispatch = useDispatch();
   const state = useSelector((state) => state.itemListReducer);
   const [btnActive, setBtnActive] = useState("ongoing");
@@ -25,7 +26,11 @@ function List() {
   return (
     <ListContainer>
       <ListHeader>
-        <h2>#분식</h2>
+        <h2>
+          {search ? `"${search}"` : "모든 지역"}
+          {"   "}
+          {clickedCategory ? `#${clickedCategory}` : ""}
+        </h2>
         <ListNav>
           <span
             id="ongoing"
