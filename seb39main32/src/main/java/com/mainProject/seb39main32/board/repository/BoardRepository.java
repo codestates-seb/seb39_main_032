@@ -12,4 +12,5 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     Page<Board> findByMember_MemberIdAndBoardStatusNot(Pageable pageable,long memberId,String status);
     Page<Board> findByMarket_AddressContainingAndBoardStatus(Pageable pageable,String adrress,String status);
     Page<Board> findByMarket_AddressContainingAndFoodCategoryAndBoardStatus(Pageable pageable,String adrress,String category,String status);
+    void deleteByMarket_MarketId(long marketId);
 }

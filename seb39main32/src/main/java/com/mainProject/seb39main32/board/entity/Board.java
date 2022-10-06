@@ -81,7 +81,7 @@ public class Board {
     private String boardStatus;
 
     //-----양방향
-    @OneToMany(mappedBy = "board")
+    @OneToMany(mappedBy = "board", orphanRemoval = true)
     @JsonIgnore
     private List<Wish> wishes = new ArrayList<>();
 

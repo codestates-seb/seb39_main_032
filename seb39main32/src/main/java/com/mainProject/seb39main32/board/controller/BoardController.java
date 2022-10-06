@@ -125,8 +125,10 @@ public class BoardController {
     @PatchMapping("{board-id}")
     public ResponseEntity<SingleResponseDto> patchBoard(
             @PathVariable("board-id") @Positive long boardId,
-            @Valid @RequestBody BoardDto.Patch requestBody) {
+            @Valid @RequestBody BoardDto.Patch requestBody,
+            @AuthenticationPrincipal PrincipalDetails principalDetails) {
         requestBody.setBoardId(boardId);
+        requestBody.setMember(principalDetails.getMember());
         Board board =
                 boardService.updateBoard(mapper.boardPatchToBoard(requestBody));
         return new ResponseEntity<>(
