@@ -1,7 +1,9 @@
 package com.mainProject.seb39main32.review.controller;
 
+import com.mainProject.seb39main32.config.oauth.PrincipalDetails;
 import com.mainProject.seb39main32.dto.MultiResponseDto;
 import com.mainProject.seb39main32.dto.SingleResponseDto;
+import com.mainProject.seb39main32.favorite.entity.Favorite;
 import com.mainProject.seb39main32.review.dto.ReviewDto;
 import com.mainProject.seb39main32.review.entity.Review;
 import com.mainProject.seb39main32.review.mapper.ReviewMapper;
@@ -9,9 +11,12 @@ import com.mainProject.seb39main32.review.repository.ReviewRepository;
 import com.mainProject.seb39main32.review.service.ReviewService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -38,17 +43,31 @@ public class ReviewController {
 
     /**
      * 마켓에 따른 리뷰 페이징 처리 후 불러오기
-     * @param marketId
-     * @param pageable
+     * @param
+     * @param
      * @return
      */
-    @GetMapping ("/{market-id}")
-    public ResponseEntity<MultiResponseDto> getReviews(@PathVariable("market-id") @Positive long marketId, Pageable pageable){
-        Page<Review> review = reviewService.findReviews(marketId,pageable);
+    @GetMapping ("/marketReview/{market-id}")
+    public ResponseEntity<MultiResponseDto> getReviews(@PathVariable("market-id") @Positive long marketId,
+                                                       @Positive @RequestParam int page,
+                                                       @Positive @RequestParam int size){
+        Pageable paging = PageRequest.of(page-1, size, Sort.by("reviewUpdateAt").descending());
+        Page<Review> review = reviewService.findReviews(marketId,paging);
 
         List<Review> reviews = review.getContent();
 
         return new ResponseEntity<>(new MultiResponseDto<>(mapper.reviewToReviewsResponse(reviews),review), HttpStatus.OK );
+    }
+
+    @GetMapping ("/myReview")
+    public ResponseEntity<MultiResponseDto> getMyReviews(@Positive @RequestParam int page,
+                                                         @Positive @RequestParam int size,
+                                                         @AuthenticationPrincipal PrincipalDetails principalDetails){
+        Pageable paging = PageRequest.of(page-1, size, Sort.by("reviewUpdateAt").descending());
+        Page<Review> review = reviewService.findMyReviews(principalDetails.getMember().getMemberId(),paging);
+        List<Review> reviews = review.getContent();
+
+        return new ResponseEntity<>(new MultiResponseDto<>(mapper.reviewToReviewsMyResponse(reviews),review), HttpStatus.OK );
     }
 
 
@@ -59,7 +78,12 @@ public class ReviewController {
      * @return
      */
     @PostMapping ("/{market-Id}")
-    public ResponseEntity<SingleResponseDto> postReview(@RequestBody ReviewDto.Post requestBody, @PathVariable("market-Id") @Positive long marketId){
+    public ResponseEntity<SingleResponseDto> postReview(@RequestBody ReviewDto.Post requestBody,
+                                                        @PathVariable("market-Id") @Positive long marketId,
+                                                        @AuthenticationPrincipal PrincipalDetails principalDetails){
+        if(principalDetails!=null) {
+            requestBody.setMemberId(principalDetails.getMember().getMemberId());
+        }
         requestBody.setMarketId(marketId);
         Review review = mapper.reviewPostToReview(requestBody);
         Review createReview = reviewService.createReview(review);

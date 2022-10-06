@@ -22,10 +22,25 @@ public interface ReviewMapper {
                 .reviewId(review.getReviewId())
                 .marketId(review.getMarket().getMarketId())
                 .memberId(review.getMember().getMemberId())
+                .memberEmail(review.getMember().getEmail())
                 .reviewContent(review.getReviewContent())
                 .reviewCreateAt(review.getReviewCreateAt())
                 .reviewUpdateAt(review.getReviewUpdateAt())
                 .build())
+                .collect(Collectors.toList());
+    }
+
+    default List<ReviewDto.MyResponse> reviewToReviewsMyResponse(List<Review> reviews) {
+        return reviews.stream().map(review -> ReviewDto.MyResponse
+                        .builder()
+                        .reviewId(review.getReviewId())
+                        .marketId(review.getMarket().getMarketId())
+                        .marketName(review.getMarket().getMarketName())
+                        .memberId(review.getMember().getMemberId())
+                        .reviewContent(review.getReviewContent())
+                        .reviewCreateAt(review.getReviewCreateAt())
+                        .reviewUpdateAt(review.getReviewUpdateAt())
+                        .build())
                 .collect(Collectors.toList());
     }
 }

@@ -24,6 +24,9 @@ public class ReviewService {
     public Page<Review> findReviews(long marketId, Pageable pageable) {
         return reviewRepository.findByMarket_MarketId(marketId, pageable);
     }
+    public Page<Review> findMyReviews(long memberId, Pageable pageable) {
+        return reviewRepository.findByMember_MemberId(memberId, pageable);
+    }
 
     public Review createReview(Review review) {
         review.setReviewCreateAt(String.valueOf(LocalDateTime.now()));

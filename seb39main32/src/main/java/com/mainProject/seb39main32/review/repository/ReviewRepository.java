@@ -11,6 +11,7 @@ import java.util.Optional;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
     Optional<Review> findByReviewId(long reviewId);
-
     Page<Review> findByMarket_MarketId(long marketId, Pageable pageable);
+    Page<Review> findByMember_MemberId(long memberId, Pageable pageable);
+    void deleteByMarket_marketId(long marketId);
 }
