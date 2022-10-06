@@ -57,5 +57,9 @@ public class WishService {
         return findWish;
     }
 
+    public Wish findVerifiedWish(long MemberId,long BoardId){
+        Wish wish= wishRepository.findByMember_MemberIdAndBoard_BoardId(MemberId,BoardId);
+        return wish;
+    }
 
 }
