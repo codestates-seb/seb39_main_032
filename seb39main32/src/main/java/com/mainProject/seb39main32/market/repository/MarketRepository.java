@@ -6,11 +6,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface MarketRepository extends JpaRepository<Market, Long> {
     Optional<Market> findByMarketId(long marketId);
     Page<Market> findByMember_MemberId( Pageable pageable,long memberId);
+    List<Market> findByMember_MemberId(long memberId);
     Page<Market> findByMarketId( Pageable pageable,long memberId);
 }

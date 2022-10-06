@@ -52,15 +52,15 @@ public class Market {
     }
 
     @JsonIgnore
-    @OneToMany(mappedBy = "market")
+    @OneToMany(mappedBy = "market", orphanRemoval = true)
     private List<Favorite> favorites = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "market")
+    @OneToMany(mappedBy = "market", orphanRemoval = true)
     private List<Board> boards = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "market")
+    @OneToMany(mappedBy = "market", orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
 
     /*public void add(Favorite favorite){
