@@ -1,15 +1,20 @@
 import styled from "styled-components";
 import Search from "./Search";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 // import mapApi from "./mapApi";
 
 function Header() {
+  const path = useLocation().pathname;
   const navigate = useNavigate();
   const authenticated = localStorage.getItem("accessToken");
 
   const logoutHandler = () => {
     localStorage.removeItem("accessToken");
-    navigate("/");
+    if (path !== "/") {
+      navigate("/");
+    } else {
+      window.location.reload();
+    }
   };
 
   return (
@@ -59,7 +64,7 @@ const HeaderContainer = styled.header`
   #title_nav {
     height: 30px;
     display: flex;
-    margin-left: 85%;
+    margin-left: 60%;
     margin-top: 10px;
     margin-bottom: -30px;
   }

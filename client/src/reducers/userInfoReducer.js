@@ -7,31 +7,14 @@ import {
 } from "../actions/index";
 
 //초기 상태 값
-const initialState = {
-  email: null,
-  memberPw: null,
-  authenticated: false,
-  memberID: null,
-  marketID: null,
-  marketName: null,
-  companyNumber: null,
-  address: null,
-  phone: null,
-  hasStoreInfo: false,
-  hasItems: false,
-};
+const initialState = {};
 
 //reducer(상태 관리) 함수
 const userInfoReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER_INFO:
-      let userInfo = {
-        email: action.payload.email,
-        memberPw: action.payload.memberPw,
-        authenticated: true,
-      };
+      return action.payload;
 
-      return Object.assign({}, state, userInfo);
       break;
 
     case SET_STORE_INFO:

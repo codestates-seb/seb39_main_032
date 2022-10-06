@@ -7,26 +7,41 @@ import StoreInfo from "./StoreInfo";
 import Firstselling from "./Firstselling";
 
 function MyStore() {
-  const [hasStoreInfo, setHasStoreInfo] = useState(true);
+  const accessToken = localStorage.getItem("accessToken");
+  // axios.defaults.headers.common["authorization"] = accessToken;
+
+  const [hasStoreInfo, setHasStoreInfo] = useState(false);
+  const [storeInfo, setStoreInfo] = useState({});
   const [hasItems, setHasItems] = useState(false);
 
   const getStoreInfo = () => {
-    // axios.get()
+    axios
+      .get("/api/markets/myMarket?page=1&size=30", {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        console.log(storeInfo);
+        if (res.data.data.length === 0) {
+          return setHasStoreInfo(false);
+        } else {
+          setStoreInfo(res.data.data[0]);
+          setHasStoreInfo(true);
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
-  // 테스트용
-
-  //   useEffect(() => {
-  //     // console.log(state);
-  //     // state에 저장해서 가져오면 어차피 초기화되니, 서버에서 가져오는게 나음.
-  //     // setHasStoreInfo(state.hasStoreInfo);
-  //   }, []);
+  useEffect(() => {
+    getStoreInfo();
+  }, []);
 
   return (
     <>
       <Header />
       <MyStoreContainer>
-        {hasStoreInfo ? <StoreInfo /> : <Firstselling />}
+        {hasStoreInfo ? <StoreInfo storeInfo={storeInfo} /> : <Firstselling />}
       </MyStoreContainer>
       <Footer />
     </>
@@ -39,5 +54,5 @@ const MyStoreContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%; // 조절 필요
+  height: 73.5vh; // 조절 필요
 `;

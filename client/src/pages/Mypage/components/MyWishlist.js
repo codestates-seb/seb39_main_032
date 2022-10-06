@@ -1,20 +1,12 @@
 import styled from "styled-components";
-import TitleHeader from "../../../components/TitleHeader";
 
-function MyWishlist() {
+function MyWishlist({ state }) {
   return (
     <MyWishlistContainer>
-      <TitleHeader title={"나의 관심 상품"} />
-      <section id="my_wishlist_wrapper">
-        <div className="my_wishlist">
-          <div className="my_wishlist_name">교촌 허니 콤보</div>
-          <div className="my_wishlist_btn delte">삭제</div>
-        </div>
-        <div className="my_wishlist">
-          <div className="my_wishlist_name">알리오 올리오 파스타</div>
-          <div className="my_wishlist_btn delte">삭제</div>
-        </div>
-      </section>
+      <div className="my_wishlist">
+        <div className="my_wishlist_name">{state.boardName}</div>
+        <div className="my_wishlist_btn delte">삭제</div>
+      </div>
     </MyWishlistContainer>
   );
 }
@@ -34,7 +26,7 @@ const MyWishlistContainer = styled.div`
   .my_wishlist {
     display: flex;
     border-bottom: 1px solid;
-    width: 600px;
+    width: 750px;
     height: 35px;
     padding: 7px;
 

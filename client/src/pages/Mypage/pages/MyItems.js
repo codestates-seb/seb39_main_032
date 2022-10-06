@@ -6,22 +6,33 @@ import Footer from "../../../components/Footer";
 import TitleHeader from "../../../components/TitleHeader";
 import ItemBox from "../../PostDetail/components/ItemBox";
 import { useSelector, useDispatch } from "react-redux";
-import { setItemsList } from "../../../actions";
+import { setMyItemsList } from "../../../actions";
 
 function MyItems() {
+  const accessToken = localStorage.getItem("accessToken");
+  // axios.defaults.headers.common["authorization"] = accessToken;
+
   const dispatch = useDispatch();
-  const state = useSelector((state) => state.itemListReducer);
-  const [hasStoreInfo, setHasStoreInfo] = useState(true);
+  const state = useSelector((state) => state.myItemListReducer);
   const [hasItems, setHasItems] = useState(false);
 
   const getItemList = () => {
     axios
-      .get("/api/markets/9")
-      .then((res) => dispatch(setItemsList(res.data.data.boardList)))
+      .get("/api/boards/myBoards?page=1&size=30", {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        if (res.data.data.length === 0) {
+          return setHasItems(false);
+        } else {
+          setHasItems(true);
+          dispatch(setMyItemsList(res.data.data));
+        }
+      })
       .catch((err) => console.log(err));
   };
-
-  // 테스트용
 
   useEffect(() => {
     getItemList();
@@ -32,13 +43,17 @@ function MyItems() {
       <Header />
       <MyItemsContainer>
         <TitleHeader title={"할인 상품 관리"} />
-        <form>
-          {state.map((item, idx) => {
-            return <ItemBox key={idx} id={idx} state={item} />;
-          })}
-        </form>
+        {hasItems ? (
+          <form>
+            {state.map((item, idx) => {
+              return <ItemBox key={idx} id={idx} state={item} />;
+            })}
+          </form>
+        ) : (
+          "등록된 상품이 없습니다"
+        )}
       </MyItemsContainer>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

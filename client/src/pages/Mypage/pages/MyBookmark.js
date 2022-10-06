@@ -4,39 +4,72 @@ import axios from "axios";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import MyFavoriteStores from "../components/MyFavoriteStores";
+import TitleHeader from "../../../components/TitleHeader";
 
 function MyBookmark() {
-  const [hasStoreInfo, setHasStoreInfo] = useState(false);
-  const [hasItems, setHasItems] = useState(false);
+  const accessToken = localStorage.getItem("accessToken");
+  // axios.defaults.headers.common["authorization"] = accessToken;
 
-  const getStoreInfo = () => {
-    // axios.get()
+  const [hasBookmark, setHasBookmark] = useState(false);
+  const [myBookmark, setMyBookmark] = useState([]);
+
+  const getMyBookmark = () => {
+    axios
+      .get("/api/favorites/myFavorite?page=1&size=30", {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        if (res.data.data.length === 0) {
+          return setHasBookmark(false);
+        } else {
+          setHasBookmark(true);
+          setMyBookmark(res.data.data);
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
-  // 테스트용
-
-  //   useEffect(() => {
-  //     // console.log(state);
-  //     // state에 저장해서 가져오면 어차피 초기화되니, 서버에서 가져오는게 나음.
-  //     // setHasStoreInfo(state.hasStoreInfo);
-  //   }, []);
+  useEffect(() => {
+    getMyBookmark();
+  }, []);
 
   return (
-    <>
+    <Outer>
       <Header />
       <MyBookmarkContainer>
-        <MyFavoriteStores />
+        <TitleHeader title={"나의 관심 가게"} />
+        {hasBookmark ? (
+          <Wrapper>
+            {myBookmark.map((item, idx) => {
+              return <MyFavoriteStores key={idx} id={idx} state={item} />;
+            })}{" "}
+          </Wrapper>
+        ) : (
+          "등록된 관심 가게가 없습니다"
+        )}
       </MyBookmarkContainer>
       <Footer />
-    </>
+    </Outer>
   );
 }
 
 export default MyBookmark;
 
+const Outer = styled.main`
+  display: flex;
+  flex-direction: column;
+`;
+
 const MyBookmarkContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 72vh;
+  height: 73.5vh;
+`;
+
+const Wrapper = styled.section`
+  border: 1px solid rgba(170, 170, 170, 1);
+  padding: 10px;
 `;

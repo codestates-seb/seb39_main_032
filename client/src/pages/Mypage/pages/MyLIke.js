@@ -4,18 +4,51 @@ import axios from "axios";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import MyWishlist from "../components/MyWishlist";
+import TitleHeader from "../../../components/TitleHeader";
 
 function MyLike() {
-  const [hasStoreInfo, setHasStoreInfo] = useState(false);
-  const [hasItems, setHasItems] = useState(false);
+  const accessToken = localStorage.getItem("accessToken");
+  // axios.defaults.headers.common["authorization"] = accessToken;
 
-  // 테스트용
+  const [hasLike, setHasLike] = useState(false);
+  const [myLike, setMyLike] = useState([]);
+
+  const getMyLike = () => {
+    axios
+      .get("/api/wishes/myWish?page=1&size=10", {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        if (res.data.length === 0) {
+          return setHasLike(false);
+        } else {
+          setHasLike(true);
+          setMyLike(res.data);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    getMyLike();
+  }, []);
 
   return (
     <>
       <Header />
       <MyLikeContainer>
-        <MyWishlist />
+        <TitleHeader title={"나의 관심 상품"} />
+        {hasLike ? (
+          <Wrapper>
+            {myLike.map((item, idx) => {
+              return <MyWishlist key={idx} id={idx} state={item} />;
+            })}{" "}
+          </Wrapper>
+        ) : (
+          "등록된 관심 상품이 없습니다"
+        )}
       </MyLikeContainer>
       <Footer />
     </>
@@ -28,5 +61,10 @@ const MyLikeContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 72vh;
+  height: 73.5vh;
+`;
+
+const Wrapper = styled.section`
+  border: 1px solid rgba(170, 170, 170, 1);
+  padding: 10px;
 `;

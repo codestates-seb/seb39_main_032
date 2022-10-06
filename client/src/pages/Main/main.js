@@ -14,15 +14,15 @@ function Main() {
   let caterogies = [
     "분식",
     "치킨",
-    "찌개",
+    "한식",
     "중식",
     "일식",
     "양식",
+    "피자",
     "아시안",
     "족발/보쌈",
     "샐러드",
-    "반찬",
-    "카페/디저트",
+    "디저트",
   ];
 
   const state = useSelector((state) => state.itemListReducer);
@@ -40,7 +40,7 @@ function Main() {
   };
 
   return (
-    <>
+    <Outer>
       <Header />
       <MainContainer>
         <section id="category">
@@ -63,13 +63,18 @@ function Main() {
         <List />
       </MainContainer>
       <Footer />
-    </>
+    </Outer>
   );
 }
 
 export default Main;
 
-const MainContainer = styled.main`
+const Outer = styled.main`
+  display: flex;
+  flex-direction: column;
+`;
+
+const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -87,7 +92,7 @@ const MainContainer = styled.main`
   article {
     margin: 10px 0;
     flex-wrap: wrap;
-    width: 60%;
+    width: 45%;
     display: flex;
     align-items: center;
   }

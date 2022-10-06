@@ -28,10 +28,8 @@ function BasicLogin() {
     axios
       .post("/login/jwt", loginInfo)
       .then((res) => {
+        console.log(res);
         localStorage.setItem("accessToken", res.headers.authorization);
-        // token이 필요한 API 요청 시 header Authorization에 token 담아서 보내기
-        axios.defaults.headers.common["Authorization"] =
-          res.headers.authorization;
 
         // 리프레쉬 토큰 쿠키 저장.
         // setRefreshToken(res.cookie);

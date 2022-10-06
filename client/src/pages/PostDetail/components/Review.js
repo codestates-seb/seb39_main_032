@@ -4,6 +4,9 @@ import styled from "styled-components";
 import moment from "moment";
 
 function Review({ reviewList, marketId }) {
+  const accessToken = localStorage.getItem("accessToken");
+  // axios.defaults.headers.common["authorization"] = accessToken;
+
   const [review, setReview] = useState("");
 
   const inputHandler = (e) => {
@@ -19,17 +22,28 @@ function Review({ reviewList, marketId }) {
     }
 
     axios
-      .post(`/api/reviews/${marketId}`, {
-        memberId: "2", // todo : 삭제하기
-        reviewContent: review,
-      })
+      .post(
+        `/api/reviews/${marketId}`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
+        },
+        {
+          reviewContent: review,
+        }
+      )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
 
   const rvDeleteHandler = (e) => {
     axios
-      .delete(`/api/reviews/${e.target.id}`)
+      .delete(`/api/reviews/${e.target.id}`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
 

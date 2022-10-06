@@ -23,7 +23,7 @@ function Post() {
 
   const BookMarkHandler = () => {
     setIsBookMark(!isBookMark);
-    // axios.post(); // 넣어주기
+    // axios.post(); // todo : 넣어주기
     console.log(storeInfo);
     console.log(state);
     console.log(reviewList);

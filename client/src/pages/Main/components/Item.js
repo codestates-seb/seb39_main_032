@@ -3,17 +3,15 @@ import { Icon } from "@iconify/react";
 import Wishlist from "./Wishlist";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setLikeScore } from "../../../actions";
 
 function Item({ state }) {
-  const [soldOut, setSoldOut] = useState("판매중");
+  const likescore = useSelector((state) => state.likeScoreReducer);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (state.boardStatus === "품절" || state.boardStatus === "delete") {
-      return setSoldOut("품절");
-    }
-  }, [soldOut]);
-
-  const [likeScore, setLikeScore] = useState(state.wishListCount);
+  // dispatch(setLikeScore(count));
+  // const [likeScore, setLikeScore] = useState(state.wishListCount); // 리듀서 사용해서 전역으로 처리해줘야 함.
   const boardId = state.boardId;
 
   let startTime = String(state.saleStartTime);
@@ -36,7 +34,7 @@ function Item({ state }) {
 
   return (
     <ItemContainer>
-      {soldOut === "품절" ? (
+      {state.boardStatus === "품절" ? (
         <div id="done">
           <span>판매 완료</span>
         </div>
@@ -82,7 +80,9 @@ function Item({ state }) {
           </a>
         </ContentContainer>
         <Wishlist
-          likeScore={likeScore}
+          likeScore={state.wishListCount}
+          // likeScore={likeScore}
+          state={state}
           setLikeScore={setLikeScore}
           boardId={boardId}
         />

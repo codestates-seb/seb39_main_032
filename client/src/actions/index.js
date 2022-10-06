@@ -4,6 +4,7 @@ export const SET_USER_INFO = "SET_USER_INFO";
 export const DELETE_TOKEN = "DELETE_TOKEN";
 export const TOKEN_TIME_OUT = 600 * 1000;
 export const SET_ITEMS_LIST = "SET_ITEMS_LIST";
+export const SET_MY_ITEMS_LIST = "SET_MY_ITEMS_LIST";
 export const SET_STORE_INFO = "SET_STORE_INFO";
 export const SET_HAS_STORE_INFO = "SET_HAS_STORE_INFO";
 export const SET_HAS_ITEMS = "SET_HAS_ITEMS";
@@ -12,6 +13,10 @@ export const SET_DELETE_ITEM = "SET_DELETE_ITEM";
 export const SET_SUBMIT_ITEMS = "SET_SUBMIT_ITEMS";
 export const SET_SEARCH = "SET_SEARCH";
 export const SET_CLICKED_CATEGORY = "SET_CLICKED_CATEGORY";
+export const SET_MY_LIKE_LIST = "SET_MY_LIKE_LIST";
+export const SET_LIKE_SCORE = "SET_LIKE_SCORE";
+export const ADD_LIKE_SCORE = "ADD_LIKE_SCORE";
+export const MINUS_LIKE_SCORE = "MINUS_LIKE_SCORE";
 
 // actions 생성 함수
 export const storeToken = (refreshtoken) => {
@@ -34,10 +39,10 @@ export const setItemsList = (itemlist) => {
   };
 };
 
-export const setUserInfo = (userinfo) => {
+export const setUserInfo = (memberid) => {
   return {
     type: SET_USER_INFO,
-    payload: userinfo,
+    payload: memberid,
   };
 };
 
@@ -94,5 +99,40 @@ export const setClickedCategory = (category) => {
   return {
     type: SET_CLICKED_CATEGORY,
     payload: category,
+  };
+};
+
+export const setMyItemsList = (itemlist) => {
+  return {
+    type: SET_MY_ITEMS_LIST,
+    payload: itemlist,
+  };
+};
+
+export const setMyLikeList = (likelist) => {
+  return {
+    type: SET_MY_LIKE_LIST,
+    payload: likelist,
+  };
+};
+
+export const setLikeScore = (score) => {
+  return {
+    type: SET_LIKE_SCORE,
+    payload: score,
+  };
+};
+
+export const addLikeScore = (score) => {
+  return {
+    type: SET_LIKE_SCORE,
+    payload: score,
+  };
+};
+
+export const minusLikeScore = (score) => {
+  return {
+    type: SET_LIKE_SCORE,
+    payload: score,
   };
 };

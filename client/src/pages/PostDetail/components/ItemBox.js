@@ -88,7 +88,7 @@ export const ItemBoxContainer = styled.section`
   align-items: center;
   border-radius: 0.5rem;
   border: 1px solid rgba(170, 170, 170, 1);
-  margin-bottom: 5px;
+  margin-bottom: 12px;
 
   .added_item_wrapper {
     display: flex;

@@ -13,7 +13,7 @@ function AddItemBox({ ele, id, deleteItemBoxHandler }) {
   const state = useSelector((state) => state.itemReducer);
   const dispatch = useDispatch();
   const done = useRef(); // 등록 완료 시 회색 화면 처리용
-  const url = "http://messidor.iptime.org:8080";
+  const url = "http://messidor.iptime.org:8080"; // todo : 변경해야 함.
 
   const [itemInfo, setItemInfo] = useState({});
 

@@ -2,8 +2,17 @@ import styled from "styled-components";
 import { useState } from "react";
 import { Icon } from "@iconify/react";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { setMyLikeList } from "../../../actions";
 
-function Wishlist({ likeScore, setLikeScore, boardId }) {
+function Wishlist({ likeScore, setLikeScore, boardId, state }) {
+  const accessToken = localStorage.getItem("accessToken");
+  const dispatch = useDispatch();
+
+  const mylikelist = useSelector((state) => state.mylikeListReducer);
+
+  // 좋아요 버튼 작동 함수
   const [isLike, setIsLike] = useState(false);
 
   const handleLikeClick = () => {
@@ -11,19 +20,77 @@ function Wishlist({ likeScore, setLikeScore, boardId }) {
     if (isLike === true) {
       if (likeScore > 0) {
         setLikeScore(likeScore - 1);
-        // todo : axios.delete
+        // 좋아요 취소
+        axios
+          .post(
+            "/api/wishes",
+            {
+              headers: {
+                Authorization: accessToken,
+              },
+            },
+
+            {
+              boardId: boardId,
+            }
+          )
+          .then((res) => console.log(res))
+          .catch((err) => console.log(err));
       }
     } else {
+      console.log(likeScore);
       setLikeScore(likeScore + 1);
       return axios
-        .post("/api/wishes", {
-          boardId: boardId,
-          memberId: 2, // 나중에 삭제해주기
-        })
+        .post(
+          "/api/wishes",
+          {
+            headers: {
+              Authorization: accessToken,
+            },
+          },
+          {
+            boardId: boardId,
+          }
+        )
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
     }
   };
+
+  // 나의 Like 리스트 불러오기
+  const [hasLike, setHasLike] = useState(false);
+  const [myLike, setMyLike] = useState([]);
+
+  const getMyLike = () => {
+    let filtered = mylikelist.filter((item, idx) => item.boardId === boardId);
+    if (filtered.length === 1) {
+      return setIsLike(true);
+    } else {
+      return setIsLike(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!accessToken) {
+      return;
+    } else {
+      axios
+        .get("/api/wishes/myWish?page=1&size=40", {
+          headers: { authorization: accessToken },
+        })
+        .then((res) => {
+          if (res.data.length === 0) {
+            return;
+          } else {
+            setHasLike(true);
+            dispatch(setMyLikeList(res.data));
+            console.log(res.data);
+            return getMyLike();
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  }, []);
 
   return (
     <WishlistContainer>

@@ -4,7 +4,7 @@ import StoreLocation from "../../PostDetail/components/Map";
 import SubmitBtn from "../../../widgets/SubmitBtn";
 import { useNavigate } from "react-router-dom";
 
-function StoreInfo() {
+function StoreInfo({ storeInfo }) {
   const navigate = useNavigate();
 
   const editBtnHandler = () => {
@@ -20,23 +20,23 @@ function StoreInfo() {
         subtitle={"수정하기"}
       />
       <StoreInfoContainer>
-        <StoreLocation />
+        <StoreLocation address={storeInfo.address} />
         <div className="first_selling_wrapper">
           <div className="first_selling_category">
             <div>상호</div>
-            <span>달려라 떡볶이</span>
+            <span>{storeInfo.marketName}</span>
           </div>
           <div className="first_selling_category">
             <div>사업자등록번호</div>
-            <span>110-495-483963</span>
+            <span>{storeInfo.companyNumber}</span>
           </div>
           <div className="first_selling_category">
             <div>주소</div>
-            <span>서울시 용산구 회나무로 110</span>
+            <span>{storeInfo.address}</span>
           </div>
           <div className="first_selling_category">
             <div>전화번호</div>
-            <span>02-1234-5678</span>
+            <span>{storeInfo.phone}</span>
           </div>
         </div>
       </StoreInfoContainer>

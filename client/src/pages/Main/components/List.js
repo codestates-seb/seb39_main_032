@@ -18,9 +18,9 @@ function List() {
     setBtnActive(e.target.id);
 
     if (e.target.id === "ongoing") {
-      return setIsFiltered(true);
+      setIsFiltered(true);
     } else {
-      return setIsFiltered(false);
+      setIsFiltered(false);
     }
   };
 

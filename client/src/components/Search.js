@@ -86,7 +86,7 @@ function Search() {
     dispatch(setClickedCategory(""));
 
     axios
-      .get(`/api/boards?page=1&size=10&address=${search}`)
+      .get(`/api/boards?page=1&size=50&address=${search}`)
       .then((res) => dispatch(setItemsList(res.data.data)))
       .catch((err) => console.log(err));
   };
