@@ -66,6 +66,8 @@ public class MemberService {
     public Member updateMember(Member member){
         member.setMemberPw(bCryptPasswordEncoder.encode(member.getMemberPw()));
         Member findMember = findVerifiedMember(member.getMemberId());
+        Optional.ofNullable(member.getEmail())
+                .ifPresent(email -> findMember.setEmail(email));
         Optional.ofNullable(member.getMemberPw())
                 .ifPresent(pw -> findMember.setMemberPw(pw));
         findMember.setMemberUpdateAt(String.valueOf(LocalDateTime.now()));

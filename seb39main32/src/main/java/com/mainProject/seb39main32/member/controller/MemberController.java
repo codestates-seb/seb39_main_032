@@ -1,5 +1,6 @@
 package com.mainProject.seb39main32.member.controller;
 
+import com.mainProject.seb39main32.config.oauth.PrincipalDetails;
 import com.mainProject.seb39main32.dto.SingleResponseDto;
 import com.mainProject.seb39main32.member.dto.MemberDto;
 import com.mainProject.seb39main32.member.entity.Member;
@@ -8,6 +9,7 @@ import com.mainProject.seb39main32.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -44,24 +46,24 @@ public class MemberController {
 
     /**
      * GET - 로그인
-     * @param memberId
+     * @param
      * @return
      */
-    @GetMapping("/login/basic/{member-id}")
+    @GetMapping("/login/basic")
     public ResponseEntity getMember(
-            @PathVariable("member-id") @Positive long memberId) {
-        Member member = memberService.findMember(memberId);
+            @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        Member member = memberService.findMember(principalDetails.getMember().getMemberId());
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.memberToMemberResponse(member))
                 , HttpStatus.OK);
     }
 
 
-    @PatchMapping("/login/basic/{member-id}")
+    @PatchMapping("/login/basic")
     public ResponseEntity patchMember(
-            @PathVariable("member-id") @Positive long memberId,
-            @Valid @RequestBody MemberDto.Patch requestBody) {
-        requestBody.setMemberId(memberId);
+            @Valid @RequestBody MemberDto.Patch requestBody,
+            @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        requestBody.setMemberId(principalDetails.getMember().getMemberId());
         Member member =
                 memberService.updateMember(mapper.memberPatchToMember(requestBody));
         return new ResponseEntity<>(
@@ -85,13 +87,13 @@ public class MemberController {
 
     /**
      * 회원 탈퇴
-     * @param memberId
+     * @param
      * @return
      */
-    @DeleteMapping("/login/basic/{member-id}")
+    @DeleteMapping("/login/basic")
     public ResponseEntity deleteMember(
-            @PathVariable("member-id") @Positive long memberId) {
-        memberService.deleteMember(memberId);
+            @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        memberService.deleteMember(principalDetails.getMember().getMemberId());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
