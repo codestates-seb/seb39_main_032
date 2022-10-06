@@ -22,7 +22,7 @@ function Mypage() {
     axios
       .get("/api/boards/myBoards?page=1&size=30", {
         headers: {
-          Authorization: accessToken,
+          authorization: accessToken,
         },
       })
       .then((res) => {

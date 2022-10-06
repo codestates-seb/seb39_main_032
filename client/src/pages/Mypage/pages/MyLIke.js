@@ -17,7 +17,7 @@ function MyLike() {
     axios
       .get("/api/wishes/myWish?page=1&size=10", {
         headers: {
-          Authorization: accessToken,
+          authorization: accessToken,
         },
       })
       .then((res) => {

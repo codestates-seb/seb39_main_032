@@ -4,6 +4,7 @@ export const SET_USER_INFO = "SET_USER_INFO";
 export const DELETE_TOKEN = "DELETE_TOKEN";
 export const TOKEN_TIME_OUT = 600 * 1000;
 export const SET_ITEMS_LIST = "SET_ITEMS_LIST";
+export const SET_FILTERED_ITEMS_LIST = "SET_FILTERED_ITEMS_LIST";
 export const SET_MY_ITEMS_LIST = "SET_MY_ITEMS_LIST";
 export const SET_STORE_INFO = "SET_STORE_INFO";
 export const SET_HAS_STORE_INFO = "SET_HAS_STORE_INFO";
@@ -35,6 +36,13 @@ export const deleteToken = () => {
 export const setItemsList = (itemlist) => {
   return {
     type: SET_ITEMS_LIST,
+    payload: itemlist,
+  };
+};
+
+export const setFilteredItemsList = (itemlist) => {
+  return {
+    type: SET_FILTERED_ITEMS_LIST,
     payload: itemlist,
   };
 };

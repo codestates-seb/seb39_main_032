@@ -7,10 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { setLikeScore } from "../../../actions";
 
 function Item({ state }) {
-  const likescore = useSelector((state) => state.likeScoreReducer);
   const dispatch = useDispatch();
 
-  // dispatch(setLikeScore(count));
   // const [likeScore, setLikeScore] = useState(state.wishListCount); // 리듀서 사용해서 전역으로 처리해줘야 함.
   const boardId = state.boardId;
 

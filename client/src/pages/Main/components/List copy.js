@@ -9,12 +9,10 @@ function List() {
   const clickedCategory = useSelector((state) => state.categoryReducer);
   const dispatch = useDispatch();
   const state = useSelector((state) => state.itemListReducer);
-
   const [btnActive, setBtnActive] = useState("ongoing");
   const [isFiltered, setIsFiltered] = useState(true);
 
-  // let filteredItems = state.filter((item) => item.boardStatus === "판매중");
-  let filteredItems = useSelector((state) => state.filteredItemListReducer);
+  let filteredItems = state.filter((item) => item.boardStatus === "판매중");
 
   const clickHandler = (e) => {
     setBtnActive(e.target.id);

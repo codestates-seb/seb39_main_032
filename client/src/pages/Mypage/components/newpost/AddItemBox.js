@@ -10,6 +10,7 @@ import moment from "moment";
 import DeleteBtn from "../../../../widgets/DeleteBtn";
 
 function AddItemBox({ ele, id, deleteItemBoxHandler }) {
+  const accessToken = localStorage.getItem("accessToken");
   const state = useSelector((state) => state.itemReducer);
   const dispatch = useDispatch();
   const done = useRef(); // 등록 완료 시 회색 화면 처리용
@@ -73,7 +74,7 @@ function AddItemBox({ ele, id, deleteItemBoxHandler }) {
 
     fetch(`${url}/api/boards`, {
       method: "POST",
-      headers: {},
+      headers: { authorization: accessToken },
       body: formData,
     })
       .then((res) => console.log(res))

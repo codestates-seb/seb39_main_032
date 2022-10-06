@@ -18,7 +18,7 @@ function MyStore() {
     axios
       .get("/api/markets/myMarket?page=1&size=30", {
         headers: {
-          Authorization: accessToken,
+          authorization: accessToken,
         },
       })
       .then((res) => {

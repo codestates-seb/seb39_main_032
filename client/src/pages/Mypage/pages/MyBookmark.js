@@ -17,7 +17,7 @@ function MyBookmark() {
     axios
       .get("/api/favorites/myFavorite?page=1&size=30", {
         headers: {
-          Authorization: accessToken,
+          authorization: accessToken,
         },
       })
       .then((res) => {

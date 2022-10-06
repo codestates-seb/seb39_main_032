@@ -8,6 +8,7 @@ import categoryReducer from "./categoryReducer";
 import myItemListReducer from "./myItemListReducer";
 import mylikeListReducer from "./mylikeListReducer";
 import likeScoreReducer from "./likeScoreReducer";
+import filteredItemListReducer from "./filteredItemListReducer";
 
 const rootReducer = combineReducers({
   loginReducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   myItemListReducer,
   mylikeListReducer,
   likeScoreReducer,
+  filteredItemListReducer,
 });
 
 export default rootReducer;

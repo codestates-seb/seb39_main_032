@@ -14,12 +14,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { setUserInfo } from "./actions";
 import { useDispatch } from "react-redux";
-import { setItemsList } from "./actions";
 import MyBookmark from "./pages/Mypage/pages/MyBookmark";
 import MyLike from "./pages/Mypage/pages/MyLIke";
 import Footer from "./components/Footer";
 import { useSelector } from "react-redux";
-import { setMyLikeList } from "./actions";
+import { setItemsList, setMyLikeList, setFilteredItemsList } from "./actions";
 
 function App() {
   const accessToken = localStorage.getItem("accessToken");
@@ -37,25 +36,37 @@ function App() {
       });
   };
 
-  const [hasLike, setHasLike] = useState(false);
-  const [myLike, setMyLike] = useState([]);
-
-  const getMyLike = () => {
+  const getPostsOnSale = () => {
     axios
-      .get("/api/wishes/myWish?page=1&size=10", {
-        headers: { authorization: accessToken },
-      })
+      .get("/api/boards/sells?page=1&size=50")
       .then((res) => {
-        if (res.data.length === 0) {
-          return setHasLike(false);
-        } else {
-          setHasLike(true);
-          dispatch(setMyLikeList(res.data));
-          console.log(res.data);
-        }
+        console.log(res.data.data);
+        dispatch(setFilteredItemsList(res.data.data));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
+  // const [hasLike, setHasLike] = useState(false);
+  // const [myLike, setMyLike] = useState([]);
+
+  // const getMyLike = () => {
+  //   axios
+  //     .get("/api/wishes/myWish?page=1&size=10", {
+  //       headers: { authorization: accessToken },
+  //     })
+  //     .then((res) => {
+  //       if (res.data.length === 0) {
+  //         return setHasLike(false);
+  //       } else {
+  //         setHasLike(true);
+  //         dispatch(setMyLikeList(res.data));
+  //         console.log(res.data);
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   useEffect(() => {
     getPosts();
@@ -64,6 +75,7 @@ function App() {
     // } else {
     //   getMyLike();
     // }
+    getPostsOnSale();
   }, []);
 
   return (

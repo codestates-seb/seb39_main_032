@@ -20,13 +20,13 @@ function Review({ reviewList, marketId }) {
       alert("5자 이상 작성해야 합니다");
       return e.preventDefault();
     }
-
+    // e.preventDefault();
     axios
       .post(
         `/api/reviews/${marketId}`,
         {
           headers: {
-            Authorization: accessToken,
+            authorization: accessToken,
           },
         },
         {
@@ -41,7 +41,7 @@ function Review({ reviewList, marketId }) {
     axios
       .delete(`/api/reviews/${e.target.id}`, {
         headers: {
-          Authorization: accessToken,
+          authorization: accessToken,
         },
       })
       .then((res) => console.log(res))
@@ -72,13 +72,15 @@ function Review({ reviewList, marketId }) {
                         "YYYY-MM-DD HH:mm:ss"
                       ).format("MM월 DD일")}
                     </div>
-                    <div
-                      className="review_delete_btn"
-                      id={review.reviewId}
-                      onClick={rvDeleteHandler}
-                    >
-                      X
-                    </div>
+                    {review.checkOwner === 1 ? (
+                      <div
+                        className="review_delete_btn"
+                        id={review.reviewId}
+                        onClick={rvDeleteHandler}
+                      >
+                        X
+                      </div>
+                    ) : null}
                   </span>
                 </>
               );

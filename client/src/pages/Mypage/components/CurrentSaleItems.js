@@ -35,7 +35,7 @@ function CurrentSaleItems({ hasItems }) {
     axios
       .patch(`/api/boards/soldOut/${boardId}`, {
         headers: {
-          Authorization: accessToken,
+          authorization: accessToken,
         },
       })
       .then((res) => console.log(res), window.location.reload())

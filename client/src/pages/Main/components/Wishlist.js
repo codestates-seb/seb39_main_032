@@ -4,7 +4,12 @@ import { Icon } from "@iconify/react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { setMyLikeList } from "../../../actions";
+import {
+  setMyLikeList,
+  setLikeScore,
+  addLikeScore,
+  minusLikeScore,
+} from "../../../actions";
 
 function Wishlist({ likeScore, setLikeScore, boardId, state }) {
   const accessToken = localStorage.getItem("accessToken");
@@ -26,7 +31,7 @@ function Wishlist({ likeScore, setLikeScore, boardId, state }) {
             "/api/wishes",
             {
               headers: {
-                Authorization: accessToken,
+                authorization: accessToken,
               },
             },
 
@@ -45,7 +50,7 @@ function Wishlist({ likeScore, setLikeScore, boardId, state }) {
           "/api/wishes",
           {
             headers: {
-              Authorization: accessToken,
+              authorization: accessToken,
             },
           },
           {
@@ -63,6 +68,7 @@ function Wishlist({ likeScore, setLikeScore, boardId, state }) {
 
   const getMyLike = () => {
     let filtered = mylikelist.filter((item, idx) => item.boardId === boardId);
+
     if (filtered.length === 1) {
       return setIsLike(true);
     } else {
@@ -90,7 +96,7 @@ function Wishlist({ likeScore, setLikeScore, boardId, state }) {
         })
         .catch((err) => console.log(err));
     }
-  }, []);
+  }, [isLike]);
 
   return (
     <WishlistContainer>

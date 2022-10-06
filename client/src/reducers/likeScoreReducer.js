@@ -6,7 +6,7 @@ import {
 } from "../actions/index";
 
 //초기 상태 값
-const initialState = {};
+const initialState = "";
 
 //reducer(상태 관리) 함수
 const likeScoreReducer = (state = initialState, action) => {
