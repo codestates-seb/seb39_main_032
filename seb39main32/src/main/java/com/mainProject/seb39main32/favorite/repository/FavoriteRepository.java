@@ -16,10 +16,10 @@ import java.util.Optional;
 public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
 
     Page<Favorite> findByMember_MemberId(long memberId, Pageable pageable);
+    void deleteByMarket_MarketId(long marketId);
 
     Favorite findByMarket_MarketIdAndMember_MemberId(long marketId, long memberId);
-
-
+    Favorite findByFavoriteId(long favoriteId);
 
     //Favorite findByMember_MemberId(long memberId);
     /*Optional<Favorite> findByMarket_MarketIdAndMember_MemberId(long marketId, long memberId);

@@ -31,9 +31,10 @@ public interface FavoriteMapper {
     default List<FavoriteDto.Response> favoritesToFavoritesDto(List<Favorite> posts) {
         return  posts.stream().map(favorite -> FavoriteDto.Response
                 .builder()
-                .favoriteId(favorite.getFavoriteId())
-                .memberId(favorite.getMember().getMemberId())
-                .marketId(favorite.getFavoriteId())
+                        .favoriteId(favorite.getFavoriteId())
+                        .memberId(favorite.getMember().getMemberId())
+                        .marketId(favorite.getMarket().getMarketId())
+                        .marketName(favorite.getMarket().getMarketName())
                 .build())
                 .collect(Collectors.toList());
     }

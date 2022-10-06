@@ -28,6 +28,8 @@ public class FavoriteDto {
             market.setMarketId(marketId);
             return market;
         }
+        public void setMember(Member member) {this.memberId = member.getMemberId();}
+        public void setMarket(Market market) {this.marketId = market.getMarketId();}
     }
 
     @AllArgsConstructor
@@ -53,6 +55,8 @@ public class FavoriteDto {
         private long memberId;
         @Setter(AccessLevel.NONE)
         private long marketId;
+
+        private String marketName;
 
         public void setMember(Member member) {this.memberId = member.getMemberId();}
         public void setMarket(Market market) {this.marketId = market.getMarketId();}
