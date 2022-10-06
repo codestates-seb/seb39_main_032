@@ -1,5 +1,6 @@
 package com.mainProject.seb39main32.member.controller;
 
+import com.mainProject.seb39main32.config.oauth.PrincipalDetails;
 import com.mainProject.seb39main32.dto.SingleResponseDto;
 import com.mainProject.seb39main32.member.dto.MemberDto;
 import com.mainProject.seb39main32.member.entity.Member;
@@ -8,6 +9,7 @@ import com.mainProject.seb39main32.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +44,12 @@ public class AuthController {
         return new ResponseEntity<>(
                 new SingleResponseDto<>(response),
                 HttpStatus.CREATED);
+    }
+    @DeleteMapping("/withdrawal")
+    public ResponseEntity deleteMember(
+            @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        memberService.deleteMember(principalDetails.getMember().getMemberId());
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 
