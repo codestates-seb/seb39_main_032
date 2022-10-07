@@ -16,7 +16,7 @@ function Post() {
   const state = useSelector((state) => state.itemListReducer);
   const dispatch = useDispatch();
   const [storeInfo, setStoreInfo] = useState({});
-  const [itemList, setItemList] = useState([]);
+  // const [itemList, setItemList] = useState([]);
   const path = useLocation().pathname;
   const [isBookMark, setIsBookMark] = useState(false);
   const [reviewList, setReviewList] = useState([]);
@@ -28,6 +28,8 @@ function Post() {
     console.log(state);
     console.log(reviewList);
   };
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const renderHandler = () => {
     return axios
@@ -43,8 +45,11 @@ function Post() {
   };
 
   useEffect(() => {
-    renderHandler();
-  }, []);
+    setIsLoading(true);
+    renderHandler().then(() => {
+      setIsLoading(false);
+    });
+  }, [storeInfo]);
 
   return (
     <>
