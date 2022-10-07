@@ -166,6 +166,9 @@ function AddItemBox({ ele, id, deleteItemBoxHandler }) {
                   <option key="occidental" value="양식">
                     양식
                   </option>
+                  <option key="pizza" value="피자">
+                    피자
+                  </option>
                   <option key="asian" value="아시안">
                     아시안
                   </option>

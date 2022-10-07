@@ -29,8 +29,10 @@ function Search() {
     // console.log(`Longitude: ${crd.longitude}`);
     // console.log(`More or less ${crd.accuracy} meters.`);
 
-    setCurLat(crd.latitude);
-    setCurLon(crd.longitude);
+    setCurLat(37.5345361);
+    setCurLon(126.99327);
+    // setCurLat(crd.latitude);
+    // setCurLon(crd.longitude);
   }
 
   function error(err) {
@@ -42,11 +44,14 @@ function Search() {
     navigator.geolocation.getCurrentPosition(success, error, options);
   }, []);
 
+  // 예시 좌표 : 	X :126.993270, Y :37.5345361
+
   const locationAPI = () => {
     // 주소 변환
     var geocoder = new kakao.maps.services.Geocoder();
 
     var coord = new kakao.maps.LatLng(curLat, curLon);
+
     var callback = function (result, status) {
       console.log(result, status);
 
