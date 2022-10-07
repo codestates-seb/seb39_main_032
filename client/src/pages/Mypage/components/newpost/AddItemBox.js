@@ -148,6 +148,9 @@ function AddItemBox({ ele, id, deleteItemBoxHandler }) {
               <li>
                 <div className="ctgTitle">카테고리</div>
                 <select onChange={inputHandler("category")}>
+                  <option key="choice" value="선택">
+                    --선택--
+                  </option>
                   <option key="snack" value="분식">
                     분식
                   </option>

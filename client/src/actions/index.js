@@ -18,6 +18,7 @@ export const SET_MY_LIKE_LIST = "SET_MY_LIKE_LIST";
 export const SET_LIKE_SCORE = "SET_LIKE_SCORE";
 export const ADD_LIKE_SCORE = "ADD_LIKE_SCORE";
 export const MINUS_LIKE_SCORE = "MINUS_LIKE_SCORE";
+export const SET_BOARD_ITEMS_LIST = "SET_BOARD_ITEMS_LIST";
 
 // actions 생성 함수
 export const storeToken = (refreshtoken) => {
@@ -142,5 +143,12 @@ export const minusLikeScore = (score) => {
   return {
     type: SET_LIKE_SCORE,
     payload: score,
+  };
+};
+
+export const setBoardItemsList = (itemlist) => {
+  return {
+    type: SET_BOARD_ITEMS_LIST,
+    payload: itemlist,
   };
 };

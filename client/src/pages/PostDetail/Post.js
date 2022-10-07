@@ -10,10 +10,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setItemsList } from "../../actions";
+import { setBoardItemsList } from "../../actions";
+import Loading from "../../components/Loading";
 
 function Post() {
-  const state = useSelector((state) => state.itemListReducer);
+  const state = useSelector((state) => state.boardItemListReducer);
   const dispatch = useDispatch();
   const [storeInfo, setStoreInfo] = useState({});
   // const [itemList, setItemList] = useState([]);
@@ -31,12 +32,12 @@ function Post() {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  const renderHandler = () => {
-    return axios
-      .get(`/api/markets/${path}`)
+  const renderHandler = async () => {
+    await axios
+      .get(`/api/markets${path}`)
       .then((res) => {
+        dispatch(setBoardItemsList(res.data.data.boardList)); // main 페이지에서 사용하는 아이템 리스트 리듀서 재활용 -> 재활용하면 안됨.
         setStoreInfo(res.data.data);
-        dispatch(setItemsList(res.data.data.boardList)); // main 페이지에서 사용하는 아이템 리스트 리듀서 재활용.
         setReviewList(res.data.data.reviewList);
       })
       .catch((err) => {
@@ -49,45 +50,51 @@ function Post() {
     renderHandler().then(() => {
       setIsLoading(false);
     });
-  }, [storeInfo]);
+  }, []);
 
   return (
     <>
-      <Header />
-      <PostContainer>
-        <TitleHeader
-          title={storeInfo.marketName}
-          bookmarkCount={storeInfo.favoriteCount}
-          subtitle={`${storeInfo.address} / ${storeInfo.phone} / `}
-          icon={
-            isBookMark ? (
-              <Icon
-                icon="bi:bookmark-star-fill"
-                className="bookmark_icon active"
-              />
-            ) : (
-              <Icon icon="bi:bookmark-star" className="bookmark_icon" />
-            )
-          }
-          icon2={
-            <Icon icon="material-symbols:thumb-up-outline" id="thumb_up" />
-          }
-          func={BookMarkHandler}
-        />
-        <main>
-          <section>
-            <StoreLocation address={storeInfo.address} />
-          </section>
-          <section className="item_info">
-            <h2>할인 품목</h2>
-            {state.map((item, idx) => {
-              return <ItemBox key={idx} id={idx} state={item} />;
-            })}
-          </section>
-        </main>
-        <Review reviewList={reviewList} marketId={storeInfo.marketId} />
-      </PostContainer>
-      <Footer />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <Header />
+          <PostContainer>
+            <TitleHeader
+              title={storeInfo.marketName}
+              bookmarkCount={storeInfo.favoriteCount}
+              subtitle={`${storeInfo.address} / ${storeInfo.phone} / `}
+              icon={
+                isBookMark ? (
+                  <Icon
+                    icon="bi:bookmark-star-fill"
+                    className="bookmark_icon active"
+                  />
+                ) : (
+                  <Icon icon="bi:bookmark-star" className="bookmark_icon" />
+                )
+              }
+              icon2={
+                <Icon icon="material-symbols:thumb-up-outline" id="thumb_up" />
+              }
+              func={BookMarkHandler}
+            />
+            <main>
+              <section>
+                <StoreLocation address={storeInfo.address} />
+              </section>
+              <section className="item_info">
+                <h2>할인 품목</h2>
+                {state.map((item, idx) => {
+                  return <ItemBox key={idx} id={idx} state={item} />;
+                })}
+              </section>
+            </main>
+            <Review reviewList={reviewList} marketId={storeInfo.marketId} />
+          </PostContainer>
+          <Footer />
+        </>
+      )}
     </>
   );
 }
