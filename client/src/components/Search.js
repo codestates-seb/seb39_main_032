@@ -29,10 +29,10 @@ function Search() {
     // console.log(`Longitude: ${crd.longitude}`);
     // console.log(`More or less ${crd.accuracy} meters.`);
 
-    setCurLat(37.5345361);
-    setCurLon(126.99327);
-    // setCurLat(crd.latitude);
-    // setCurLon(crd.longitude);
+    // setCurLat(37.5345361);
+    // setCurLon(126.99327);
+    setCurLat(crd.latitude);
+    setCurLon(crd.longitude);
   }
 
   function error(err) {
