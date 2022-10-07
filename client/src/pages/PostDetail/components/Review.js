@@ -5,7 +5,7 @@ import moment from "moment";
 
 function Review({ reviewList, marketId }) {
   const accessToken = localStorage.getItem("accessToken");
-  // axios.defaults.headers.common["authorization"] = accessToken;
+  axios.defaults.headers.common["authorization"] = accessToken; // 여기서는 이렇게 지정해줘야 get요청으로 리뷰 리스트 불러올 때 올바르게 불러와짐.
 
   const [review, setReview] = useState("");
 
@@ -20,30 +20,23 @@ function Review({ reviewList, marketId }) {
       alert("5자 이상 작성해야 합니다");
       return e.preventDefault();
     }
+    // console.log(marketId);
     // e.preventDefault();
     axios
-      .post(
-        `/api/reviews/${marketId}`,
-        {
-          headers: {
-            authorization: accessToken,
-          },
-        },
-        {
-          reviewContent: review,
-        }
-      )
+      .post(`/api/reviews/${marketId}`, {
+        // headers: {
+        //   authorization: accessToken,
+        // },
+
+        reviewContent: review,
+      })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
 
   const rvDeleteHandler = (e) => {
     axios
-      .delete(`/api/reviews/${e.target.id}`, {
-        headers: {
-          authorization: accessToken,
-        },
-      })
+      .delete(`/api/reviews/${e.target.id}`)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
 

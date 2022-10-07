@@ -9,11 +9,12 @@ import { useNavigate, useLocation } from "react-router-dom";
 import StoreLocationMap from "../components/StoreLocationMap";
 
 function Firstselling() {
+  const accessToken = localStorage.getItem("accessToken");
+
   const navigate = useNavigate();
   const location = useLocation();
   const path = location.pathname;
   const dispatch = useDispatch();
-  const accessToken = localStorage.getItem("accessToken");
 
   const [storeInfo, setStoreInfo] = useState({
     storeName: "",
@@ -40,7 +41,7 @@ function Firstselling() {
     }
 
     let body = {
-      memberId: "3", // 테스트용 넘버. 회원가입 시 부여되는 개인 아이디넘버가 들어가야함. 단, 헤더에 액세스 토큰 넣으면 불필요. todo : 삭제
+      // memberId: "3", // 테스트용 넘버. 회원가입 시 부여되는 개인 아이디넘버가 들어가야함. 단, 헤더에 액세스 토큰 넣으면 불필요. todo : 삭제
       marketName: storeInfo.storeName,
       companyNumber: storeInfo.storeNum,
       address: storeInfo.storeAdr,
@@ -48,8 +49,12 @@ function Firstselling() {
     };
 
     axios
-      // .post("/api/markets", body, { headers: { Authorization: accessToken } }) // todo : 추가
-      .post("/api/markets", body)
+      .post("/api/markets", {
+        headers: {
+          authorization: accessToken,
+        },
+        body,
+      })
       .then(
         (res) => console.log(res),
         dispatch(setHasStoreInfo(true)),

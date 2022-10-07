@@ -18,7 +18,7 @@ function CurrentSaleItems({ hasItems }) {
     axios
       .delete(`/api/boards/${boardId}`, {
         headers: {
-          Authorization: accessToken,
+          authorization: accessToken,
         },
       })
       .then((res) => window.location.reload())

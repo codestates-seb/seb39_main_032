@@ -13,8 +13,8 @@ function List() {
   const [btnActive, setBtnActive] = useState("ongoing");
   const [isFiltered, setIsFiltered] = useState(true);
 
-  // let filteredItems = state.filter((item) => item.boardStatus === "판매중");
-  let filteredItems = useSelector((state) => state.filteredItemListReducer);
+  let filteredItems = state.filter((item) => item.boardStatus === "판매중");
+  // let filteredItems = useSelector((state) => state.filteredItemListReducer);
 
   const clickHandler = (e) => {
     setBtnActive(e.target.id);

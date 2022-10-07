@@ -36,17 +36,17 @@ function App() {
       });
   };
 
-  const getPostsOnSale = () => {
-    axios
-      .get("/api/boards/sells?page=1&size=50")
-      .then((res) => {
-        console.log(res.data.data);
-        dispatch(setFilteredItemsList(res.data.data));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const getPostsOnSale = () => {
+  //   axios
+  //     .get("/api/boards/sells?page=1&size=50")
+  //     .then((res) => {
+  //       // console.log(res.data.data);
+  //       dispatch(setFilteredItemsList(res.data.data));
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   // const [hasLike, setHasLike] = useState(false);
   // const [myLike, setMyLike] = useState([]);
@@ -75,7 +75,7 @@ function App() {
     // } else {
     //   getMyLike();
     // }
-    getPostsOnSale();
+    // getPostsOnSale();
   }, []);
 
   return (

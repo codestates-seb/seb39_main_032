@@ -27,18 +27,13 @@ function Wishlist({ likeScore, setLikeScore, boardId, state }) {
         setLikeScore(likeScore - 1);
         // 좋아요 취소
         axios
-          .post(
-            "/api/wishes",
-            {
-              headers: {
-                authorization: accessToken,
-              },
+          .post("/api/wishes", {
+            headers: {
+              authorization: accessToken,
             },
 
-            {
-              boardId: boardId,
-            }
-          )
+            boardId: boardId,
+          })
           .then((res) => console.log(res))
           .catch((err) => console.log(err));
       }
@@ -46,17 +41,12 @@ function Wishlist({ likeScore, setLikeScore, boardId, state }) {
       console.log(likeScore);
       setLikeScore(likeScore + 1);
       return axios
-        .post(
-          "/api/wishes",
-          {
-            headers: {
-              authorization: accessToken,
-            },
+        .post("/api/wishes", {
+          headers: {
+            authorization: accessToken,
           },
-          {
-            boardId: boardId,
-          }
-        )
+          boardId: boardId,
+        })
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
     }
