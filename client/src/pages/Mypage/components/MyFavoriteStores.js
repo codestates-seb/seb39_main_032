@@ -1,11 +1,28 @@
 import styled from "styled-components";
+import axios from "axios";
 
 function MyFavoriteStores({ state }) {
+  const accessToken = localStorage.getItem("accessToken");
+
+  const BookMarkHandler = () => {
+    axios
+      .post("/api/favorites", {
+        headers: {
+          authorization: accessToken,
+        },
+        marketId: state.marketId,
+      })
+      .then((res) => console.log(res), window.location.reload())
+      .catch((err) => console.log(err));
+  };
+
   return (
     <MyFavoriteStoresContainer>
       <div className="my_fav_store">
         <div className="my_fav_store_name">{state.marketName}</div>
-        <div className="my_fav_store_btn delte">삭제</div>
+        <div className="my_fav_store_btn delte" onClick={BookMarkHandler}>
+          삭제
+        </div>
       </div>
     </MyFavoriteStoresContainer>
   );

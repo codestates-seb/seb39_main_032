@@ -33,7 +33,7 @@ function MyBookmark() {
 
   useEffect(() => {
     getMyBookmark();
-  }, []);
+  }, [myBookmark]);
 
   return (
     <Outer>

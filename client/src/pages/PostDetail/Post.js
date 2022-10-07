@@ -14,23 +14,32 @@ import { setBoardItemsList } from "../../actions";
 import Loading from "../../components/Loading";
 
 function Post() {
+  const accessToken = localStorage.getItem("accessToken");
+  axios.defaults.headers.common["authorization"] = accessToken; // 여기서는 이렇게 지정해줘야 get요청으로 리뷰 리스트 불러올 때 올바르게 불러와짐.
+
   const state = useSelector((state) => state.boardItemListReducer);
   const dispatch = useDispatch();
   const [storeInfo, setStoreInfo] = useState({});
   // const [itemList, setItemList] = useState([]);
   const path = useLocation().pathname;
+  let marketId = path.slice(1);
   const [isBookMark, setIsBookMark] = useState(false);
   const [reviewList, setReviewList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const BookMarkHandler = () => {
-    setIsBookMark(!isBookMark);
-    // axios.post(); // todo : 넣어주기
-    console.log(storeInfo);
-    console.log(state);
-    console.log(reviewList);
+    if (!accessToken) {
+      return alert("로그인 후 등록이 가능합니다");
+    } else {
+      setIsBookMark(!isBookMark);
+      axios.post("/api/favorites", {
+        headers: {
+          authorization: accessToken,
+        },
+        marketId: marketId,
+      });
+    }
   };
-
-  const [isLoading, setIsLoading] = useState(true);
 
   const renderHandler = async () => {
     await axios
@@ -50,7 +59,7 @@ function Post() {
     renderHandler().then(() => {
       setIsLoading(false);
     });
-  }, []);
+  }, []); //async & await 같이 해줘야 함
 
   return (
     <>

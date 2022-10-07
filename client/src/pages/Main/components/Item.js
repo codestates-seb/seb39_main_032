@@ -9,7 +9,7 @@ import { setLikeScore } from "../../../actions";
 function Item({ state }) {
   const dispatch = useDispatch();
 
-  // const [likeScore, setLikeScore] = useState(state.wishListCount); // 리듀서 사용해서 전역으로 처리해줘야 함.
+  const [likeScore, setLikeScore] = useState(state.wishListCount); // 리듀서 사용해서 전역으로 처리해줘야 함.
   const boardId = state.boardId;
 
   let startTime = String(state.saleStartTime);
@@ -78,8 +78,8 @@ function Item({ state }) {
           </a>
         </ContentContainer>
         <Wishlist
-          likeScore={state.wishListCount}
-          // likeScore={likeScore}
+          // likeScore={state.wishListCount}
+          likeScore={likeScore}
           state={state}
           setLikeScore={setLikeScore}
           boardId={boardId}
