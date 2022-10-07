@@ -10,6 +10,7 @@ import StoreLocationMap from "../components/StoreLocationMap";
 
 function Firstselling() {
   const accessToken = localStorage.getItem("accessToken");
+  axios.defaults.headers.common["authorization"] = accessToken;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -17,10 +18,10 @@ function Firstselling() {
   const dispatch = useDispatch();
 
   const [storeInfo, setStoreInfo] = useState({
-    storeName: "",
-    storeNum: "",
-    storeAdr: "",
-    storeTel: "",
+    marketName: "",
+    companyNumber: "",
+    address: "",
+    phone: "",
   });
 
   const handleInputStoreInfo = (key) => (e) => {
@@ -29,41 +30,32 @@ function Firstselling() {
   };
 
   const handleSubmitStoreInfo = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     if (
-      storeInfo.storeName.length < 2 ||
-      storeInfo.storeNum.length < 2 ||
-      storeInfo.storeAdr.length < 2 ||
-      storeInfo.storeTel.length < 2
+      storeInfo.marketName.length < 2 ||
+      storeInfo.companyNumber.length < 2 ||
+      storeInfo.address.length < 2 ||
+      storeInfo.phone.length < 2
     ) {
       return alert("정보를 정확하게 입력해주세요");
     }
 
-    let body = {
-      // memberId: "3", // 테스트용 넘버. 회원가입 시 부여되는 개인 아이디넘버가 들어가야함. 단, 헤더에 액세스 토큰 넣으면 불필요. todo : 삭제
-      marketName: storeInfo.storeName,
-      companyNumber: storeInfo.storeNum,
-      address: storeInfo.storeAdr,
-      phone: storeInfo.storeTel,
-    };
+    console.log(storeInfo);
 
     axios
-      .post("/api/markets", {
-        headers: {
-          authorization: accessToken,
-        },
-        body,
-      })
+      .post("/api/markets", storeInfo)
       .then(
-        (res) => console.log(res),
+        (res) => console.log(res.data.data),
         dispatch(setHasStoreInfo(true)),
         navigate("/mystore")
       )
-      .catch(
-        (err) => console.log(err),
-        alert("가게 등록에 실패했습니다. 잠시 후 다시 등록해주시기 바랍니다")
-      );
+      .catch((err) => {
+        console.log(err);
+        return alert(
+          "가게 등록에 실패했습니다. 잠시 후 다시 등록해주시기 바랍니다"
+        );
+      });
   };
 
   return (
@@ -80,35 +72,35 @@ function Firstselling() {
       />
 
       <section>
-        <form onSubmit={handleSubmitStoreInfo}>
+        <form>
           <div className="first_selling_wrapper">
             <div className="first_selling_category">
               <div>
                 상호<span>*</span>
               </div>
-              <input onChange={handleInputStoreInfo("storeName")} />
+              <input onChange={handleInputStoreInfo("marketName")} />
             </div>
             <div className="first_selling_category">
               <div>
                 사업자등록번호<span>*</span>
               </div>
-              <input onChange={handleInputStoreInfo("storeNum")} />
+              <input onChange={handleInputStoreInfo("companyNumber")} />
             </div>
             <div className="first_selling_category">
               <div>
                 주소<span>*</span>
               </div>
-              <input onChange={handleInputStoreInfo("storeAdr")} />
+              <input onChange={handleInputStoreInfo("address")} />
               {/* <StoreLocationMap /> */}
             </div>
             <div className="first_selling_category">
               <div>
                 전화번호<span>*</span>
               </div>
-              <input onChange={handleInputStoreInfo("storeTel")} />
+              <input onChange={handleInputStoreInfo("phone")} />
             </div>
           </div>
-          <button type="submit">
+          <button type="submit" onClick={handleSubmitStoreInfo}>
             {path === "/mystore/edit" ? "수정하기" : "등록하기"}
           </button>
         </form>

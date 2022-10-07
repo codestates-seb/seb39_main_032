@@ -11,6 +11,9 @@ import DeleteBtn from "../../../../widgets/DeleteBtn";
 
 function AddItemBox({ ele, id, deleteItemBoxHandler }) {
   const accessToken = localStorage.getItem("accessToken");
+  axios.defaults.headers.common["authorization"] = accessToken;
+  const marketId = localStorage.getItem("marketId");
+
   const state = useSelector((state) => state.itemReducer);
   const dispatch = useDispatch();
   const done = useRef(); // 등록 완료 시 회색 화면 처리용
@@ -46,8 +49,8 @@ function AddItemBox({ ele, id, deleteItemBoxHandler }) {
     const setFiTime = `${year}-${month}-${day} ${FIdt}:00`;
 
     let body = {
-      memberId: "1", // 수정 필요
-      marketId: "9", // 수정 필요
+      // memberId: "1", // 수정 필요
+      marketId: marketId, // 수정 필요
       itemName: itemInfo.itemName,
       foodCategory: itemInfo.category,
       itemAmount: itemInfo.quantity,
@@ -58,28 +61,30 @@ function AddItemBox({ ele, id, deleteItemBoxHandler }) {
       boardStatus: "판매중",
     };
     //기존
-    // axios
-    //   .post("/api/boards", body)
-    //   .then(() => (done.current.id = "done"))
-    //   .catch((err) => console.log(err));
-
-    // console.log(file);
-    const formData = new FormData(); // formData는 콘솔로 확인 불가.
-
-    formData.enctype = "multipart/form-data";
-    formData.append("file", file); // 이미지 파일 넣기
-
-    const blob = new Blob([JSON.stringify(body)], { type: "application/json" });
-    formData.append("requestBody", blob); // 일반 데이터 넣기
-
-    fetch(`${url}/api/boards`, {
-      method: "POST",
-      headers: { authorization: accessToken },
-      body: formData,
-    })
-      .then((res) => console.log(res))
+    axios
+      .post("/api/boards", body)
       .then(() => (done.current.id = "done"))
       .catch((err) => console.log(err));
+
+    // console.log(file);
+
+    // 이미지 함께 등록 시,
+    // const formData = new FormData(); // formData는 콘솔로 확인 불가.
+
+    // formData.enctype = "multipart/form-data";
+    // formData.append("file", file); // 이미지 파일 넣기
+
+    // const blob = new Blob([JSON.stringify(body)], { type: "application/json" });
+    // formData.append("requestBody", blob); // 일반 데이터 넣기
+
+    // fetch(`${url}/api/boards`, {
+    //   method: "POST",
+    //   headers: { authorization: accessToken },
+    //   body: formData,
+    // })
+    //   .then((res) => console.log(res))
+    //   .then(() => (done.current.id = "done"))
+    //   .catch((err) => console.log(err));
   };
 
   //img 미리보기 관리

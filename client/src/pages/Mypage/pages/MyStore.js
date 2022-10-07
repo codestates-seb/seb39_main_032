@@ -28,6 +28,7 @@ function MyStore() {
         } else {
           setStoreInfo(res.data.data[0]);
           setHasStoreInfo(true);
+          localStorage.setItem("marketId", res.data.data[0].marketId);
         }
       })
       .catch((err) => console.log(err));
