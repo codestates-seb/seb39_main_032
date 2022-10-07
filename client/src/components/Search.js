@@ -70,6 +70,10 @@ function Search() {
   const navigate = useNavigate();
   const path = useLocation().pathname;
 
+  const inputHandler = (e) => {
+    setCurAdr(e.target.value);
+  };
+
   const searchHandler = (e) => {
     if (!curAdr.length) {
       alert("주소를 입력해주세요");
@@ -108,6 +112,7 @@ function Search() {
             type="text"
             defaultValue={curAdr}
             placeholder="건물명, 도로명, 지번으로 주소를 검색하세요"
+            onChange={inputHandler}
           ></input>
           <button id="search_btn">
             <Icon icon="ant-design:search-outlined" id="search_icon" />
