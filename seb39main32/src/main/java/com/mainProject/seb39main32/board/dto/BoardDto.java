@@ -3,6 +3,7 @@ package com.mainProject.seb39main32.board.dto;
 
 import com.mainProject.seb39main32.market.entity.Market;
 import com.mainProject.seb39main32.member.entity.Member;
+import com.mainProject.seb39main32.review.dto.ReviewDto;
 import com.mainProject.seb39main32.wish.dto.WishDto;
 import com.mainProject.seb39main32.wish.entity.Wish;
 import io.swagger.annotations.ApiImplicitParam;
@@ -110,6 +111,7 @@ public class BoardDto {
     @Getter
     @AllArgsConstructor
     @Builder
+    @Setter
     public static class ResponseMarketName{
         private long boardId;
         @Setter(AccessLevel.NONE)
@@ -129,7 +131,9 @@ public class BoardDto {
         private String boardCreateAt;
         private String boardUpdateAt;
         private String boardStatus;
+        private List<WishDto.Response> wishList;
         private long wishListCount;
+        private long checkMyWish;
 
         public void setMember(Member member) {this.memberId = member.getMemberId();}
         public void setMarket(Market market) {
@@ -138,7 +142,6 @@ public class BoardDto {
         }
 
         public void setWishListCount(List<WishDto.Response> wishList){this.wishListCount = wishList.size();}
-
     }
 
 

@@ -2,6 +2,9 @@ package com.mainProject.seb39main32.board.mapper;
 
 import com.mainProject.seb39main32.board.dto.BoardDto;
 import com.mainProject.seb39main32.board.entity.Board;
+import com.mainProject.seb39main32.review.dto.ReviewDto;
+import com.mainProject.seb39main32.review.entity.Review;
+import com.mainProject.seb39main32.wish.dto.WishDto;
 import com.mainProject.seb39main32.wish.entity.Wish;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -32,8 +35,19 @@ public interface BoardMapper {
                 .boardCreateAt(brd.getBoardCreateAt())
                 .boardUpdateAt(brd.getBoardUpdateAt())
                 .boardStatus(brd.getBoardStatus())
+                .wishList(wishToWishResponseDtos(brd.getWishes()))
                 .wishListCount(brd.getWishes().size())
                 .build())
+                .collect(Collectors.toList());
+    }
+    default List<WishDto.Response> wishToWishResponseDtos(List<Wish> wish){
+        return wish
+                .stream().map(wsh -> WishDto.Response
+                        .builder()
+                        .wishId(wsh.getWishId())
+                        .boardId(wsh.getBoard().getBoardId())
+                        .memberId(wsh.getMember().getMemberId())
+                        .build())
                 .collect(Collectors.toList());
     }
 }

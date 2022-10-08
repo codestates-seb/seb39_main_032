@@ -7,6 +7,7 @@ import com.mainProject.seb39main32.board.service.BoardService;
 import com.mainProject.seb39main32.config.oauth.PrincipalDetails;
 import com.mainProject.seb39main32.dto.MultiResponseDto;
 import com.mainProject.seb39main32.dto.SingleResponseDto;
+import com.mainProject.seb39main32.market.dto.MarketDto;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -23,6 +24,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/boards")
@@ -69,11 +71,46 @@ public class BoardController {
     public ResponseEntity<MultiResponseDto> getBoards(@Positive @RequestParam int page,
                                                       @Positive @RequestParam int size,
                                                       @RequestParam(required = false) String address,
-                                                      @RequestParam(required = false) String category){
+                                                      @RequestParam(required = false) String category,
+                                                      @AuthenticationPrincipal PrincipalDetails principalDetails){
         Page<Board> pageBoard = boardService.findBoards(page,size,address,category);
         List<Board> boards = pageBoard.getContent();
+
+        List<BoardDto.ResponseMarketName> responseListDto = mapper.boardsToBoardResponseDtos(boards);
+
+        if(principalDetails!=null) {
+            responseListDto.stream()
+                    .filter(brd -> brd.getWishList().stream().anyMatch(wish -> wish.getMemberId()== principalDetails.getMember().getMemberId()))
+                    .collect(Collectors.toList())
+                    .forEach(li -> li.setCheckMyWish(1));
+        }
+
+
         return new ResponseEntity<>(
-                new MultiResponseDto<>(mapper.boardsToBoardResponseDtos(boards),
+                new MultiResponseDto<>(responseListDto,
+                        pageBoard),
+                HttpStatus.OK);
+    }
+
+    @GetMapping("/sells")
+    public ResponseEntity<MultiResponseDto> getSellsBoards(@Positive @RequestParam int page,
+                                                      @Positive @RequestParam int size,
+                                                      @RequestParam(required = false) String address,
+                                                      @RequestParam(required = false) String category,
+                                                      @AuthenticationPrincipal PrincipalDetails principalDetails){
+        Page<Board> pageBoard = boardService.findSellsBoards(page,size,address,category);
+        List<Board> boards = pageBoard.getContent();
+        List<BoardDto.ResponseMarketName> responseListDto = mapper.boardsToBoardResponseDtos(boards);
+
+        if(principalDetails!=null) {
+            responseListDto.stream()
+                    .filter(brd -> brd.getWishList().stream().anyMatch(wish -> wish.getMemberId()== principalDetails.getMember().getMemberId()))
+                    .collect(Collectors.toList())
+                    .forEach(li -> li.setCheckMyWish(1));
+        }
+
+        return new ResponseEntity<>(
+                new MultiResponseDto<>(responseListDto,
                         pageBoard),
                 HttpStatus.OK);
     }
@@ -131,6 +168,16 @@ public class BoardController {
         requestBody.setMember(principalDetails.getMember());
         Board board =
                 boardService.updateBoard(mapper.boardPatchToBoard(requestBody));
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.boardToBoardResponse(board)),
+                HttpStatus.OK);
+    }
+
+    @PatchMapping("/soldOut/{board-id}")
+    public ResponseEntity<SingleResponseDto> soldBoard(
+            @PathVariable("board-id") @Positive long boardId) {
+        Board board =
+                boardService.updateBoardSoldOut(boardId);
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.boardToBoardResponse(board)),
                 HttpStatus.OK);

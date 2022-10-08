@@ -4,6 +4,7 @@ import com.mainProject.seb39main32.board.entity.Board;
 import com.mainProject.seb39main32.board.repository.BoardRepository;
 import com.mainProject.seb39main32.exception.BusinessLogicException;
 import com.mainProject.seb39main32.exception.ExceptionCode;
+import com.mainProject.seb39main32.market.entity.Market;
 import com.mainProject.seb39main32.member.service.MemberService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -53,6 +54,14 @@ public class BoardService {
     public Board updateBoardSoldOut(long boardId){
         Board findBoard = findVerifiedBoard(boardId);
         //chaneStatus SoldOut
+        findBoard.setBoardUpdateAt(String.valueOf(LocalDateTime.now()));
+//        if(findBoard.getBoardStatus().equals("판매중")) {
+//            findBoard.setBoardStatus("품절");
+//        }
+//        else if(findBoard.getBoardStatus().equals("품절")) {
+//            findBoard.setBoardStatus("판매중");
+//        }
+        findBoard.setBoardStatus("품절");
         Board updateBoard = boardRepository.save(findBoard);
         return updateBoard;
     }
@@ -61,6 +70,23 @@ public class BoardService {
         return findVerifiedBoard(boardId);
     }
     public Page<Board> findBoards(int page, int size,String address,String category){
+        Page<Board> pageResult = null;
+        Pageable paging = PageRequest.of(page-1,size, Sort.by("boardUpdateAt").descending());
+
+        if((address != null && !address.isEmpty()) && ( category != null && !category.isEmpty())){
+            pageResult = boardRepository.findByMarket_AddressContainingAndFoodCategoryAndBoardStatusNot(paging,address,category,"delete");
+        }
+        else if(address != null && !address.isEmpty()){
+            pageResult =boardRepository.findByMarket_AddressContainingAndBoardStatusNot(paging,address,"delete");
+        }
+        else {
+            pageResult= boardRepository.findByBoardStatusNot(paging,"delete");
+        }
+        return pageResult;
+        //return boardRepository.findByMarket_AddressContaining(paging,address);
+    }
+
+    public Page<Board> findSellsBoards(int page, int size,String address,String category){
         Page<Board> pageResult = null;
         Pageable paging = PageRequest.of(page-1,size, Sort.by("boardUpdateAt").descending());
 
