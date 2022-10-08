@@ -82,8 +82,9 @@ public class MarketDto {
         private String createAt;
         private String updateAt;
         private List<BoardDto.ResponseMarketName> boardList;
-        private List<ReviewDto.Response> reviewList;
+        private List<ReviewDto.CheckRivewResponse> reviewList;
         private long favoriteCount;
+        private long checkMyFavorite;
 
 
         public void setMember(Member member){
@@ -92,4 +93,6 @@ public class MarketDto {
         //public void setFavoriteCount(List<FavoriteDto.Response> favoriteList){this.favoriteCount = favoriteList.size();}
 
     }
+
+
 }

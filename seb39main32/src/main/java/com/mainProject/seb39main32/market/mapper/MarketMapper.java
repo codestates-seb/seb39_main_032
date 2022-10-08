@@ -34,8 +34,26 @@ public interface MarketMapper {
         marketResponseDto.setBoardList(boardToMarketResponseDtos(boards));
         marketResponseDto.setReviewList(reviewToMarketResponseDtos(reviews));
         marketResponseDto.setFavoriteCount(market.getFavorites().size());
-        return marketResponseDto;
 
+        return marketResponseDto;
+    }
+
+    default MarketDto.ResponseListDto marketToMarketCheckOwnerResponseDtos(Market market,String memberId){
+        List<Board> boards = market.getBoards();
+        List<Review> reviews = market.getReviews();
+        MarketDto.ResponseListDto marketResponseDto = new MarketDto.ResponseListDto();
+        marketResponseDto.setMarketId(market.getMarketId());
+        marketResponseDto.setMarketName(market.getMarketName());
+        marketResponseDto.setCompanyNumber(market.getCompanyNumber());
+        marketResponseDto.setAddress(market.getAddress());
+        marketResponseDto.setPhone(market.getPhone());
+        marketResponseDto.setCreateAt(market.getCreateAt());
+        marketResponseDto.setUpdateAt(market.getUpdateAt());
+        marketResponseDto.setMember(market.getMember());
+        marketResponseDto.setBoardList(boardToMarketResponseDtos(boards));
+        marketResponseDto.setReviewList(reviewToMarketResponseDtos(reviews));
+        marketResponseDto.setFavoriteCount(market.getFavorites().size());
+        return marketResponseDto;
     }
 
     default List<BoardDto.ResponseMarketName> boardToMarketResponseDtos(List<Board> boards){
@@ -61,9 +79,9 @@ public interface MarketMapper {
                 .collect(Collectors.toList());
     }
 
-    default List<ReviewDto.Response> reviewToMarketResponseDtos(List<Review> review){
+    default List<ReviewDto.CheckRivewResponse> reviewToMarketResponseDtos(List<Review> review){
         return review
-                .stream().map(rev -> ReviewDto.Response
+                .stream().map(rev -> ReviewDto.CheckRivewResponse
                         .builder()
                         .reviewId(rev.getReviewId())
                         .memberId(rev.getMember().getMemberId())

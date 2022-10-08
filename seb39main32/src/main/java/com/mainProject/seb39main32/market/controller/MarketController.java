@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/markets")
@@ -75,12 +76,34 @@ public class MarketController {
 //                HttpStatus.OK);
 //    }
 
+//    @GetMapping("/{market-id}")
+//    public ResponseEntity getMarkets(@PathVariable("market-id") @Positive long marketId) {
+//        Market market = marketService.findVerifiedMarketMarkgetID(marketId);
+//        return new ResponseEntity<>(
+//                new SingleResponseDto<>(mapper.marketToMarketResponseDtos(market))
+//                , HttpStatus.OK);
+//    }
     @GetMapping("/{market-id}")
-    public ResponseEntity getMarkets(@PathVariable("market-id") @Positive long marketId) {
+    public ResponseEntity getMarkets(@PathVariable("market-id") @Positive long marketId,
+                                     @AuthenticationPrincipal PrincipalDetails principalDetails) {
+
         Market market = marketService.findVerifiedMarketMarkgetID(marketId);
+
+
+        MarketDto.ResponseListDto responseListDto = mapper.marketToMarketResponseDtos(market);
+
+        if(principalDetails!=null) {
+            if(market.getFavorites().stream().filter(fav->fav.getMember().getMemberId()==principalDetails.getMember().getMemberId()).collect(Collectors.toList()).size()>0){
+                responseListDto.setCheckMyFavorite(1);
+            }
+            responseListDto.getReviewList().stream()
+                    .filter(rev -> rev.getMemberId() == principalDetails.getMember().getMemberId())
+                    .collect(Collectors.toList())
+                    .forEach(li -> li.setCheckOwner(1));
+        }
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.marketToMarketResponseDtos(market))
-                , HttpStatus.OK);
+            new SingleResponseDto<>(responseListDto)
+            , HttpStatus.OK);
     }
     /**
      * 마켓 등록하기
