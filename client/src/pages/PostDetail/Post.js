@@ -39,7 +39,7 @@ function Post() {
           },
           marketId: marketId,
         })
-        .then((res) => console.log(res))
+        .then((res) => console.log(res)) // todo : 새로고침하지 말고 삼항연산자 이용해서 적용하는 법 찾기
         .catch((err) => console.log(err));
     }
   };
@@ -63,6 +63,12 @@ function Post() {
       setIsLoading(false);
     });
   }, []); //async & await 같이 해줘야 함
+
+  useEffect(() => {
+    if (storeInfo.checkMyFavorite === 1) {
+      return setIsBookMark(true);
+    }
+  }, [storeInfo.checkMyFavorite]);
 
   return (
     <>

@@ -33,7 +33,9 @@ function BasicLogin() {
 
         // 리프레쉬 토큰 쿠키 저장.
         // setRefreshToken(res.cookie);
+
         navigate("/");
+        window.location.reload();
       })
       .catch((err) => {
         setLoginInfo({

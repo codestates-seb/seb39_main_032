@@ -17,6 +17,12 @@ function Item({ state }) {
     }
   }, [state.wishListCount]);
 
+  useEffect(() => {
+    if (state.checkMyWish === 1) {
+      return setIsLike(true);
+    }
+  }, [state.checkMyWish]);
+
   const boardId = state.boardId;
 
   let startTime = String(state.saleStartTime);
