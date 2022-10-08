@@ -1,11 +1,31 @@
 import styled from "styled-components";
+import axios from "axios";
 
 function MyWishlist({ state }) {
+  const accessToken = localStorage.getItem("accessToken");
+
+  const likeHandler = () => {
+    axios
+      .post(
+        "/api/wishes",
+        { boardId: state.boardId },
+        {
+          headers: {
+            authorization: accessToken,
+          },
+        }
+      )
+      .then((res) => console.log(res), window.location.reload())
+      .catch((err) => console.log(err));
+  };
+
   return (
     <MyWishlistContainer>
       <div className="my_wishlist">
         <div className="my_wishlist_name">{state.boardName}</div>
-        <div className="my_wishlist_btn delte">삭제</div>
+        <div className="my_wishlist_btn delte" onClick={likeHandler}>
+          삭제
+        </div>
       </div>
     </MyWishlistContainer>
   );

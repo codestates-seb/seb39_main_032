@@ -7,8 +7,9 @@ import List from "./components/List";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setItemsList, setClickedCategory } from "../../actions";
+import Loading from "../../components/Loading";
 
-function Main() {
+function Main({ isLoading }) {
   const search = useSelector((state) => state.searchReducer);
 
   let caterogies = [
@@ -40,30 +41,36 @@ function Main() {
   };
 
   return (
-    <Outer>
-      <Header />
-      <MainContainer>
-        <section id="category">
-          <article>
-            {caterogies.map((item, idx) => {
-              return (
-                <div
-                  id={item}
-                  value={idx}
-                  key={idx}
-                  className="food_category"
-                  onClick={handleClickCategory}
-                >
-                  {item}
-                </div>
-              );
-            })}
-          </article>
-        </section>
-        <List />
-      </MainContainer>
-      <Footer />
-    </Outer>
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Outer>
+          <Header />
+          <MainContainer>
+            <section id="category">
+              <article>
+                {caterogies.map((item, idx) => {
+                  return (
+                    <div
+                      id={item}
+                      value={idx}
+                      key={idx}
+                      className="food_category"
+                      onClick={handleClickCategory}
+                    >
+                      {item}
+                    </div>
+                  );
+                })}
+              </article>
+            </section>
+            <List />
+          </MainContainer>
+          <Footer />
+        </Outer>
+      )}
+    </>
   );
 }
 

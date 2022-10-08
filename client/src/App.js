@@ -23,9 +23,10 @@ import { setItemsList, setMyLikeList, setFilteredItemsList } from "./actions";
 function App() {
   const accessToken = localStorage.getItem("accessToken");
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
 
-  const getPosts = () => {
-    axios
+  const getPosts = async () => {
+    await axios
       .get("/api/boards?page=1&size=50")
       .then((res) => {
         // console.log(res.data.data);
@@ -69,7 +70,10 @@ function App() {
   // };
 
   useEffect(() => {
-    getPosts();
+    setIsLoading(true);
+    getPosts().then(() => {
+      setIsLoading(false);
+    });
     // if (!accessToken) {
     //   return;
     // } else {
@@ -81,7 +85,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<Main isLoading={isLoading} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/newpost" element={<Newpost />} />

@@ -50,7 +50,7 @@ function Mypage() {
       {isLoading ? (
         <Loading />
       ) : (
-        <>
+        <Outer>
           <Header />
           <MypageContainer>
             <TitleHeader title={"마이 페이지"} />
@@ -81,7 +81,7 @@ function Mypage() {
             </Container>
           </MypageContainer>
           <Footer />
-        </>
+        </Outer>
       )}
     </>
   );
@@ -89,11 +89,17 @@ function Mypage() {
 
 export default Mypage;
 
+const Outer = styled.main`
+  display: flex;
+  flex-direction: column;
+`;
+
 const MypageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 73.5vh;
+  height: 100vh;
+  /* height: 100%; */
 `;
 
 const Container = styled.div`

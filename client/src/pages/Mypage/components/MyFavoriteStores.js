@@ -6,12 +6,15 @@ function MyFavoriteStores({ state }) {
 
   const BookMarkHandler = () => {
     axios
-      .post("/api/favorites", {
-        headers: {
-          authorization: accessToken,
-        },
-        marketId: state.marketId,
-      })
+      .post(
+        "/api/favorites",
+        { marketId: state.marketId },
+        {
+          headers: {
+            authorization: accessToken,
+          },
+        }
+      )
       .then((res) => console.log(res), window.location.reload())
       .catch((err) => console.log(err));
   };

@@ -32,12 +32,15 @@ function Post() {
       return alert("로그인 후 등록이 가능합니다");
     } else {
       setIsBookMark(!isBookMark);
-      axios.post("/api/favorites", {
-        headers: {
-          authorization: accessToken,
-        },
-        marketId: marketId,
-      });
+      axios
+        .post("/api/favorites", {
+          headers: {
+            authorization: accessToken,
+          },
+          marketId: marketId,
+        })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
     }
   };
 

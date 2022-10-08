@@ -1,15 +1,22 @@
 import styled from "styled-components";
 import { Icon } from "@iconify/react";
-import Wishlist from "./Wishlist";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setLikeScore } from "../../../actions";
+import axios from "axios";
 
 function Item({ state }) {
   const dispatch = useDispatch();
 
-  const [likeScore, setLikeScore] = useState(state.wishListCount); // 리듀서 사용해서 전역으로 처리해줘야 함.
+  const [likeScore, setLikeScore] = useState(0); // 리듀서 사용해서 전역으로 처리해줘야 함.
+
+  useEffect(() => {
+    if (state.wishListCount) {
+      return setLikeScore(state.wishListCount);
+    }
+  }, [state.wishListCount]);
+
   const boardId = state.boardId;
 
   let startTime = String(state.saleStartTime);
@@ -29,6 +36,97 @@ function Item({ state }) {
   let head = price.slice(0, -3);
   let queue = price.slice(-3);
   let setPrice = head.concat(",", queue);
+
+  const accessToken = localStorage.getItem("accessToken");
+  // axios.defaults.headers.common["authorization"] = accessToken;
+
+  const mylikelist = useSelector((state) => state.mylikeListReducer);
+
+  // 좋아요 버튼 작동 함수
+  const [isLike, setIsLike] = useState(false);
+
+  const handleLikeClick = () => {
+    //로그인 안한 경우,
+    if (!accessToken) {
+      return alert("로그인 후 등록이 가능합니다");
+    }
+    //로그인 한 경우,
+    else {
+      console.log(accessToken);
+      console.log(boardId);
+      setIsLike(!isLike);
+      if (isLike === true) {
+        if (likeScore > 0) {
+          setLikeScore(likeScore - 1);
+          // 좋아요 취소(-)
+          return axios
+            .post(
+              "/api/wishes",
+              { boardId: boardId },
+              {
+                headers: {
+                  authorization: accessToken,
+                },
+              }
+            )
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
+        }
+      }
+      // 좋아요 추가(+)
+      else {
+        setLikeScore(likeScore + 1);
+        axios
+          .post(
+            "/api/wishes",
+            { boardId: boardId },
+            {
+              headers: {
+                authorization: accessToken,
+              },
+            }
+          )
+          .then((res) => console.log(res))
+          .catch((err) => console.log(err));
+      }
+    }
+  };
+
+  // 나의 Like 리스트 불러오기
+  // const [hasLike, setHasLike] = useState(false);
+  // const [myLike, setMyLike] = useState([]);
+
+  // const getMyLike = () => {
+  //   let filtered = mylikelist.filter((item, idx) => item.boardId === boardId);
+
+  //   if (filtered.length === 1) {
+  //     return setIsLike(true);
+  //   } else {
+  //     return setIsLike(false);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   if (!accessToken) {
+  //     return;
+  //   } else {
+  //     axios
+  //       .get("/api/wishes/myWish?page=1&size=40", {
+  //         headers: { authorization: accessToken },
+  //       })
+  //       .then((res) => {
+  //         if (res.data.length === 0) {
+  //           return;
+  //         } else {
+  //           setHasLike(true);
+  //           dispatch(setMyLikeList(res.data));
+  //           console.log(res.data);
+  //           return getMyLike();
+  //         }
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // }, [isLike]);
 
   return (
     <ItemContainer>
@@ -52,7 +150,7 @@ function Item({ state }) {
           <a href={`/${state.marketId}`}>
             <ul>
               <li>
-                <div className="store_name">[{state.marketName}]</div>
+                <div className="store_name">{state.marketName}</div>
               </li>
               <li>
                 <div className="item_title">{state.itemName}</div>
@@ -77,13 +175,22 @@ function Item({ state }) {
             </ul>
           </a>
         </ContentContainer>
-        <Wishlist
-          // likeScore={state.wishListCount}
-          likeScore={likeScore}
-          state={state}
-          setLikeScore={setLikeScore}
-          boardId={boardId}
-        />
+        <WishlistContainer>
+          <div>관심 {likeScore}</div>
+          {isLike ? (
+            <Icon
+              icon="clarity:heart-solid"
+              className="wishlist_icon clicked"
+              onClick={handleLikeClick}
+            />
+          ) : (
+            <Icon
+              icon="clarity:heart-line"
+              className="wishlist_icon"
+              onClick={handleLikeClick}
+            />
+          )}
+        </WishlistContainer>
       </div>
     </ItemContainer>
   );
@@ -189,4 +296,23 @@ const ImgContainer = styled.div`
 
 const ContentContainer = styled.div`
   cursor: pointer;
+`;
+
+const WishlistContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  font-size: smaller;
+  margin-top: 20px;
+  margin-bottom: 8px;
+
+  .wishlist_icon {
+    height: 25px;
+    width: 25px;
+    padding-bottom: 5px;
+    cursor: pointer;
+  }
+
+  .clicked {
+    color: red;
+  }
 `;
