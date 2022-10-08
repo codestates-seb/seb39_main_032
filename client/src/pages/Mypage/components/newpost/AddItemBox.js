@@ -49,7 +49,6 @@ function AddItemBox({ ele, id, deleteItemBoxHandler }) {
     const setFiTime = `${year}-${month}-${day} ${FIdt}:00`;
 
     let body = {
-      // memberId: "1", // 수정 필요
       marketId: marketId, // 수정 필요
       itemName: itemInfo.itemName,
       foodCategory: itemInfo.category,

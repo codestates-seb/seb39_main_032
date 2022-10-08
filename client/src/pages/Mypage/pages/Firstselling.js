@@ -11,6 +11,7 @@ import StoreLocationMap from "../components/StoreLocationMap";
 function Firstselling() {
   const accessToken = localStorage.getItem("accessToken");
   axios.defaults.headers.common["authorization"] = accessToken;
+  const marketId = localStorage.getItem("marketId");
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -43,19 +44,35 @@ function Firstselling() {
 
     console.log(storeInfo);
 
-    axios
-      .post("/api/markets", storeInfo)
-      .then(
-        (res) => console.log(res.data.data),
-        dispatch(setHasStoreInfo(true)),
-        navigate("/mystore")
-      )
-      .catch((err) => {
-        console.log(err);
-        return alert(
-          "가게 등록에 실패했습니다. 잠시 후 다시 등록해주시기 바랍니다"
-        );
-      });
+    if (path === "/mystore/edit") {
+      axios
+        .patch(`/api/markets/${marketId}`, storeInfo)
+        .then(
+          (res) => console.log(res.data.data),
+          dispatch(setHasStoreInfo(true)),
+          navigate("/mystore")
+        )
+        .catch((err) => {
+          console.log(err);
+          return alert(
+            "가게 등록에 실패했습니다. 잠시 후 다시 등록해주시기 바랍니다"
+          );
+        });
+    } else {
+      axios
+        .post("/api/markets", storeInfo)
+        .then(
+          (res) => console.log(res.data.data),
+          dispatch(setHasStoreInfo(true)),
+          navigate("/mystore")
+        )
+        .catch((err) => {
+          console.log(err);
+          return alert(
+            "가게 등록에 실패했습니다. 잠시 후 다시 등록해주시기 바랍니다"
+          );
+        });
+    }
   };
 
   return (
