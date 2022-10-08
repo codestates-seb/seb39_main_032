@@ -36,7 +36,7 @@ function MyLike() {
   }, []);
 
   return (
-    <>
+    <Outer>
       <Header />
       <MyLikeContainer>
         <TitleHeader title={"나의 관심 상품"} />
@@ -51,17 +51,21 @@ function MyLike() {
         )}
       </MyLikeContainer>
       <Footer />
-    </>
+    </Outer>
   );
 }
 
 export default MyLike;
+const Outer = styled.main`
+  display: flex;
+  flex-direction: column;
+`;
 
 const MyLikeContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 73.5vh;
+  height: 100vh;
 `;
 
 const Wrapper = styled.section`

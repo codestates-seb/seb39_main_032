@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import Header from "../../../components/Header";
 import TitleHeader from "../../../components/TitleHeader";
+import Footer from "../../../components/Footer";
 
 function MyInfo() {
   return (
-    <>
+    <Outer>
       <Header />
       <Container>
         <TitleHeader title={"개인정보 변경"} />
@@ -28,16 +29,23 @@ function MyInfo() {
           <div>회원 탈퇴</div>
         </div>
       </Container>
-    </>
+      <Footer />
+    </Outer>
   );
 }
 
 export default MyInfo;
 
+const Outer = styled.main`
+  display: flex;
+  flex-direction: column;
+`;
+
 const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 
   #editPw {
     border: 1px solid;

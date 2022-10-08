@@ -43,7 +43,7 @@ function Newpost() {
   };
 
   return (
-    <>
+    <Outer>
       <Header />
       <NewPostContainer>
         <TitleHeader
@@ -65,14 +65,20 @@ function Newpost() {
         })}
       </NewPostContainer>
       <Footer />
-    </>
+    </Outer>
   );
 }
 
 export default Newpost;
 
+const Outer = styled.main`
+  display: flex;
+  flex-direction: column;
+`;
+
 const NewPostContainer = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
 `;

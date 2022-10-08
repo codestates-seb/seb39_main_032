@@ -39,21 +39,26 @@ function MyStore() {
   }, []);
 
   return (
-    <>
+    <Outer>
       <Header />
       <MyStoreContainer>
         {hasStoreInfo ? <StoreInfo storeInfo={storeInfo} /> : <Firstselling />}
       </MyStoreContainer>
       <Footer />
-    </>
+    </Outer>
   );
 }
 
 export default MyStore;
 
+const Outer = styled.main`
+  display: flex;
+  flex-direction: column;
+`;
+
 const MyStoreContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 73.5vh; // 조절 필요
+  height: 100vh; // 조절 필요
 `;

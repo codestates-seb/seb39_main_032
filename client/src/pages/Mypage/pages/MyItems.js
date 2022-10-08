@@ -39,7 +39,7 @@ function MyItems() {
   }, []);
 
   return (
-    <>
+    <Outer>
       <Header />
       <MyItemsContainer>
         <TitleHeader title={"할인 상품 관리"} />
@@ -53,17 +53,23 @@ function MyItems() {
           "등록된 상품이 없습니다"
         )}
       </MyItemsContainer>
-      {/* <Footer /> */}
-    </>
+      <Footer />
+    </Outer>
   );
 }
 
 export default MyItems;
 
+const Outer = styled.main`
+  display: flex;
+  flex-direction: column;
+`;
+
 const MyItemsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 
   form {
     display: flex;

@@ -66,7 +66,7 @@ const MyBookmarkContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 73.5vh;
+  height: 100vh;
 `;
 
 const Wrapper = styled.section`
