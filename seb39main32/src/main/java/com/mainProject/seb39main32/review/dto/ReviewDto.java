@@ -96,4 +96,28 @@ public class ReviewDto {
         public void setMarket(Market market) {this.marketId = market.getMarketId();}
     }
 
+
+    @Builder
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    public static class CheckRivewResponse{
+        private long reviewId;
+        @Setter(AccessLevel.NONE)
+        private long memberId;
+        @Setter(AccessLevel.NONE)
+        private long marketId;
+        private String reviewContent;
+        private String reviewCreateAt;
+        private String reviewUpdateAt;
+        private String memberEmail;
+        private long checkOwner;
+
+        public void setMember(Member member) {
+            this.memberId = member.getMemberId();
+            this.memberEmail = member.getEmail();
+        }
+
+        public void setMarket(Market market) {this.marketId = market.getMarketId();}
+    }
 }
