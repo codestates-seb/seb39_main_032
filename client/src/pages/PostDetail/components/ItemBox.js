@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import TitleHeader from "../../../components/TitleHeader";
-import { Icon } from "@iconify/react";
 import DeleteBtn from "../../../widgets/DeleteBtn";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
@@ -44,6 +42,7 @@ function ItemBox({ state }) {
             <li>
               <div className="item_title">{state.itemName}</div>
               <span className="category_tag">{state.foodCategory}</span>
+              <span className="status_tag">{state.boardStatus}</span>
             </li>
             <li>
               <div>수량 : {state.itemAmount}개</div>
@@ -129,6 +128,15 @@ export const ItemBoxContainer = styled.section`
       padding: 4px 8px;
       color: white;
       background-color: rgba(255, 74, 85, 1);
+      border-radius: 1rem;
+    }
+    .status_tag {
+      font-size: smaller;
+      margin-left: 10px;
+      font-weight: 700;
+      padding: 4px 8px;
+      color: white;
+      background-color: black;
       border-radius: 1rem;
     }
 
