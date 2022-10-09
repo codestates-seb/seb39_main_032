@@ -21,6 +21,7 @@
 
 
 ## 기술 스택
+![기술스택](https://user-images.githubusercontent.com/9441441/194732072-2968d5fc-0559-4d02-8adc-cc4586243079.png)
 
 
 
