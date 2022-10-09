@@ -45,14 +45,11 @@ const MyWishlistContainer = styled.div`
 
   .my_wishlist {
     display: flex;
+    justify-content: space-between;
     border-bottom: 1px solid;
     width: 750px;
     height: 35px;
     padding: 7px;
-
-    .my_wishlist_name {
-      width: 92%;
-    }
 
     .my_wishlist_btn {
       margin: 0 7px;
