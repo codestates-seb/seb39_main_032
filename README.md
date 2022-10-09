@@ -20,21 +20,37 @@
 ## 배포 링크
 
 :link:[배포주소](http://seb39pre32.s3-website.ap-northeast-2.amazonaws.com):link:
-
+<br/><br/>
 ## 팀원
 
 
 ![팀원사진](https://user-images.githubusercontent.com/104333775/194744384-4a3d5aaf-9ac3-468c-aac0-51d6f2b06506.png)
 ### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[신근수](https://github.com/messidor) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[송희영](https://github.com/sheey37)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [한준성](https://github.com/JUNSUNGCODING)
-
+<br/><br/>
 ## 기술 스택
 ![기술스택](https://user-images.githubusercontent.com/9441441/194732072-2968d5fc-0559-4d02-8adc-cc4586243079.png)
 
 
 
-
+<br/><br/>
 ## 프로젝트 관련 문서
 :page_facing_up:[노션링크](https://www.notion.so/codestates/Team-032-953a49b5581645a98e8d1f8f8813bf29?p=7ef908607fe545789cbc8f2a412fa8d1&pm=s):page_facing_up:
+<br/><br/>
+
+
+## 프로젝트 관련 수칙
+- 매일 오전 회의 진행 (10시), 오후 회의는 필요할 때마다 진행 : 세분화해서 이해하기 쉽게 브리핑.
+- 주의 사항, 필수 사항, 필요한 내용 등 안건 생길 때마다 유동적으로 기록 : **notion**
+- 화면 정의서, API 명세서, 이슈 등 기록 : **notion**
+- 수정, 문제 발생 시 바로 공지
+<br/><br/>
+
+
+## 프로젝트 개발 관련 규칙
+
+- branch 3개로 구성 : main, BEdev, FEdev
+- client, server 폴더로 구성
+<br/><br/>
 
 
 ## GIT Commit Message rule
