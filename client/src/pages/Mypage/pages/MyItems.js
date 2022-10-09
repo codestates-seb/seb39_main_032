@@ -18,7 +18,7 @@ function MyItems() {
 
   const getItemList = () => {
     axios
-      .get("/api/boards/myBoards?page=1&size=30", {
+      .get("/api/boards/myBoards?page=1&size=50", {
         headers: {
           authorization: accessToken,
         },
@@ -46,7 +46,14 @@ function MyItems() {
         {hasItems ? (
           <form>
             {state.map((item, idx) => {
-              return <ItemBox key={idx} id={idx} state={item} />;
+              return (
+                <>
+                  <div id="date">
+                    <div>등록일 : {item.boardCreateAt}</div>
+                  </div>
+                  <ItemBox key={idx} id={idx} state={item} />
+                </>
+              );
             })}
           </form>
         ) : (
@@ -69,12 +76,16 @@ const MyItemsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  height: 100%;
 
   form {
     display: flex;
     flex-direction: column;
     /* border: 1px solid rgba(170, 170, 170, 1); */
     border-radius: 0.5rem;
+  }
+
+  #date {
+    margin-top: 13px;
   }
 `;
