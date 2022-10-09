@@ -19,7 +19,7 @@
 <br/><br/>
 ## 배포 링크
 
-:link:[배포주소](http://seb39pre32.s3-website.ap-northeast-2.amazonaws.com):link:
+:link:[배포링크](http://seb39pre32.s3-website.ap-northeast-2.amazonaws.com):link:
 <br/><br/>
 ## 팀원
 
