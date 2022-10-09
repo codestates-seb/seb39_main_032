@@ -1,12 +1,17 @@
 import styled from "styled-components";
 import Search from "./Search";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { useState } from "react";
 // import mapApi from "./mapApi";
 
 function Header() {
   const path = useLocation().pathname;
   const navigate = useNavigate();
-  const authenticated = localStorage.getItem("accessToken");
+
+  const [accessToken, setAccessToken] = useState(
+    localStorage.getItem("accessToken")
+  ); // todo : 액세스토큰 만료 시, 갱신된 토큰으로 변경해줘야 함.
 
   const logoutHandler = () => {
     localStorage.removeItem("accessToken");
@@ -17,11 +22,15 @@ function Header() {
     }
   };
 
+  useEffect(() => {
+    setAccessToken(accessToken);
+  }, [accessToken]);
+
   return (
     <HeaderContainer>
       <div id="title_nav">
         <nav>
-          {authenticated ? (
+          {accessToken ? (
             <>
               <a href="/mypage" className="btn_nav">
                 마이페이지
