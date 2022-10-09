@@ -13,7 +13,9 @@
 <br/><br/>
 
 
-![내가판매중인상품보기](https://user-images.githubusercontent.com/104333775/194744479-52f47b24-47b1-4d61-9066-ea7234c51baa.gif)![게시글 클릭 마켓 상세페이지](https://user-images.githubusercontent.com/104333775/194744480-b3df625d-be1b-4b9b-b4ac-2407defa1382.gif)
+![내가판매중인상품보기](https://user-images.githubusercontent.com/104333775/194744479-52f47b24-47b1-4d61-9066-ea7234c51baa.gif)
+<br/><br/>
+![게시글 클릭 마켓 상세페이지](https://user-images.githubusercontent.com/104333775/194744480-b3df625d-be1b-4b9b-b4ac-2407defa1382.gif)
 <br/><br/>
 ## 배포 링크
 
