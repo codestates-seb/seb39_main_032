@@ -3,12 +3,9 @@ import Header from "../../components/Header";
 import TitleHeader from "../../components/TitleHeader";
 import Footer from "../../components/Footer";
 import CurrentSaleItems from "./components/CurrentSaleItems";
-import MyFavoriteStores from "./components/MyFavoriteStores";
-import MyWishlist from "./components/MyWishlist";
-import MyLike from "./pages/MyLIke";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setMyItemsList } from "../../actions";
 import Loading from "../../components/Loading";
 

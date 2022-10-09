@@ -17,20 +17,20 @@ function Newpost() {
   const addItemBoxHandler = () => {
     let counter = countList.length; // length는 기본적으로 1부터 시작 // 2
     setCountList([...countList, counter]); // [0,1,2]
-    console.log(countList);
+    // console.log(countList);
   };
 
   //[0,2]
 
   const deleteItemBoxHandler = (deleteidx) => {
-    console.log(deleteidx); // 1
+    // console.log(deleteidx); // 1
     // console.log(countList); // [0,1,2]
     const restList = countList.filter((ele, idx) => {
       return idx !== deleteidx; // [0,2]
     });
-    console.log(restList); //[0,2]
+    // console.log(restList); //[0,2]
     setCountList(restList);
-    console.log(countList);
+    // console.log(countList);
   };
 
   return (

@@ -1,5 +1,5 @@
 import "./GlobalStyle.css";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login/login";
 import Main from "./pages/Main/main";
 import Newpost from "./pages/Mypage/pages/Newpost";
@@ -12,13 +12,10 @@ import Mypage from "./pages/Mypage/Mypage";
 import MyItems from "./pages/Mypage/pages/MyItems";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { setUserInfo } from "./actions";
 import { useDispatch } from "react-redux";
 import MyBookmark from "./pages/Mypage/pages/MyBookmark";
 import MyLike from "./pages/Mypage/pages/MyLIke";
-import Footer from "./components/Footer";
-import { useSelector } from "react-redux";
-import { setItemsList, setMyLikeList, setFilteredItemsList } from "./actions";
+import { setItemsList } from "./actions";
 
 function App() {
   const accessToken = localStorage.getItem("accessToken");
@@ -67,8 +64,6 @@ function App() {
     getPosts().then(() => {
       setIsLoading(false);
     });
-
-    // getPostsOnSale();
   }, []);
 
   return (

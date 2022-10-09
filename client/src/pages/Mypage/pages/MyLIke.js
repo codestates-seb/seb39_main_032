@@ -26,7 +26,6 @@ function MyLike() {
         } else {
           setHasLike(true);
           setMyLike(res.data);
-          console.log(res.data);
         }
       })
       .catch((err) => console.log(err));

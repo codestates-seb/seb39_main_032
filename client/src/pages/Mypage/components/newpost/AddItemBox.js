@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import { Icon } from "@iconify/react";
-import TitleHeader from "../../../../components/TitleHeader";
 import { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setAddItem, setSubmitItems } from "../../../../actions";
+import { setAddItem } from "../../../../actions";
 import { applyMiddleware } from "redux";
 import axios from "axios";
 import moment from "moment";
@@ -25,8 +24,6 @@ function AddItemBox({ ele, id, deleteItemBoxHandler }) {
   const inputHandler = (key) => (e) => {
     setItemInfo({ ...itemInfo, itemId: ele, [key]: e.target.value });
     dispatch(setAddItem(itemInfo));
-    console.log(itemInfo);
-    console.log(state);
   };
 
   // 등록 버튼 클릭 시,

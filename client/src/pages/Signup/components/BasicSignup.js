@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { BasicLoginContainer } from "../../Login/components/BasicLogin";
 import SubmitBtn from "../../../widgets/SubmitBtn";
 import { Icon } from "@iconify/react";

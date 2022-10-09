@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import TitleHeader from "../../../components/TitleHeader";
 import axios from "axios";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function CurrentSaleItems({ hasItems }) {
   const accessToken = localStorage.getItem("accessToken");

@@ -11,8 +11,6 @@ function Review({ reviewList, marketId }) {
 
   const inputHandler = (e) => {
     setReview(e.target.value);
-    console.log(review);
-    console.log(marketId);
   };
 
   const rvSubmitHandler = (e) => {
@@ -20,8 +18,7 @@ function Review({ reviewList, marketId }) {
       alert("5자 이상 작성해야 합니다");
       return e.preventDefault();
     }
-    // console.log(marketId);
-    // e.preventDefault();
+
     axios
       .post(`/api/reviews/${marketId}`, {
         // headers: {

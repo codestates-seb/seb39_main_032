@@ -20,26 +20,20 @@ function Newpost() {
     counter += 1;
     countArr.push(counter);
     setCountList(countArr);
-    console.log(countList);
   };
 
   //[0,2]
 
   const deleteItemBoxHandler = (deleteId, id) => {
-    console.log(deleteId); // 1
+    // console.log(deleteId); // 1
     // console.log(countList); // [0,1,2]
     let countArr = [...countList];
     const restList = countArr.filter((ele, idx) => {
       return ele !== deleteId; // [0,2]
     });
-    console.log(restList); //[0,2]
+    // console.log(restList); //[0,2]
     setCountList(restList);
     dispatch(setDeleteItem(deleteId));
-    console.log(state);
-    // console.log(items);
-
-    // $('#divReloadLayer').load(location.href+' #divReloadLayer');
-    // $(`#${id}`).load(window.location + ` #${id}`);
   };
 
   return (

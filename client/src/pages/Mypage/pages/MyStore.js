@@ -22,7 +22,6 @@ function MyStore() {
         },
       })
       .then((res) => {
-        console.log(storeInfo);
         if (res.data.data.length === 0) {
           return setHasStoreInfo(false);
         } else {

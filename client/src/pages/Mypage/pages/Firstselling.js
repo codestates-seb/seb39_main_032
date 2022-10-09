@@ -27,7 +27,6 @@ function Firstselling() {
 
   const handleInputStoreInfo = (key) => (e) => {
     setStoreInfo({ ...storeInfo, [key]: e.target.value });
-    console.log(storeInfo);
   };
 
   const handleSubmitStoreInfo = (e) => {
@@ -41,8 +40,6 @@ function Firstselling() {
     ) {
       return alert("정보를 정확하게 입력해주세요");
     }
-
-    console.log(storeInfo);
 
     if (path === "/mystore/edit") {
       axios

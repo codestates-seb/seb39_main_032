@@ -28,7 +28,6 @@ function BasicLogin() {
     axios
       .post("/login/jwt", loginInfo)
       .then((res) => {
-        console.log(res);
         localStorage.setItem("accessToken", res.headers.authorization);
 
         // 리프레쉬 토큰 쿠키 저장.
@@ -86,8 +85,9 @@ function BasicLogin() {
         <SubmitBtn type="submit" />
       </form>
       <div id="sub_menu">
-        <span className="sub_menu">비밀번호 찾기</span>
-        <span className="sub_menu">계정 찾기</span>
+        {/* todo : */}
+        {/* <span className="sub_menu">비밀번호 찾기</span>
+        <span className="sub_menu">계정 찾기</span> */}
         <a href="/signup">
           <span className="sub_menu">회원가입</span>
         </a>

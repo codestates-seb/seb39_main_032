@@ -3,7 +3,7 @@ import { Icon } from "@iconify/react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setLikeScore } from "../../../actions";
+// import { setLikeScore } from "../../../actions";
 import axios from "axios";
 
 function Item({ state }) {
@@ -58,8 +58,6 @@ function Item({ state }) {
     }
     //로그인 한 경우,
     else {
-      console.log(accessToken);
-      console.log(boardId);
       setIsLike(!isLike);
       if (isLike === true) {
         if (likeScore > 0) {
