@@ -45,8 +45,6 @@ public class Market {
     @Column(name = "update_at")
     private String updateAt;
 
-
-
     public void setMember(Member member){
         this.member = member;
     }
