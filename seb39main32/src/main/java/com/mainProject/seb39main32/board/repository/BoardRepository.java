@@ -10,9 +10,9 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     Page<Board> findAll(Pageable pageable);
     Page<Board> findByBoardStatusNot(Pageable pageable,String status);
     Page<Board> findByMember_MemberIdAndBoardStatusNot(Pageable pageable,long memberId,String status);
+    Page<Board> findByMember_MemberIdAndBoardStatus(Pageable pageable,long memberId,String status);
     Page<Board> findByMarket_AddressContainingAndBoardStatusNot(Pageable pageable,String adrress,String status);
     Page<Board> findByMarket_AddressContainingAndFoodCategoryAndBoardStatusNot(Pageable pageable,String adrress,String category,String status);
-
 
     Page<Board> findByMarket_AddressContainingAndFoodCategoryAndBoardStatus(Pageable pageable,String adrress,String category,String status);
 

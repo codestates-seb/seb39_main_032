@@ -106,7 +106,9 @@ public class BoardService {
     public Page<Board> findMemberBoards(int page, int size,long memberId){
         Page<Board> pageResult = null;
         Pageable paging = PageRequest.of(page-1,size, Sort.by("boardUpdateAt").descending());
-        return boardRepository.findByMember_MemberIdAndBoardStatusNot(paging,memberId,"delete");
+        //return boardRepository.findByMember_MemberIdAndBoardStatusNot(paging,memberId,"delete");
+        return boardRepository.findByMember_MemberIdAndBoardStatus(paging,memberId,"판매중");
+
     }
 
     public void deleteBoard(long boardId){
