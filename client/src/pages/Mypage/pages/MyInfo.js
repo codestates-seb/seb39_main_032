@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 function MyInfo() {
+  const API_URL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const accessToken = localStorage.getItem("accessToken");
   const [email, setEmail] = useState("");
@@ -15,7 +16,7 @@ function MyInfo() {
   // 이메일 주소 확인
   useEffect(() => {
     axios
-      .get("/api/member/login/basic", {
+      .get(`${API_URL}/api/member/login/basic`, {
         headers: {
           authorization: accessToken,
         },
@@ -27,7 +28,7 @@ function MyInfo() {
   // 회원 탈퇴
   const withdraw = (e) => {
     axios
-      .delete("/withdrawal", {
+      .delete(`${API_URL}/withdrawal`, {
         headers: {
           authorization: accessToken,
         },
@@ -60,7 +61,7 @@ function MyInfo() {
 
     axios
       .patch(
-        "/api/member/login",
+        `${API_URL}/api/member/login`,
         {
           email: email,
           memberPw: userPwInfo.pwd1,

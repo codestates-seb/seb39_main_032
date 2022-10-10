@@ -8,6 +8,7 @@ import { setItemsList, setClickedCategory } from "../../actions";
 import Loading from "../../components/Loading";
 
 function Main({ isLoading }) {
+  const API_URL = process.env.REACT_APP_API_URL;
   const search = useSelector((state) => state.searchReducer);
 
   let caterogies = [
@@ -32,7 +33,7 @@ function Main({ isLoading }) {
 
     axios
       .get(
-        `/api/boards?page=1&size=10&address=${search}&category=${e.target.id}`
+        `${API_URL}/api/boards?page=1&size=10&address=${search}&category=${e.target.id}`
       )
       .then((res) => dispatch(setItemsList(res.data.data)))
       .catch((err) => console.log(err));

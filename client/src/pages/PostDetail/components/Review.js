@@ -4,6 +4,7 @@ import styled from "styled-components";
 import moment from "moment";
 
 function Review({ reviewList, marketId }) {
+  const API_URL = process.env.REACT_APP_API_URL;
   const accessToken = localStorage.getItem("accessToken");
   axios.defaults.headers.common["authorization"] = accessToken; // 여기서는 이렇게 지정해줘야 get요청으로 리뷰 리스트 불러올 때 올바르게 불러와짐.
 
@@ -20,7 +21,7 @@ function Review({ reviewList, marketId }) {
     }
 
     axios
-      .post(`/api/reviews/${marketId}`, {
+      .post(`${API_URL}/api/reviews/${marketId}`, {
         // headers: {
         //   authorization: accessToken,
         // },
@@ -33,7 +34,7 @@ function Review({ reviewList, marketId }) {
 
   const rvDeleteHandler = (e) => {
     axios
-      .delete(`/api/reviews/${e.target.id}`)
+      .delete(`${API_URL}/api/reviews/${e.target.id}`)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
 

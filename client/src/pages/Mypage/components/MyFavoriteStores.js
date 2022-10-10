@@ -2,12 +2,13 @@ import styled from "styled-components";
 import axios from "axios";
 
 function MyFavoriteStores({ state }) {
+  const API_URL = process.env.REACT_APP_API_URL;
   const accessToken = localStorage.getItem("accessToken");
 
   const BookMarkHandler = () => {
     axios
       .post(
-        "/api/favorites",
+        `${API_URL}/api/favorites`,
         { marketId: state.marketId },
         {
           headers: {

@@ -7,6 +7,7 @@ import MyWishlist from "../components/MyWishlist";
 import TitleHeader from "../../../components/TitleHeader";
 
 function MyLike() {
+  const API_URL = process.env.REACT_APP_API_URL;
   const accessToken = localStorage.getItem("accessToken");
   // axios.defaults.headers.common["authorization"] = accessToken;
 
@@ -15,7 +16,7 @@ function MyLike() {
 
   const getMyLike = () => {
     axios
-      .get("/api/wishes/myWish?page=1&size=20", {
+      .get(`${API_URL}/api/wishes/myWish?page=1&size=20`, {
         headers: {
           authorization: accessToken,
         },

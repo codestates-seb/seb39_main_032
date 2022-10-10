@@ -3,7 +3,6 @@ import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
 import AddItemBox from "../components/newpost/AddItemBox";
 import TitleHeader from "../../../components/TitleHeader";
 import { setAddItem, setDeleteItem } from "../../../actions";

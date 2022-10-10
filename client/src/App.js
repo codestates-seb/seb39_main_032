@@ -18,6 +18,8 @@ import MyLike from "./pages/Mypage/pages/MyLIke";
 import { setItemsList } from "./actions";
 
 function App() {
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const accessToken = localStorage.getItem("accessToken");
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +27,7 @@ function App() {
   const getPosts = async () => {
     if (accessToken) {
       await axios
-        .get("/api/boards?page=1&size=50", {
+        .get(`${API_URL}/api/boards?page=1&size=50`, {
           headers: { authorization: accessToken },
         })
         .then((res) => {
@@ -36,7 +38,7 @@ function App() {
         });
     } else {
       await axios
-        .get("/api/boards?page=1&size=50")
+        .get(`${API_URL}/api/boards?page=1&size=50`)
         .then((res) => {
           // console.log(res.data.data);
           dispatch(setItemsList(res.data.data));

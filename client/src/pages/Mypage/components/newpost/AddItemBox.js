@@ -9,6 +9,7 @@ import moment from "moment";
 import DeleteBtn from "../../../../widgets/DeleteBtn";
 
 function AddItemBox({ ele, id, deleteItemBoxHandler }) {
+  const API_URL = process.env.REACT_APP_API_URL;
   const accessToken = localStorage.getItem("accessToken");
   axios.defaults.headers.common["authorization"] = accessToken;
   const marketId = localStorage.getItem("marketId");
@@ -58,7 +59,7 @@ function AddItemBox({ ele, id, deleteItemBoxHandler }) {
     };
     //기존
     axios
-      .post("/api/boards", body)
+      .post(`${API_URL}/api/boards`, body)
       .then(() => (done.current.id = "done"))
       .catch((err) => console.log(err));
 
@@ -73,7 +74,7 @@ function AddItemBox({ ele, id, deleteItemBoxHandler }) {
     // const blob = new Blob([JSON.stringify(body)], { type: "application/json" });
     // formData.append("requestBody", blob); // 일반 데이터 넣기
 
-    // fetch(`${url}/api/boards`, {
+    // fetch(`${API_URL}/api/boards`, {
     //   method: "POST",
     //   headers: { authorization: accessToken },
     //   body: formData,

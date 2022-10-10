@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
 function Item({ state }) {
+  const API_URL = process.env.REACT_APP_API_URL;
   const dispatch = useDispatch();
 
   const [likeScore, setLikeScore] = useState(0); // 리듀서 사용해서 전역으로 처리해줘야 함.
@@ -65,7 +66,7 @@ function Item({ state }) {
           // 좋아요 취소(-)
           return axios
             .post(
-              "/api/wishes",
+              `${API_URL}/api/wishes`,
               { boardId: boardId },
               {
                 headers: {
@@ -82,7 +83,7 @@ function Item({ state }) {
         setLikeScore(likeScore + 1);
         axios
           .post(
-            "/api/wishes",
+            `${API_URL}/api/wishes`,
             { boardId: boardId },
             {
               headers: {

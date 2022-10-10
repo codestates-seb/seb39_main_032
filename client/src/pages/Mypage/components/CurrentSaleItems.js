@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 function CurrentSaleItems({ hasItems }) {
+  const API_URL = process.env.REACT_APP_API_URL;
   const accessToken = localStorage.getItem("accessToken");
   // axios.defaults.headers.common["authorization"] = accessToken;
 
@@ -16,7 +17,7 @@ function CurrentSaleItems({ hasItems }) {
     const boardId = e.target.id;
 
     axios
-      .delete(`/api/boards/${boardId}`, {
+      .delete(`${API_URL}/api/boards/${boardId}`, {
         headers: {
           authorization: accessToken,
         },
@@ -33,7 +34,7 @@ function CurrentSaleItems({ hasItems }) {
     const boardId = e.target.id;
 
     axios
-      .patch(`/api/boards/soldOut/${boardId}`, {
+      .patch(`${API_URL}/api/boards/soldOut/${boardId}`, {
         headers: {
           authorization: accessToken,
         },

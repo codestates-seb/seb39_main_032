@@ -8,6 +8,8 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
+    "cross-env": "^7.0.3",
+    "env-cmd": "^10.1.0",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
@@ -22,7 +24,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "env-cmd -f .env.production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -46,6 +48,5 @@
   },
   "devDependencies": {
     "@iconify/react": "^4.0.0"
-  },
-  "proxy": "http://messidor.iptime.org:8080"
+  }
 }

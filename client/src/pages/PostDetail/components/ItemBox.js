@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 function ItemBox({ state }) {
+  const API_URL = process.env.REACT_APP_API_URL;
   const location = useLocation();
   const path = location.pathname;
 
@@ -29,7 +30,7 @@ function ItemBox({ state }) {
     const boardId = state.boardId;
 
     axios
-      .delete(`/api/boards/${boardId}`)
+      .delete(`${API_URL}/api/boards/${boardId}`)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };

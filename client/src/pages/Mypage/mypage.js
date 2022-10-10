@@ -10,6 +10,7 @@ import { setMyItemsList } from "../../actions";
 import Loading from "../../components/Loading";
 
 function Mypage() {
+  const API_URL = process.env.REACT_APP_API_URL;
   const [isLoading, setIsLoading] = useState(true);
   const accessToken = localStorage.getItem("accessToken");
   // axios.defaults.headers.common["authorization"] = accessToken;
@@ -19,7 +20,7 @@ function Mypage() {
 
   const getMyItems = async () => {
     await axios
-      .get("/api/boards/myBoards?page=1&size=30", {
+      .get(`${API_URL}/api/boards/myBoards?page=1&size=30`, {
         headers: {
           authorization: accessToken,
         },

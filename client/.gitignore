@@ -28,3 +28,6 @@ yarn-error.log*
     "email":"test2@test.com",
     "memberPw":"test32"
 }
+
+# 프록시 설정
+"proxy": "http://messidor.iptime.org:8080"

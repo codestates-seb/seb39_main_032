@@ -6,6 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 
 function BasicSignup() {
+  const API_URL = process.env.REACT_APP_API_URL;
   const location = useLocation();
   const path = location.pathname;
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ function BasicSignup() {
     }
 
     axios
-      .post("/signup", {
+      .post(`${API_URL}/signup`, {
         email: userLoginInfo.email,
         memberPw: userLoginInfo.pwd1,
       })

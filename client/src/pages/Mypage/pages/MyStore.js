@@ -7,6 +7,7 @@ import StoreInfo from "./StoreInfo";
 import Firstselling from "./Firstselling";
 
 function MyStore() {
+  const API_URL = process.env.REACT_APP_API_URL;
   const accessToken = localStorage.getItem("accessToken");
   // axios.defaults.headers.common["authorization"] = accessToken;
 
@@ -16,7 +17,7 @@ function MyStore() {
 
   const getStoreInfo = () => {
     axios
-      .get("/api/markets/myMarket?page=1&size=30", {
+      .get(`${API_URL}/api/markets/myMarket?page=1&size=30`, {
         headers: {
           authorization: accessToken,
         },

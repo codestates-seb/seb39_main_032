@@ -11,6 +11,7 @@ import axios from "axios";
 // } from "../../../storage/Cookie";
 
 function BasicLogin() {
+  const API_URL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
 
   const [loginInfo, setLoginInfo] = useState({
@@ -26,7 +27,7 @@ function BasicLogin() {
     e.preventDefault();
 
     axios
-      .post("/login/jwt", loginInfo)
+      .post(`${API_URL}/login/jwt`, loginInfo)
       .then((res) => {
         localStorage.setItem("accessToken", res.headers.authorization);
 

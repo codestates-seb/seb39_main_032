@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setMyItemsList } from "../../../actions";
 
 function MyItems() {
+  const API_URL = process.env.REACT_APP_API_URL;
   const accessToken = localStorage.getItem("accessToken");
   // axios.defaults.headers.common["authorization"] = accessToken;
 
@@ -18,7 +19,7 @@ function MyItems() {
 
   const getItemList = () => {
     axios
-      .get("/api/boards/myBoards?page=1&size=50", {
+      .get(`${API_URL}/api/boards/myBoards?page=1&size=50`, {
         headers: {
           authorization: accessToken,
         },

@@ -2,12 +2,13 @@ import styled from "styled-components";
 import axios from "axios";
 
 function MyWishlist({ state }) {
+  const API_URL = process.env.REACT_APP_API_URL;
   const accessToken = localStorage.getItem("accessToken");
 
   const likeHandler = () => {
     axios
       .post(
-        "/api/wishes",
+        `${API_URL}/api/wishes`,
         { boardId: state.boardId },
         {
           headers: {

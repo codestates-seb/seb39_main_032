@@ -14,6 +14,7 @@ import { setBoardItemsList } from "../../actions";
 import Loading from "../../components/Loading";
 
 function Post() {
+  const API_URL = process.env.REACT_APP_API_URL;
   const accessToken = localStorage.getItem("accessToken");
   axios.defaults.headers.common["authorization"] = accessToken; // 여기서는 이렇게 지정해줘야 get요청으로 리뷰 리스트 불러올 때 올바르게 불러와짐.
 
@@ -33,7 +34,7 @@ function Post() {
     } else {
       setIsBookMark(!isBookMark);
       axios
-        .post("/api/favorites", {
+        .post(`${API_URL}/api/favorites`, {
           headers: {
             authorization: accessToken,
           },
@@ -46,7 +47,7 @@ function Post() {
 
   const renderHandler = async () => {
     await axios
-      .get(`/api/markets${path}`)
+      .get(`${API_URL}/api/markets${path}`)
       .then((res) => {
         dispatch(setBoardItemsList(res.data.data.boardList)); // main 페이지에서 사용하는 아이템 리스트 리듀서 재활용 -> 재활용하면 안됨.
         setStoreInfo(res.data.data);

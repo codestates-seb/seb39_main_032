@@ -9,6 +9,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 /*global kakao*/
 
 function Search() {
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const dispatch = useDispatch();
   const [curLat, setCurLat] = useState("");
   const [curLon, setCurLon] = useState("");
@@ -95,7 +97,7 @@ function Search() {
     dispatch(setClickedCategory(""));
 
     axios
-      .get(`/api/boards?page=1&size=50&address=${search}`)
+      .get(`${API_URL}/api/boards?page=1&size=50&address=${search}`)
       .then((res) => dispatch(setItemsList(res.data.data)))
       .catch((err) => console.log(err));
   };

@@ -9,6 +9,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import StoreLocationMap from "../components/StoreLocationMap";
 
 function Firstselling() {
+  const API_URL = process.env.REACT_APP_API_URL;
   const accessToken = localStorage.getItem("accessToken");
   axios.defaults.headers.common["authorization"] = accessToken;
   const marketId = localStorage.getItem("marketId");
@@ -43,7 +44,7 @@ function Firstselling() {
 
     if (path === "/mystore/edit") {
       axios
-        .patch(`/api/markets/${marketId}`, storeInfo)
+        .patch(`${API_URL}/api/markets/${marketId}`, storeInfo)
         .then(
           (res) => console.log(res.data.data),
           dispatch(setHasStoreInfo(true)),
@@ -57,7 +58,7 @@ function Firstselling() {
         });
     } else {
       axios
-        .post("/api/markets", storeInfo)
+        .post(`${API_URL}/api/markets`, storeInfo)
         .then(
           (res) => console.log(res.data.data),
           dispatch(setHasStoreInfo(true)),

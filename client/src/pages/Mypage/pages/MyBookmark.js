@@ -7,6 +7,7 @@ import MyFavoriteStores from "../components/MyFavoriteStores";
 import TitleHeader from "../../../components/TitleHeader";
 
 function MyBookmark() {
+  const API_URL = process.env.REACT_APP_API_URL;
   const accessToken = localStorage.getItem("accessToken");
   // axios.defaults.headers.common["authorization"] = accessToken;
 
@@ -15,7 +16,7 @@ function MyBookmark() {
 
   const getMyBookmark = () => {
     axios
-      .get("/api/favorites/myFavorite?page=1&size=30", {
+      .get(`${API_URL}/api/favorites/myFavorite?page=1&size=30`, {
         headers: {
           authorization: accessToken,
         },
