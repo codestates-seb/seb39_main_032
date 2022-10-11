@@ -1,3 +1,6 @@
+
+# seb39_main_032
+=======
 # 최후의 반찬
 ![최후의반찬](https://user-images.githubusercontent.com/9441441/194340664-5fa980be-df65-4cde-8961-ea0105e36e2e.png)
 
@@ -69,3 +72,4 @@
 | chore | 빌드 테스트 업데이트, 패키지 매니저를 설정하는 경우 |
 | rename | 폴더명 변경 |
 | remove | 파일을 삭제 시 |
+
