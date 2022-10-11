@@ -73,11 +73,15 @@ public class BoardService {
         Page<Board> pageResult = null;
         Pageable paging = PageRequest.of(page-1,size, Sort.by("boardUpdateAt").descending());
 
+
         if((address != null && !address.isEmpty()) && ( category != null && !category.isEmpty())){
             pageResult = boardRepository.findByMarket_AddressContainingAndFoodCategoryAndBoardStatusNot(paging,address,category,"delete");
         }
         else if(address != null && !address.isEmpty()){
             pageResult =boardRepository.findByMarket_AddressContainingAndBoardStatusNot(paging,address,"delete");
+        }
+        else if(category != null && !category.isEmpty()){
+            pageResult =boardRepository.findByFoodCategoryAndBoardStatusNot(paging,category,"delete");
         }
         else {
             pageResult= boardRepository.findByBoardStatusNot(paging,"delete");
@@ -95,6 +99,9 @@ public class BoardService {
         }
         else if(address != null && !address.isEmpty()){
             pageResult =boardRepository.findByMarket_AddressContainingAndBoardStatus(paging,address,"판매중");
+        }
+        else if(category != null && !category.isEmpty()){
+            pageResult =boardRepository.findByFoodCategoryAndBoardStatus(paging,category,"판매중");
         }
         else {
             pageResult= boardRepository.findByBoardStatus(paging,"판매중");
