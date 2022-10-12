@@ -48,5 +48,6 @@
   },
   "devDependencies": {
     "@iconify/react": "^4.0.0"
-  }
+  },
+  "proxy": "http://messidor.iptime.org:8080"
 }
