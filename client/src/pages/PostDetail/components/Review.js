@@ -11,6 +11,10 @@ function Review({ reviewList, marketId }) {
   const [review, setReview] = useState("");
 
   const inputHandler = (e) => {
+    if (!accessToken) {
+      return alert("로그인 후 작성이 가능합니다");
+    }
+
     setReview(e.target.value);
   };
 
