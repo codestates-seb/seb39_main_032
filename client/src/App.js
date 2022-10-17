@@ -8,7 +8,7 @@ import Post from "./pages/PostDetail/Post";
 import MyInfo from "./pages/Mypage/pages/MyInfo";
 import MyStore from "./pages/Mypage/pages/MyStore";
 import Firstselling from "./pages/Mypage/pages/Firstselling";
-import Mypage from "./pages/Mypage/Mypage";
+import Mypage from "./pages/Mypage/mypage";
 import MyItems from "./pages/Mypage/pages/MyItems";
 import axios from "axios";
 import { useEffect, useState } from "react";
