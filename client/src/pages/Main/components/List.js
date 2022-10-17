@@ -56,10 +56,10 @@ function List() {
       <Items>
         {isFiltered
           ? filteredItems.map((item, idx) => {
-              return <Item key={idx} id={idx} state={item} />;
+              return <Item key={item.boardId} id={idx} state={item} />;
             })
           : state.map((item, idx) => {
-              return <Item key={idx} id={idx} state={item} />;
+              return <Item key={item.boardId} id={idx} state={item} />;
             })}
       </Items>
     </ListContainer>
