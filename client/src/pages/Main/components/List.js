@@ -71,7 +71,7 @@ export default List;
 const ListHeader = styled.section`
   display: flex;
   justify-content: space-between;
-  margin: 20px 35px 0 20px;
+  /* margin-top: 20px; */
 
   h2 {
     margin-left: 20px;
@@ -93,18 +93,18 @@ const ListNav = styled.div`
 `;
 
 const ListContainer = styled.section`
-  width: 50%;
+  width: 950px;
   /* border: 1px solid; */
 `;
 
 const Items = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  margin: 0 20px;
+  /* margin: 0 20px; */
   justify-content: flex-start;
   list-style: none;
   padding: 0 1%;
   border: 1.5px solid #aaaaaa;
   border-radius: 0.5rem;
-  margin: 0 40px;
+  /* margin: 0 20px; */
 `;

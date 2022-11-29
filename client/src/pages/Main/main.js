@@ -6,6 +6,7 @@ import List from "./components/List";
 import { useSelector, useDispatch } from "react-redux";
 import { setItemsList, setClickedCategory } from "../../actions";
 import Loading from "../../components/Loading";
+import { useState } from "react";
 
 function Main({ isLoading }) {
   const API_URL = process.env.REACT_APP_API_URL;
@@ -27,9 +28,12 @@ function Main({ isLoading }) {
 
   const state = useSelector((state) => state.itemListReducer);
   const dispatch = useDispatch();
+  const [active, setActive] = useState(null);
 
   const handleClickCategory = (e) => {
     dispatch(setClickedCategory(e.target.id));
+
+    setActive(e.target.id);
 
     axios
       .get(
@@ -51,15 +55,15 @@ function Main({ isLoading }) {
               <article>
                 {caterogies.map((item, idx) => {
                   return (
-                    <div
+                    <FoodCategory
                       id={item}
-                      value={idx}
                       key={idx}
-                      className="food_category"
                       onClick={handleClickCategory}
+                      backGround={active === item ? "grey" : ""}
+                      color={active === item ? "white" : ""}
                     >
                       {item}
-                    </div>
+                    </FoodCategory>
                   );
                 })}
               </article>
@@ -87,38 +91,45 @@ const MainContainer = styled.div`
   height: 100%;
 
   #category {
-    margin-top: 10px;
-    width: 100%;
-    height: 150px;
+    margin-top: 20px;
+    /* width: 46%; */
+    /* height: 60px; */
     display: flex;
     justify-content: center;
-    background-color: rgba(217, 217, 217, 0.58);
+    border: 1px solid rgba(217, 217, 217, 0.58);
+    /* border: 1px solid #aaaaaa; */
+    /* background-color: rgba(217, 217, 217, 0.58); */
+    margin-bottom: 20px;
   }
 
   article {
-    margin: 10px 0;
+    /* margin: 10px 0; */
     flex-wrap: wrap;
-    width: 45%;
     display: flex;
+    /* justify-content: center; */
     align-items: center;
   }
+`;
 
-  .food_category {
-    background-color: white;
-    border: 1px solid;
-    border-radius: 1em;
-    cursor: pointer;
-    height: 50px;
-    margin: 0 1%;
-    padding: 1% 20px;
-    font-size: 22px;
-    text-align: center;
-    white-space: nowrap;
-    box-shadow: 3px 3px grey;
-    /* font-family: "Noto Sans KR", sans-serif; */
-    font-family: "Do Hyeon";
-    :hover {
-      background-color: grey;
-    }
+const FoodCategory = styled.div`
+  background-color: ${(props) => props.backGround};
+  color: ${(props) => props.color};
+  /* border: 1px solid; */
+  /* border-radius: 1em; */
+  cursor: pointer;
+  /* height: 50px; */
+  /* margin: 0 1%; */
+  padding: 1.5% 0;
+  width: 86px;
+  font-size: 17px;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  /* box-shadow: 3px 3px grey; */
+  font-family: "Noto Sans KR", sans-serif;
+  /* font-family: "Do Hyeon"; */
+  :hover {
+    background-color: grey;
+    color: white;
   }
 `;

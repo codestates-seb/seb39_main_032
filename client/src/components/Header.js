@@ -58,6 +58,7 @@ function Header() {
         </a>
       </h1>
       <Search />
+      {/* <div id="line"></div> */}
     </HeaderContainer>
   );
 }
@@ -66,15 +67,23 @@ export default Header;
 
 const HeaderContainer = styled.header`
   margin: 0 15%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
 
+  #line {
+    margin-top: 17px;
+    width: 142%;
+    border: 1px solid rgba(255, 74, 85, 1);
+  }
+
   #title_nav {
+    /* border: 1px solid; */
     height: 30px;
     display: flex;
-    margin-left: 60%;
-    margin-top: 10px;
+    margin-left: 850px;
+    margin-top: 15px;
     margin-bottom: -30px;
   }
 
