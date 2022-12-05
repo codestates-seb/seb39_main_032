@@ -59,8 +59,9 @@ function Main({ isLoading }) {
                       id={item}
                       key={idx}
                       onClick={handleClickCategory}
-                      backGround={active === item ? "grey" : ""}
+                      backGround={active === item ? "rgba(255, 74, 85, 1)" : ""}
                       color={active === item ? "white" : ""}
+                      size={active === item ? "700" : "500"}
                     >
                       {item}
                     </FoodCategory>
@@ -114,6 +115,7 @@ const MainContainer = styled.div`
 const FoodCategory = styled.div`
   background-color: ${(props) => props.backGround};
   color: ${(props) => props.color};
+  font-weight: ${(props) => props.size};
   /* border: 1px solid; */
   /* border-radius: 1em; */
   cursor: pointer;
@@ -122,14 +124,15 @@ const FoodCategory = styled.div`
   padding: 1.5% 0;
   width: 86px;
   font-size: 17px;
-  font-weight: 500;
+  /* font-weight: 500; */
   text-align: center;
   white-space: nowrap;
   /* box-shadow: 3px 3px grey; */
   font-family: "Noto Sans KR", sans-serif;
   /* font-family: "Do Hyeon"; */
   :hover {
-    background-color: grey;
+    background-color: rgba(255, 74, 85, 1);
     color: white;
+    font-weight: 700;
   }
 `;

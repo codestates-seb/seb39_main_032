@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import Item from "./Item";
+import Pagination from "./Pagination";
 
 // 명칭 변경
 function List() {
@@ -25,6 +26,11 @@ function List() {
       setIsFiltered(false);
     }
   };
+
+  // Pagination
+  const [limit, setLimit] = useState(8);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
 
   return (
     <ListContainer>
@@ -55,13 +61,20 @@ function List() {
 
       <Items>
         {isFiltered
-          ? filteredItems.map((item, idx) => {
+          ? filteredItems.slice(offset, offset + limit).map((item, idx) => {
               return <Item key={item.boardId} id={idx} state={item} />;
             })
-          : state.map((item, idx) => {
+          : state.slice(offset, offset + limit).map((item, idx) => {
               return <Item key={item.boardId} id={idx} state={item} />;
             })}
       </Items>
+
+      <Pagination
+        total={isFiltered ? filteredItems.length : state.length}
+        limit={limit}
+        page={page}
+        setPage={setPage}
+      />
     </ListContainer>
   );
 }
