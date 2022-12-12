@@ -10,7 +10,7 @@ function Item({ state }) {
   const API_URL = process.env.REACT_APP_API_URL;
   const dispatch = useDispatch();
 
-  const [likeScore, setLikeScore] = useState(0); // 리듀서 사용해서 전역으로 처리해줘야 함.
+  const [likeScore, setLikeScore] = useState(0);
 
   useEffect(() => {
     if (state.wishListCount) {

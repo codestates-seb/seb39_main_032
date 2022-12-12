@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import Item from "./Item";
+import Pagination from "./Pagination";
 
 // 명칭 변경
 function List() {
@@ -25,6 +26,11 @@ function List() {
       setIsFiltered(false);
     }
   };
+
+  // Pagination
+  const [limit, setLimit] = useState(8);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
 
   return (
     <ListContainer>
@@ -55,13 +61,20 @@ function List() {
 
       <Items>
         {isFiltered
-          ? filteredItems.map((item, idx) => {
-              return <Item key={idx} id={idx} state={item} />;
+          ? filteredItems.slice(offset, offset + limit).map((item, idx) => {
+              return <Item key={item.boardId} id={idx} state={item} />;
             })
-          : state.map((item, idx) => {
-              return <Item key={idx} id={idx} state={item} />;
+          : state.slice(offset, offset + limit).map((item, idx) => {
+              return <Item key={item.boardId} id={idx} state={item} />;
             })}
       </Items>
+
+      <Pagination
+        total={isFiltered ? filteredItems.length : state.length}
+        limit={limit}
+        page={page}
+        setPage={setPage}
+      />
     </ListContainer>
   );
 }
@@ -71,7 +84,7 @@ export default List;
 const ListHeader = styled.section`
   display: flex;
   justify-content: space-between;
-  margin: 20px 35px 0 20px;
+  /* margin-top: 20px; */
 
   h2 {
     margin-left: 20px;
@@ -93,18 +106,18 @@ const ListNav = styled.div`
 `;
 
 const ListContainer = styled.section`
-  width: 50%;
+  width: 950px;
   /* border: 1px solid; */
 `;
 
 const Items = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  margin: 0 20px;
+  /* margin: 0 20px; */
   justify-content: flex-start;
   list-style: none;
   padding: 0 1%;
   border: 1.5px solid #aaaaaa;
   border-radius: 0.5rem;
-  margin: 0 40px;
+  /* margin: 0 20px; */
 `;
